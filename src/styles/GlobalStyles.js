@@ -17,18 +17,32 @@ a{
     font-family: 'Montserrat', sans-serif;
 }
 p{
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: ${Colors.textColor}
 }
 h2{
     font-size: 2.5rem;
     font-weight: 400;
+    color: ${Colors.headings};
 }
 h3{
     font-size: 2rem;
     font-weight: 350;
-    color: ${Colors.textColor};
+    color: ${Colors.headings};
 }
+
+h4{
+    font-size: 1.5rem;
+    font-weight: 350;
+    color: ${Colors.footerColor}
+}
+
+h5{
+    font-size: 1rem;
+    font-weight: 350;
+    color: ${Colors.footerColor}
+}
+
 button{
     font-family: 'Montserrat', sans-serif;
 }

@@ -1,18 +1,20 @@
 import Details from "./components/details/Details";
-import styled from "styled-components";
 import GlobalStyles from "./styles/GlobalStyles";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./components/home/Home";
 
 function App() {
   return (
-    <div className="App">
-      <GlobalStyles />
-      <Details />
-    </div>
+    <Router>
+      <div className="App">
+        <GlobalStyles />
+        <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/details/:id" component={Details} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
-
-const AppWrapper = styled.div`
-  padding: 0;
-`;
 
 export default App;
