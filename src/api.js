@@ -2,7 +2,7 @@ const user = {
   _id: { $oid: "60fad57e59babbe5f22e9f5a" },
   firstname: "Marcel",
   lastname: "Judth",
-  jobtitle: "Software-Engineer",
+  jobtitle: "Software Engineer",
   description: "I love to create web-applications",
   mobileNr: "+4367682595032",
   email: "marjudth@gmail.com",
@@ -26,7 +26,7 @@ const user = {
     },
     {
       name: "DevCode-Solutions",
-      position: "Self employed as Software Developer",
+      position: "Self Employed",
       branch: "Software-Entwicklung",
       logoURL: "",
       website: "www.infineon.com",

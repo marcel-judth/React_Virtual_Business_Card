@@ -25,7 +25,7 @@ function Details() {
           <FiDownload
             className="btn-icon"
             onClick={() => console.log(vCardData)}
-          />{" "}
+          />
           download
         </button>
       </DetailsContent>
