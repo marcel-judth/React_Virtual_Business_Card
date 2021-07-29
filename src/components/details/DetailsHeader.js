@@ -13,7 +13,7 @@ import Icon from "../shared/Icon";
 import profilePicture from "../../img/profile.JPG";
 import logo from "../../img/logo.png";
 
-function DetailsHeader({ user }) {
+function DetailsHeader({ user, setPopupDisplayed }) {
   return (
     <Header>
       <ProfilePicture src={profilePicture} />
@@ -43,7 +43,11 @@ function DetailsHeader({ user }) {
       </div>
       <div className="logo-wrapper">
         <img src={logo} alt="logo-nfc-card" className="logo" />
-        <button>
+        <button
+          onClick={() => {
+            setPopupDisplayed(true);
+          }}
+        >
           <FiShare className="btn-icon" />
           Share
         </button>
@@ -117,6 +121,7 @@ const Header = styled.div`
     .logo-wrapper {
       display: none;
     }
+
     > * {
       text-align: center;
     }

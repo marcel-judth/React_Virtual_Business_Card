@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import DetailsHeader from "./DetailsHeader";
@@ -7,19 +7,33 @@ import { useParams } from "react-router-dom";
 import getUserByID from "../../api";
 import { Colors } from "../../styles/Colors";
 import { FiDownload } from "react-icons/fi";
+import SharePopup from "./SharePopup";
+import vCard from "../../utils/vCard";
 
 function Details() {
   let { id } = useParams();
+  const [popupDisplayed, setPopupDisplayed] = useState(false);
   const user = getUserByID(id);
+  const vCardData = vCard(user);
+
   return (
     <DetailsWrapper>
       <DetailsContent>
-        <DetailsHeader user={user} />
+        <DetailsHeader user={user} setPopupDisplayed={setPopupDisplayed} />
         <DetailsBody user={user} />
         <button>
-          <FiDownload className="btn-icon" /> download
+          <FiDownload
+            className="btn-icon"
+            onClick={() => console.log(vCardData)}
+          />{" "}
+          download
         </button>
       </DetailsContent>
+      <SharePopup
+        user={user}
+        popupDisplayed={popupDisplayed}
+        setPopupDisplayed={setPopupDisplayed}
+      />
     </DetailsWrapper>
   );
 }

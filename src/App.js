@@ -1,6 +1,6 @@
 import Details from "./components/details/Details";
 import GlobalStyles from "./styles/GlobalStyles";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 
 function App() {

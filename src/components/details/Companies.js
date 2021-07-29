@@ -20,7 +20,6 @@ function Companies({ companies }) {
             return (
               <>
                 <Company company={element} />
-
                 {index + 1 < companies.length && (
                   <tr>
                     <td colSpan="3">
