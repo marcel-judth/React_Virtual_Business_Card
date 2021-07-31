@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import DetailsHeader from "./DetailsHeader";
@@ -9,32 +9,43 @@ import { Colors } from "../../styles/Colors";
 import { FiDownload } from "react-icons/fi";
 import SharePopup from "./SharePopup";
 import vCard from "../../utils/vCard";
+import axios from "axios";
 
 function Details() {
   let { id } = useParams();
   const [popupDisplayed, setPopupDisplayed] = useState(false);
-  const user = getUserByID(id);
-  const vCardData = vCard(user);
+
+  const [user, setUser] = useState();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(async () => {
+    const res = await axios.get("http://localhost:3000/api/users/" + id);
+    setUser(res.data);
+    setLoading(false);
+  }, []);
 
   return (
-    <DetailsWrapper>
-      <DetailsContent>
-        <DetailsHeader user={user} setPopupDisplayed={setPopupDisplayed} />
-        <DetailsBody user={user} />
-        <button>
-          <FiDownload
-            className="btn-icon"
-            onClick={() => console.log(vCardData)}
+    <>
+      {loading ? (
+        <div>loading...</div>
+      ) : (
+        <DetailsWrapper>
+          <DetailsContent>
+            <DetailsHeader user={user} setPopupDisplayed={setPopupDisplayed} />
+            <DetailsBody user={user} />
+            <button>
+              <FiDownload className="btn-icon" onClick={() => console.log()} />
+              download
+            </button>
+          </DetailsContent>
+          <SharePopup
+            user={user}
+            popupDisplayed={popupDisplayed}
+            setPopupDisplayed={setPopupDisplayed}
           />
-          download
-        </button>
-      </DetailsContent>
-      <SharePopup
-        user={user}
-        popupDisplayed={popupDisplayed}
-        setPopupDisplayed={setPopupDisplayed}
-      />
-    </DetailsWrapper>
+        </DetailsWrapper>
+      )}
+    </>
   );
 }
 

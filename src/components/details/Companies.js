@@ -19,7 +19,7 @@ function Companies({ companies }) {
           {companies.map((element, index) => {
             return (
               <>
-                <Company key={index} company={element} />
+                <Company company={element} />
                 {index + 1 < companies.length && (
                   <tr>
                     <td colSpan="3">
