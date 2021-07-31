@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const user = {
   _id: { $oid: "60fad57e59babbe5f22e9f5a" },
   firstname: "Marcel",
@@ -50,6 +52,19 @@ const user = {
 };
 
 function getUserByID(id) {
+  // fetch(
+  //   "https://whispering-island-34730.herokuapp.com/api/users/marjudth@gmail.com"
+  // )
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     console.log(data);
+  //   })
+  //   .catch(console.log);
+
+  axios
+    .get("localhost:3000/api/users/marjudth@gmail.com")
+    .then((response) => console.log("ehlö"));
+  console.log("hellou");
   return user;
 }
 

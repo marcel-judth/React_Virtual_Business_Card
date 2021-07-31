@@ -10,9 +10,9 @@ function Skills({ skills }) {
       <DetailsContentHeading iconType={RiToolsFill} headingText="Skills" />
       <DeatailsContentLine />
 
-      {skills.map((element) => {
+      {skills.map((element, index) => {
         return (
-          <Skill>
+          <Skill key={index}>
             <div className="dot" />
             <p>{element}</p>
           </Skill>
