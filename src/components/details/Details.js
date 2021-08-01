@@ -4,12 +4,12 @@ import styled from "styled-components";
 import DetailsHeader from "./DetailsHeader";
 import DetailsBody from "./DetailsBody";
 import { useParams } from "react-router-dom";
-import getUserByID from "../../api";
 import { Colors } from "../../styles/Colors";
 import { FiDownload } from "react-icons/fi";
 import SharePopup from "./SharePopup";
-import vCard from "../../utils/vCard";
-import axios from "axios";
+import Loading from "../shared/Loading";
+import { API_BaseURL } from "../../utils/constants";
+import { getUserByID } from "../../api";
 
 function Details() {
   let { id } = useParams();
@@ -18,22 +18,24 @@ function Details() {
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  useEffect(async () => {
-    const res = await axios.get("http://localhost:3000/api/users/" + id);
-    setUser(res.data);
-    setLoading(false);
-  }, []);
+  useEffect(() => {
+    getUserByID(id, setUser, setLoading);
+  }, [id]);
 
   return (
     <>
       {loading ? (
-        <div>loading...</div>
+        <Loading />
       ) : (
         <DetailsWrapper>
           <DetailsContent>
             <DetailsHeader user={user} setPopupDisplayed={setPopupDisplayed} />
             <DetailsBody user={user} />
-            <button>
+            <button
+              onClick={() => {
+                window.open(API_BaseURL + "/users/download/" + user.email);
+              }}
+            >
               <FiDownload className="btn-icon" onClick={() => console.log()} />
               download
             </button>
@@ -83,7 +85,6 @@ const DetailsContent = styled.div`
 `;
 
 const DetailsWrapper = styled.div`
-  /* background-color: grey; */
   display: flex;
   align-items: center;
   justify-content: center;

@@ -13,7 +13,6 @@ function CustomButton({ Icon, children }) {
 const Button = styled.button`
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5vh;
   width: 100%;
   display: flex;
   padding: 0.5rem 2.5rem;

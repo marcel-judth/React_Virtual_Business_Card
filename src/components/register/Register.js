@@ -1,28 +1,40 @@
-import { FaLock, FaEnvelope } from "react-icons/fa";
+import { FaLock, FaUser, FaEnvelope } from "react-icons/fa";
 import styled from "styled-components";
 import CustomButton from "../shared/CustomButton";
 import TextInput from "../shared/TextInput";
 import logo from "../../img/logo.png";
-import { login } from "../../api";
+import { register } from "../../api";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Colors } from "../../styles/Colors";
 
-function Login() {
+function Register() {
+  const [firstname, setFirstname] = useState();
+  const [lastname, setLastname] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
   const history = useHistory();
 
   const handleSubmit = () => {
-    login(email, password, setError, history);
+    register(firstname, lastname, email, password, setError, history);
   };
 
   return (
-    <LoginWrapper onSubmit={handleSubmit}>
+    <RegisterWrapper onSubmit={handleSubmit}>
       <div className="content-wrapper">
         <img src={logo} alt="logo" className="logo" />
 
+        <TextInput
+          onChange={(event) => setFirstname(event.target.value)}
+          placeholder="firstname"
+          Icon={FaUser}
+        />
+        <TextInput
+          onChange={(event) => setLastname(event.target.value)}
+          placeholder="lastname"
+          Icon={FaUser}
+        />
         <TextInput
           onChange={(event) => setEmail(event.target.value)}
           placeholder="email"
@@ -37,16 +49,13 @@ function Login() {
           Icon={FaLock}
         />
         <span className="error-label">{error}</span>
-        <CustomButton>Login</CustomButton>
-        <a href="/forgotpassword" className="forgot-password">
-          Forgot Password?
-        </a>
+        <CustomButton>Register</CustomButton>
       </div>
-    </LoginWrapper>
+    </RegisterWrapper>
   );
 }
 
-const LoginWrapper = styled.form`
+const RegisterWrapper = styled.form`
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -68,9 +77,6 @@ const LoginWrapper = styled.form`
     max-width: 100%;
     margin-bottom: 1rem;
   }
-  .forgot-password {
-    margin-top: 1rem;
-  }
 
   .content-wrapper {
     display: flex;
@@ -85,4 +91,4 @@ const LoginWrapper = styled.form`
   }
 `;
 
-export default Login;
+export default Register;

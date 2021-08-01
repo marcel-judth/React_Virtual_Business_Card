@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import { Colors } from "../../styles/Colors";
 
-function TextInput({ placeholder, Icon, name, onChange, isPassword = false }) {
+function TextInput({ placeholder, Icon, onChange, isPassword = false }) {
   return (
     <InputWrapper>
-      <input required type={isPassword ? "password" : "text"} />
+      <input
+        required
+        type={isPassword ? "password" : "text"}
+        onChange={onChange}
+      />
       <label htmlFor="name" className="label-name">
         <span className="content-name">
           <Icon /> {placeholder}
@@ -18,10 +22,16 @@ const InputWrapper = styled.div`
   position: relative;
   overflow: hidden;
   margin-bottom: 1.5rem;
+  width: 100%;
 
   span {
-    vertical-align: middle;
-    font-size: 0.8rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: 0.5rem;
+    }
   }
 
   input {
@@ -32,6 +42,7 @@ const InputWrapper = styled.div`
     outline: none;
     overflow: visible;
     font-size: 1rem;
+    color: ${Colors.textColor};
   }
 
   label {

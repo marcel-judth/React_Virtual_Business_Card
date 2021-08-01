@@ -92,6 +92,12 @@ const CompanyToggle = styled.div`
     margin: 1rem auto;
     opacity: 0.5;
   }
+  .company-details-hidden {
+    /* opacity: 0;
+    transform: translateY(-50%);
+    pointer-events: none; */
+    visibility: collapse;
+  }
 `;
 
 const CompaniesWrapper = styled.div`

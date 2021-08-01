@@ -6,8 +6,8 @@ import Skills from "./Skills";
 function DetailsBody({ user }) {
   return (
     <BodyWrapper>
-      <Companies companies={user.companies} />
-      <Skills skills={user.skills} />
+      {user.companies.length > 0 && <Companies companies={user.companies} />}
+      {user.skills.length > 0 && <Skills skills={user.skills} />}
     </BodyWrapper>
   );
 }

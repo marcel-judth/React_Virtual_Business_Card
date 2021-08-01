@@ -1,61 +1,54 @@
 import axios from "axios";
+import { API_BaseURL } from "./utils/constants";
 
-// const user = {
-//   _id: { $oid: "60fad57e59babbe5f22e9f5a" },
-//   firstname: "Marcel",
-//   lastname: "Judth",
-//   jobtitle: "Software Engineer",
-//   description: "I love to create web-applications",
-//   mobileNr: "+4367682595032",
-//   email: "marjudth@gmail.com",
-//   facebookURL: "https://www.facebook.com/profile.php?id=100004874208428",
-//   instagramURL: "https://www.instagram.com/judthmar",
-//   linkedInURL: "",
-//   companies: [
-//     {
-//       name: "Infineon Technologies IT-Service GmbH",
-//       position: "Senior Specialist System Engineer",
-//       branch: "",
-//       logoURL: "",
-//       website: "www.infineon.com",
-//       email: "marcel.judth@infineon.com",
-//       phoneNr: "",
-//       mobileNr: "",
-//       location: "Klagenfurt",
-//       address: "Lakesidepark 5b",
-//       postcode: "9020",
-//       country: "AT",
-//     },
-//     {
-//       name: "DevCode-Solutions",
-//       position: "Self Employed",
-//       branch: "Software-Entwicklung",
-//       logoURL: "",
-//       website: "www.infineon.com",
-//       email: "marcel.judth@infineon.com",
-//       phoneNr: "",
-//       mobileNr: "",
-//       location: "Klagenfurt",
-//       address: "Lakesidepark 5b",
-//       postcode: "9020",
-//       country: "AT",
-//       linkedInURL: "aslkdf",
-//       facebookURL: "aölsdkf",
-//       instagramURL: "alkdsf",
-//     },
-//   ],
-//   skills: [
-//     "Designing and Developing User Interfaces",
-//     "Full Stack Software Developer",
-//     "Technologies like: React, React-Native, JavaScript, C#, Xamarin, ASP.net core, NodeJS",
-//   ],
-// };
+const getUserByID = async (id, setUser, setLoading) => {
+  const res = await axios.get(API_BaseURL + "/users/" + id);
+  setUser(res.data);
+  setLoading(false);
+};
 
-function getUserByID(id, setUser) {
+const login = async (email, password, setError, history) => {
   axios
-    .get("http://localhost:3000/api/users/" + id)
-    .then((res) => setUser(res.data))
-    .catch((error) => console.log(error));
-}
+    .post(API_BaseURL + "/users/login", {
+      email,
+      password,
+    })
+    .then((res) => {
+      localStorage.setItem("jwt", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data));
+      console.log("saved to storage");
+      history.push("/");
+    })
+    .catch((err) => {
+      setError(err.response.data);
+      setTimeout(() => setError(""), 3000);
+    });
+};
 
-export default getUserByID;
+const register = async (
+  firstname,
+  lastname,
+  email,
+  password,
+  setError,
+  history
+) => {
+  axios
+    .post(API_BaseURL + "/users/register", {
+      firstname,
+      lastname,
+      email,
+      password,
+    })
+    .then((res) => {
+      localStorage.setItem("jwt", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data));
+      history.push("/");
+    })
+    .catch((err) => {
+      setError(err.response.data);
+      setTimeout(() => setError(""), 3000);
+    });
+};
+
+export { getUserByID, login, register };

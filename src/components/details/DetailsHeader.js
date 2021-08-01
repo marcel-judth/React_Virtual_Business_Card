@@ -117,6 +117,8 @@ const Header = styled.div`
 
     > img {
       margin-bottom: 1rem;
+      margin-left: 0;
+      margin-right: 0;
     }
     .logo-wrapper {
       display: none;

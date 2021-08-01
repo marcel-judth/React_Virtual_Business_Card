@@ -9,42 +9,53 @@ const GlobalStyles = createGlobalStyle`
 }
 body{
     font-size: 62.5%;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 a{
-    text-decoration: none;
-    font-size: 1.3rem;
-    font-family: 'Montserrat', sans-serif;
+    text-decoration: underline;
+    font-size: 1rem;
+    color: ${Colors.textColor};
+    font-family: 'Open Sans', sans-serif;
+    cursor: pointer;
+
+    &:hover{
+        text-decoration: none;
+    }
 }
 p{
     font-size: 1rem;
-    color: ${Colors.textColor}
+    color: ${Colors.textColor};
+    font-family: 'Open Sans', sans-serif;
 }
 h2{
     font-size: 2.5rem;
     font-weight: 400;
     color: ${Colors.headings};
+    font-family: 'Open Sans', sans-serif;
 }
 h3{
     font-size: 2rem;
     font-weight: 350;
     color: ${Colors.headings};
+    font-family: 'Open Sans', sans-serif;
 }
 
 h4{
     font-size: 1.5rem;
     font-weight: 350;
-    color: ${Colors.footerColor}
+    color: ${Colors.footerColor};
+    font-family: 'Open Sans', sans-serif;
 }
 
 h5{
     font-size: 1rem;
     font-weight: 350;
-    color: ${Colors.footerColor}
+    color: ${Colors.footerColor};
+    font-family: 'Open Sans', sans-serif;
 }
 
 button{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 @media (max-width: 1300px){
     p{
@@ -61,6 +72,9 @@ button{
     }
     h4{
         font-size: 1.2rem;
+    }
+    h5{
+        font-size: 0.9rem;
     }
 }
 `;
