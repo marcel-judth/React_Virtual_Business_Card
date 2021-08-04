@@ -27,6 +27,14 @@ p{
     color: ${Colors.textColor};
     font-family: 'Open Sans', sans-serif;
 }
+
+h1{
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: ${Colors.headings};
+    font-family: 'Open Sans', sans-serif;
+}
+
 h2{
     font-size: 2.5rem;
     font-weight: 400;
@@ -63,6 +71,9 @@ button{
     }
     a{
         font-size: 1rem;
+    }
+    h1{
+        font-size: 2rem;
     }
     h2{
        font-size: 2rem;

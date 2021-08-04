@@ -1,6 +1,7 @@
 //styles
 import styled from "styled-components";
 //images
+import logoImg from "../../img/logo.png";
 //router
 import { useLocation } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
@@ -20,7 +21,10 @@ const Nav = () => {
   return (
     <StyledNav>
       <Link to="/">
-        {/* <img src={logoImg} alt="logo Outdoor Solution" /> */}
+        <div className="nav-logo">
+          <img src={logoImg} alt="logo x-act.me" />
+          X-Act.me
+        </div>
       </Link>
 
       <Burger
@@ -101,6 +105,7 @@ const Nav = () => {
 };
 
 const StyledNav = styled.nav`
+  box-shadow: 0 2px 2px -2px rgba(0, 0, 0, 0.2);
   min-height: 5rem;
   height: 10vh;
   max-height: auto;
@@ -108,7 +113,7 @@ const StyledNav = styled.nav`
   width: 100%;
   display: flex;
   position: fixed;
-  background: rgba(0, 0, 0, 0.66);
+  background: white;
   top: 0;
   display: flex;
   align-items: center;
@@ -130,10 +135,23 @@ const StyledNav = styled.nav`
     position: relative;
   }
   a {
-    color: white;
-    font-weight: 300;
+    color: ${Colors.textColor};
+    font-weight: 400;
     text-decoration: none;
   }
+
+  .nav-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+
+    img {
+      height: 8vh;
+      width: auto;
+    }
+  }
+
   .toggle {
     .line1 {
       transform: rotateZ(45deg) translateY(480%);
@@ -178,7 +196,7 @@ const Burger = styled.div`
   z-index: 10;
   span {
     padding: 0.1rem 1.2rem;
-    background: white;
+    background: ${Colors.textColor};
     margin: 0.5rem 0rem;
     display: block;
     transition: all 0.5s ease;
@@ -186,11 +204,13 @@ const Burger = styled.div`
 `;
 
 const Line = styled(motion.div)`
-  height: 0.3rem;
-  background: ${Colors.primaryColor};
+  height: 0.2rem;
+  border-radius: 2rem;
+  background: ${Colors.textColor};
+  opacity: 0.5;
   width: 0%;
   position: absolute;
-  bottom: -70%;
+  bottom: -50%;
   @media (max-width: 1300px) {
     left: 0%;
   }
