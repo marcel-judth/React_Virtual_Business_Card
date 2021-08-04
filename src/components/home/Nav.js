@@ -118,7 +118,7 @@ const StyledNav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0rem 5rem;
+  padding: 0rem 10vw;
   z-index: 10;
   img {
     height: 5vh;

@@ -62,7 +62,7 @@ const Heading = styled.div`
 `;
 
 const HomeWrapper = styled.div`
-  padding: 15vh 5rem;
+  padding: 15vh 10vw;
   width: 100%;
   min-height: 100vh;
 
@@ -81,12 +81,13 @@ const HomeWrapper = styled.div`
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
-    padding: 15vh 2.5rem;
+    /* padding: 15vh 10vh; */
 
     svg {
       position: relative;
       height: 30vh;
-      margin: 2rem 0;
+      margin: 0rem;
+      margin-bottom: 5vh;
       transform: none;
     }
   }
