@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Colors } from "../../styles/Colors";
 
-function CustomButton({ Icon, children }) {
+function CustomButton({ Icon, children, onClick }) {
   return (
-    <Button>
+    <Button onClick={onClick}>
       {Icon && <Icon className="btn-icon" />}
       {children}
     </Button>

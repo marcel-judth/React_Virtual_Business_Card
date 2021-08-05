@@ -1,10 +1,30 @@
 import axios from "axios";
 import { API_BaseURL } from "./utils/constants";
 
+const authHeader = {
+  "x-auth-token": localStorage.getItem("jwt"),
+};
+
 const getUserByID = async (id, setUser, setLoading) => {
   const res = await axios.get(API_BaseURL + "/users/" + id);
+  console.log(res.data);
   setUser(res.data);
   setLoading(false);
+};
+
+const update = async (user, setError, history, setLoading) => {
+  axios
+    .put(API_BaseURL + "/users/" + user.email, user, {
+      headers: authHeader,
+    })
+    .then(() => {
+      history.push("/details/" + user.email);
+    })
+    .catch((err) => {
+      setError(err.response.data);
+      setLoading(false);
+      setTimeout(() => setError(""), 3000);
+    });
 };
 
 const login = async (email, password, setError, history) => {
@@ -16,7 +36,6 @@ const login = async (email, password, setError, history) => {
     .then((res) => {
       localStorage.setItem("jwt", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data));
-      console.log("saved to storage");
       history.push("/");
     })
     .catch((err) => {
@@ -51,4 +70,4 @@ const register = async (
     });
 };
 
-export { getUserByID, login, register };
+export { getUserByID, login, register, update };

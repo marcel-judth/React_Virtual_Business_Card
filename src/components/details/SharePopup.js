@@ -34,7 +34,6 @@ function SharePopup({ user, popupDisplayed, setPopupDisplayed }) {
             <CancelButton
               className="share-btn-close"
               onClick={() => setPopupDisplayed(false)}
-              title="Close"
             >
               Close
             </CancelButton>

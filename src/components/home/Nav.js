@@ -54,10 +54,9 @@ const Nav = () => {
                 transition={{ duration: 0.75 }}
                 initial={{ width: "0%" }}
                 animate={{
-                  width:
-                    location.pathname === "/details/" + user.email
-                      ? "100%"
-                      : "0%",
+                  width: location.pathname.startsWith("/details/" + user.email)
+                    ? "100%"
+                    : "0%",
                 }}
               />
             </li>

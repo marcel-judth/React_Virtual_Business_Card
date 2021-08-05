@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import { Colors } from "../../styles/Colors";
 
-function TextInput({ placeholder, Icon, onChange, isPassword = false }) {
+function TextInput({ placeholder, value, Icon, onChange, isPassword = false }) {
   return (
     <InputWrapper>
       <input
         required
         type={isPassword ? "password" : "text"}
         onChange={onChange}
+        value={value}
       />
       <label htmlFor="name" className="label-name">
         <span className="content-name">
