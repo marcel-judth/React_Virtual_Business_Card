@@ -16,7 +16,8 @@ function Register() {
   const [error, setError] = useState();
   const history = useHistory();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     register(firstname, lastname, email, password, setError, history);
   };
 

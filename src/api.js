@@ -28,20 +28,26 @@ const update = async (user, setError, history, setLoading) => {
 };
 
 const login = async (email, password, setError, history) => {
+  console.log("im here");
   axios
     .post(API_BaseURL + "/users/login", {
       email,
       password,
     })
     .then((res) => {
-      localStorage.setItem("jwt", res.data.token);
+      console.log("im here success");
+
+      localStorage.setItem("jwt", res.data);
       localStorage.setItem("user", JSON.stringify(res.data));
       history.push("/");
     })
     .catch((err) => {
+      console.log("im here fail");
       setError(err.response.data);
       setTimeout(() => setError(""), 3000);
     });
+
+  console.log("im go");
 };
 
 const register = async (
@@ -60,7 +66,7 @@ const register = async (
       password,
     })
     .then((res) => {
-      localStorage.setItem("jwt", res.data.token);
+      localStorage.setItem("jwt", res.data);
       localStorage.setItem("user", JSON.stringify(res.data));
       history.push("/");
     })

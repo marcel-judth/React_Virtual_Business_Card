@@ -14,7 +14,9 @@ function Login() {
   const [error, setError] = useState();
   const history = useHistory();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
     login(email, password, setError, history);
   };
 
@@ -52,7 +54,7 @@ const LoginWrapper = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  margin-top: 10vh;
   h2 {
     margin: 2rem 0rem;
   }
