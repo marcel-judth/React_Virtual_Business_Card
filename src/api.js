@@ -2,7 +2,7 @@ import axios from "axios";
 import { API_BaseURL } from "./utils/constants";
 
 const authHeader = {
-  "x-auth-token": localStorage.getItem("jwt"),
+  "x-auth-token": JSON.parse(localStorage.getItem("user")).token,
 };
 
 const getUserByID = async (id, setUser, setLoading) => {
@@ -28,21 +28,16 @@ const update = async (user, setError, history, setLoading) => {
 };
 
 const login = async (email, password, setError, history) => {
-  console.log("im here");
   axios
     .post(API_BaseURL + "/users/login", {
       email,
       password,
     })
     .then((res) => {
-      console.log("im here success");
-
-      localStorage.setItem("jwt", res.data);
       localStorage.setItem("user", JSON.stringify(res.data));
-      history.push("/");
+      history.push("/details/" + res.data.email);
     })
     .catch((err) => {
-      console.log("im here fail");
       setError(err.response.data);
       setTimeout(() => setError(""), 3000);
     });
@@ -66,7 +61,6 @@ const register = async (
       password,
     })
     .then((res) => {
-      localStorage.setItem("jwt", res.data);
       localStorage.setItem("user", JSON.stringify(res.data));
       history.push("/");
     })

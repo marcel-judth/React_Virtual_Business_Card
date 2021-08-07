@@ -1,12 +1,12 @@
-import { FaLock, FaUser, FaEnvelope } from "react-icons/fa";
+import { FaLock, FaUser, FaEnvelope, FaUserAlt } from "react-icons/fa";
 import styled from "styled-components";
 import CustomButton from "../shared/CustomButton";
 import TextInput from "../shared/TextInput";
-import logo from "../../img/logo.png";
 import { register } from "../../api";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Colors } from "../../styles/Colors";
+import IconImage from "../shared/IconImage";
 
 function Register() {
   const [firstname, setFirstname] = useState();
@@ -24,7 +24,10 @@ function Register() {
   return (
     <RegisterWrapper onSubmit={handleSubmit}>
       <div className="content-wrapper">
-        <img src={logo} alt="logo" className="logo" />
+        <IconImage>
+          <FaUserAlt />
+        </IconImage>
+        <br />
 
         <TextInput
           onChange={(event) => setFirstname(event.target.value)}
@@ -89,6 +92,11 @@ const RegisterWrapper = styled.form`
     border-radius: 1rem;
     border: 1px solid lightgrey;
     min-width: 25rem;
+  }
+  @media (max-width: 600px) {
+    .content-wrapper {
+      border: none;
+    }
   }
 `;
 

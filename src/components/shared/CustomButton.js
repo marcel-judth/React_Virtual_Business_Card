@@ -19,7 +19,7 @@ const Button = styled.button`
   cursor: pointer;
   border-radius: 0.2rem;
   font-size: 1rem;
-  background: ${Colors.userColor};
+  background: ${Colors.primaryColor};
   color: white;
   border: none;
   display: flex;

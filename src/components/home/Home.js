@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import CustomButton from "../shared/CustomButton";
@@ -15,7 +16,9 @@ function Home() {
           magni quo eos dolo res omnis incidunt vitae praesentium! Ipsum he
         </p>
         <div className="btn-wrapper">
-          <CustomButton>Sign Up</CustomButton>
+          <Link to="/register">
+            <CustomButton>Sign Up</CustomButton>
+          </Link>
         </div>
       </Heading>
       <HomeSvg />

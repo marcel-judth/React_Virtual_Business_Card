@@ -14,8 +14,6 @@ import { Colors } from "../../styles/Colors";
 const Nav = () => {
   const location = useLocation();
   const [navStatus, setNavStatus] = useState(false);
-  const userIsLoggedOn =
-    localStorage.getItem("user") && localStorage.getItem("jwt");
   const user = JSON.parse(localStorage.getItem("user"));
 
   return (
@@ -46,7 +44,7 @@ const Nav = () => {
           />
         </li>
 
-        {userIsLoggedOn ? (
+        {user ? (
           <>
             <li onClick={() => setNavStatus(!navStatus)}>
               <Link to={"/details/" + user.email}>My page</Link>

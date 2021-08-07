@@ -83,10 +83,6 @@ const InputWrapper = styled.div`
   .form input:valid + .label-name::after {
     transform: translateX(0%);
   }
-  @media (max-width: 900px) {
-    width: auto;
-    max-width: 20rem;
-  }
 `;
 
 export default TextInput;

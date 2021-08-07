@@ -1,8 +1,8 @@
-import { FaLock, FaEnvelope } from "react-icons/fa";
+import { FaLock, FaEnvelope, FaUserAlt } from "react-icons/fa";
 import styled from "styled-components";
 import CustomButton from "../shared/CustomButton";
+import IconImage from "../shared/IconImage";
 import TextInput from "../shared/TextInput";
-import logo from "../../img/logo.png";
 import { login } from "../../api";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -23,8 +23,10 @@ function Login() {
   return (
     <LoginWrapper onSubmit={handleSubmit}>
       <div className="content-wrapper">
-        <img src={logo} alt="logo" className="logo" />
-
+        <IconImage>
+          <FaUserAlt />
+        </IconImage>
+        <br />
         <TextInput
           onChange={(event) => setEmail(event.target.value)}
           placeholder="email"
@@ -54,7 +56,6 @@ const LoginWrapper = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10vh;
   h2 {
     margin: 2rem 0rem;
   }
@@ -84,6 +85,12 @@ const LoginWrapper = styled.form`
     border-radius: 1rem;
     border: 1px solid lightgrey;
     min-width: 25rem;
+  }
+
+  @media (max-width: 600px) {
+    .content-wrapper {
+      border: none;
+    }
   }
 `;
 
