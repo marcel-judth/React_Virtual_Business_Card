@@ -64,7 +64,7 @@ function Details() {
 const DetailsContent = styled.div`
   background: white;
   align-self: center;
-  padding: 10vh 5%;
+  padding: 15vh 5%;
   min-width: 60%;
   button {
     margin-left: auto;

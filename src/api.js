@@ -2,7 +2,7 @@ import axios from "axios";
 import { API_BaseURL } from "./utils/constants";
 
 const authHeader = {
-  "x-auth-token": JSON.parse(localStorage.getItem("user")).token,
+  "x-auth-token": JSON.parse(localStorage.getItem("user"))?.token,
 };
 
 const getUserByID = async (id, setUser, setLoading) => {

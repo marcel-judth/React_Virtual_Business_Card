@@ -1,27 +1,79 @@
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import styled from "styled-components";
 import logo from "../../../img/Infineon-Logo.png";
+import { Colors } from "../../../styles/Colors";
 
 function CompanyHeader({ company, toggle, setToggle }) {
   return (
-    <tr className="company-table-header" onClick={() => setToggle(!toggle)}>
-      <td className="company-table-td">
+    <CoHeader onClick={() => setToggle(!toggle)}>
+      <div className="co-logo-text-wrapper">
         <img src={logo} alt="company-logo" height="30px" />
-      </td>
-      <td className="company-table-td">
-        <div className="company-text">
+        <div className="co-text">
           <h5>{company.name}</h5>
           <span>{company.position}</span>
         </div>
-      </td>
-      <td className="company-table-td">
-        {toggle ? (
-          <IoIosArrowUp className="company-arrow" />
-        ) : (
-          <IoIosArrowDown className="company-arrow" />
-        )}
-      </td>
-    </tr>
+      </div>
+
+      {toggle ? (
+        <IoIosArrowUp className="co-arrow" />
+      ) : (
+        <IoIosArrowDown className="co-arrow" />
+      )}
+    </CoHeader>
   );
 }
+
+const CoHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 1rem 1rem;
+  padding-bottom: 0.5rem;
+  min-width: 33rem;
+
+  .co-logo-text-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .co-arrow {
+    font-size: 2rem;
+    color: ${Colors.textColor};
+    margin-left: auto;
+  }
+
+  .co-text {
+    margin-left: 0.5rem;
+    margin-right: 1rem;
+    max-width: 30rem;
+  }
+
+  img {
+    width: 5rem;
+    height: auto;
+  }
+
+  @media (max-width: 600px) {
+    padding: 1rem 0.5rem;
+
+    img {
+      width: 3rem;
+    }
+
+    .co-text {
+      margin-right: 0.5rem;
+    }
+
+    .co-arrow {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    min-width: auto;
+  }
+`;
 
 export default CompanyHeader;
