@@ -1,103 +1,175 @@
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { useState } from "react";
-import { FaIdCardAlt, FaPen, FaPhoneAlt, FaUser } from "react-icons/fa";
+import { useEffect, useRef, useState } from "react";
+import {
+  FaFacebookF,
+  FaIdCardAlt,
+  FaInstagram,
+  FaLinkedinIn,
+  FaPen,
+  FaPhoneAlt,
+  FaUser,
+} from "react-icons/fa";
 
 import CustomButton from "../shared/CustomButton";
 import CancelButton from "../shared/CancelButton";
 import { Colors } from "../../styles/Colors";
 import profilePicture from "../../img/profile.JPG";
 import TextInput from "../shared/TextInput";
-import { useEffect } from "react";
-import Loading from "../shared/Loading";
-import { getUserByID, update } from "../../api";
+import CompanyHeader from "./CompanyHeader";
+import { update } from "../../api";
+import CompanyEdit from "./CompanyEdit";
 
-function Edit() {
+function Edit({
+  user,
+  setUser,
+  visible,
+  setVisible,
+  setLoading,
+  setOverlayVisible,
+}) {
   const history = useHistory();
   const [error, setError] = useState();
-  const [user, setUser] = useState();
-  const [loading, setLoading] = useState(true);
+  const fileInput = useRef();
+  const [image, setImage] = useState(profilePicture);
+  const [editCompanyOpen, setEditCompanyOpen] = useState(false);
+  const [selectedCompany, setSelectedCompany] = useState();
 
-  useEffect(() => {
-    const userObject = JSON.parse(localStorage.getItem("user"));
+  console.log("reload");
+  function handleImgChange(event) {
+    // setUser({ ...user, img: event.target.files[0] });
 
-    if (!userObject) history.push("/login");
+    const url = URL.createObjectURL(event.target.files[0]);
+    setImage(url);
+  }
 
-    getUserByID(userObject.email, setUser, setLoading);
-  }, [history]);
+  function openCompanyEdit(index) {
+    setSelectedCompany(index);
+    setEditCompanyOpen(true);
+    setVisible(false);
+  }
 
-  function handleSubmit() {
-    setLoading(true);
-    update(user, setError, history, setLoading);
+  function handleSubmit(event) {
+    // event.preventDefault();
+    // setError("false");
+    // setLoading(true);
+    update(user, setError, history, setLoading, setVisible);
   }
 
   return (
     <>
-      {loading ? (
-        <Loading />
-      ) : (
+      {visible && (
         <EditWrapper onSubmit={handleSubmit}>
-          <div className="content-wrapper">
-            <ProfilePicture src={profilePicture} alt="profile picture" />
-
-            <TextInput
-              placeholder="Firstname"
-              Icon={FaUser}
-              value={user.firstname}
-              onChange={(e) => setUser({ ...user, firstname: e.target.value })}
-            />
-
-            <TextInput
-              placeholder="Lastname"
-              Icon={FaUser}
-              value={user.lastname}
-              onChange={(e) => setUser({ ...user, lastname: e.target.value })}
-            />
-
-            <TextInput
-              placeholder="Jobtitle"
-              Icon={FaIdCardAlt}
-              value={user.jobtitle}
-              onChange={(e) => setUser({ ...user, jobtitle: e.target.value })}
-            />
-            <TextInput
-              placeholder="Description"
-              Icon={FaPen}
-              value={user.description}
-              onChange={(e) =>
-                setUser({ ...user, description: e.target.value })
-              }
-            />
-            <TextInput
-              placeholder="Phone Nr."
-              Icon={FaPhoneAlt}
-              value={user.mobileNr}
-              onChange={(e) => setUser({ ...user, mobileNr: e.target.value })}
-            />
-
-            <span className="error-label">{error}</span>
-            <CustomButton onClick={handleSubmit}>Save</CustomButton>
-            <br />
-            <CancelButton
-              onClick={() => {
-                history.push("/details/" + user.email);
-              }}
-            >
-              Cancel
-            </CancelButton>
+          <input
+            style={{ display: "none" }}
+            type="file"
+            onChange={handleImgChange}
+            ref={(file) => (fileInput.current = file)}
+          />
+          <ProfilePicture
+            src={image}
+            alt="profile picture"
+            onClick={() => fileInput.current.click()}
+          />
+          <TextInput
+            placeholder="Firstname"
+            Icon={FaUser}
+            value={user.firstname}
+            onChange={(e) => setUser({ ...user, firstname: e.target.value })}
+          />
+          <TextInput
+            placeholder="Lastname"
+            Icon={FaUser}
+            value={user.lastname}
+            onChange={(e) => setUser({ ...user, lastname: e.target.value })}
+          />
+          <TextInput
+            placeholder="Jobtitle"
+            Icon={FaIdCardAlt}
+            value={user.jobtitle}
+            onChange={(e) => setUser({ ...user, jobtitle: e.target.value })}
+          />
+          <TextInput
+            placeholder="Description"
+            Icon={FaPen}
+            value={user.description}
+            onChange={(e) => setUser({ ...user, description: e.target.value })}
+          />
+          <TextInput
+            placeholder="Phone Nr."
+            Icon={FaPhoneAlt}
+            value={user.mobileNr}
+            onChange={(e) => setUser({ ...user, mobileNr: e.target.value })}
+          />
+          <TextInput
+            placeholder="Facebook Url"
+            Icon={FaFacebookF}
+            value={user.facebookURL}
+            onChange={(e) => setUser({ ...user, facebookURL: e.target.value })}
+          />
+          <TextInput
+            placeholder="Instagram Url"
+            Icon={FaInstagram}
+            value={user.instagramURL}
+            onChange={(e) => setUser({ ...user, instagramURL: e.target.value })}
+          />
+          <TextInput
+            placeholder="LinkedIn Url"
+            Icon={FaLinkedinIn}
+            value={user.linkedInURL}
+            onChange={(e) => setUser({ ...user, linkedInURL: e.target.value })}
+          />
+          <h4>Companies</h4>
+          <div className="company-list">
+            {user.companies.map((company, index) => {
+              return (
+                <CompanyHeader
+                  onclick={(e) => openCompanyEdit(index)}
+                  key={index}
+                  company={company}
+                />
+              );
+            })}
           </div>
+          <span className="error-label">{error}</span>
+          <CustomButton onClick={handleSubmit}>Save</CustomButton>
+          <br />
+          <CancelButton
+            onClick={() => {
+              setVisible(false);
+            }}
+          >
+            Cancel
+          </CancelButton>
         </EditWrapper>
+      )}
+      {editCompanyOpen && (
+        <CompanyEdit
+          user={user}
+          setUser={setUser}
+          index={selectedCompany}
+          setVisible={setEditCompanyOpen}
+          setOverlayVisible={setOverlayVisible}
+          setParentVisible={setVisible}
+        />
       )}
     </>
   );
 }
 
 const EditWrapper = styled.form`
-  width: 100vw;
+  position: absolute;
+  z-index: 1;
+  top: 15vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 15vh;
+  background: white;
+  padding: 3rem 4rem;
+  border-radius: 1rem;
+  min-width: 25rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
   .error-label {
     color: ${Colors.warningColor};
@@ -106,16 +178,8 @@ const EditWrapper = styled.form`
     margin-bottom: 1rem;
   }
 
-  .content-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: white;
-    padding: 3rem 4rem;
-    border-radius: 1rem;
-    border: 1px solid lightgrey;
-    min-width: 25rem;
+  .company-list {
+    width: 100%;
   }
 `;
 

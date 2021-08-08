@@ -40,7 +40,6 @@ function SharePopup({ user, popupDisplayed, setPopupDisplayed }) {
           </div>
         </Popup>
       )}
-      {popupDisplayed && <ScreenOverlay />}
     </>
   );
 }
@@ -85,15 +84,6 @@ const Popup = styled.div`
   h2 {
     margin-bottom: 1rem;
   }
-`;
-
-const ScreenOverlay = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  backdrop-filter: blur(5px);
 `;
 
 export default SharePopup;

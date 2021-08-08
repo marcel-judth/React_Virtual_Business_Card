@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import DetailsHeader from "./DetailsHeader";
 import DetailsBody from "./DetailsBody";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Colors } from "../../styles/Colors";
 import { FiDownload } from "react-icons/fi";
 import SharePopup from "./SharePopup";
@@ -11,6 +11,7 @@ import Loading from "../shared/Loading";
 import { API_BaseURL } from "../../utils/constants";
 import { getUserByID } from "../../api";
 import { FaUserEdit } from "react-icons/fa";
+import Edit from "../edit/Edit";
 
 function Details() {
   let { id } = useParams();
@@ -18,7 +19,8 @@ function Details() {
 
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
-  const history = useHistory();
+  const [editVisible, setEditVisible] = useState(false);
+  const [overlayVisible, setOverlayVisible] = useState(false);
 
   useEffect(() => {
     getUserByID(id, setUser, setLoading);
@@ -43,7 +45,7 @@ function Details() {
             </button>
             <button
               onClick={() => {
-                history.push(`/details/${user.email}/edit`);
+                setEditVisible(true);
               }}
             >
               <FaUserEdit className="btn-icon" />
@@ -54,7 +56,19 @@ function Details() {
             user={user}
             popupDisplayed={popupDisplayed}
             setPopupDisplayed={setPopupDisplayed}
+            setOverlayVisible={setOverlayVisible}
           />
+          <Edit
+            setUser={setUser}
+            user={user}
+            visible={editVisible}
+            setVisible={setEditVisible}
+            setLoading={setLoading}
+            setOverlayVisible={setOverlayVisible}
+          />
+          {(overlayVisible || editVisible || popupDisplayed) && (
+            <ScreenOverlay />
+          )}
         </DetailsWrapper>
       )}
     </>
@@ -99,4 +113,13 @@ const DetailsWrapper = styled.div`
   justify-content: center;
 `;
 
+const ScreenOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100vw;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+`;
 export default Details;

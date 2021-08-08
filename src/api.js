@@ -7,23 +7,26 @@ const authHeader = {
 
 const getUserByID = async (id, setUser, setLoading) => {
   const res = await axios.get(API_BaseURL + "/users/" + id);
-  console.log(res.data);
+
   setUser(res.data);
   setLoading(false);
 };
 
-const update = async (user, setError, history, setLoading) => {
+const update = async (user, setError, history, setLoading, setVisible) => {
   axios
     .put(API_BaseURL + "/users/" + user.email, user, {
       headers: authHeader,
     })
     .then(() => {
-      history.push("/details/" + user.email);
+      setVisible(false);
+      setLoading(false);
+      //window.location.reload();
+      alert("all good");
     })
     .catch((err) => {
       setError(err.response.data);
       setLoading(false);
-      setTimeout(() => setError(""), 3000);
+      // setTimeout(() => setError(""), 3000);
     });
 };
 
