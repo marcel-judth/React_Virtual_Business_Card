@@ -1,6 +1,5 @@
-import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   FaFacebookF,
   FaIdCardAlt,
@@ -14,11 +13,13 @@ import {
 import CustomButton from "../shared/CustomButton";
 import CancelButton from "../shared/CancelButton";
 import { Colors } from "../../styles/Colors";
-import profilePicture from "../../img/profile.JPG";
 import TextInput from "../shared/TextInput";
 import CompanyHeader from "./CompanyHeader";
 import { update } from "../../api";
 import CompanyEdit from "./CompanyEdit";
+import defaultProfilePicture from "../../img/profile.png";
+import Logo from "../shared/Logo";
+
 
 function Edit({
   user,
@@ -28,19 +29,20 @@ function Edit({
   setLoading,
   setOverlayVisible,
 }) {
-  const history = useHistory();
   const [error, setError] = useState();
   const fileInput = useRef();
-  const [image, setImage] = useState(profilePicture);
   const [editCompanyOpen, setEditCompanyOpen] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState();
 
-  console.log("reload");
   function handleImgChange(event) {
-    // setUser({ ...user, img: event.target.files[0] });
+    setUser({ ...user, image: event.target.files[0] });
+  }
 
-    const url = URL.createObjectURL(event.target.files[0]);
-    setImage(url);
+  function addNewCompany(){
+    const tmp = user;
+    tmp.companies.push({})
+    setUser({ ...user, companies: tmp.companies });
+    openCompanyEdit(user.companies.length - 1)
   }
 
   function openCompanyEdit(index) {
@@ -49,11 +51,10 @@ function Edit({
     setVisible(false);
   }
 
-  function handleSubmit(event) {
-    // event.preventDefault();
-    // setError("false");
-    // setLoading(true);
-    update(user, setError, history, setLoading, setVisible);
+  async function handleSubmit() {
+    console.log(user.image)
+    setLoading(true);
+    await update(user, setError, setLoading);
   }
 
   return (
@@ -66,20 +67,18 @@ function Edit({
             onChange={handleImgChange}
             ref={(file) => (fileInput.current = file)}
           />
-          <ProfilePicture
-            src={image}
-            alt="profile picture"
-            onClick={() => fileInput.current.click()}
-          />
+          <Logo src={user.image && typeof user.image !== 'string' ? URL.createObjectURL(user.image) : defaultProfilePicture} fileInput={fileInput} isRounded/>
           <TextInput
             placeholder="Firstname"
             Icon={FaUser}
+            required
             value={user.firstname}
             onChange={(e) => setUser({ ...user, firstname: e.target.value })}
           />
           <TextInput
             placeholder="Lastname"
             Icon={FaUser}
+            required
             value={user.lastname}
             onChange={(e) => setUser({ ...user, lastname: e.target.value })}
           />
@@ -124,19 +123,20 @@ function Edit({
             {user.companies.map((company, index) => {
               return (
                 <CompanyHeader
-                  onclick={(e) => openCompanyEdit(index)}
+                  onclick={() => openCompanyEdit(index)}
                   key={index}
                   company={company}
                 />
               );
             })}
+            <button type="button" onClick={addNewCompany}>Add new</button>
           </div>
           <span className="error-label">{error}</span>
           <CustomButton onClick={handleSubmit}>Save</CustomButton>
           <br />
           <CancelButton
             onClick={() => {
-              setVisible(false);
+              window.location.reload();
             }}
           >
             Cancel
@@ -182,15 +182,4 @@ const EditWrapper = styled.form`
     width: 100%;
   }
 `;
-
-const ProfilePicture = styled.img`
-  width: 10vw;
-  height: 10vw;
-  min-width: 5rem;
-  min-height: 5rem;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 2rem;
-`;
-
 export default Edit;

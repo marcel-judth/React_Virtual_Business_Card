@@ -1,13 +1,11 @@
 import { MdEdit } from "react-icons/md";
 import styled from "styled-components";
-import logo from "../../img/Infineon-Logo.png";
 import { Colors } from "../../styles/Colors";
 
 function CompanyHeader({ company, onclick }) {
   return (
     <Company onClick={onclick}>
-      <img src={logo} alt="company-logo" height="30px" />
-
+      {company.logo && <img src={URL.createObjectURL(company.logo)} alt="company-logo" height="30px" />}
       <p>{company.name}</p>
 
       <MdEdit className="icon" />
@@ -29,6 +27,8 @@ const Company = styled.div`
     width: 3rem;
     height: auto;
     margin-right: 1rem;
+    max-height: 3rem;
+      object-fit: cover;
   }
   p {
     font-size: 0.8rem;
@@ -39,6 +39,11 @@ const Company = styled.div`
     margin-left: auto;
     font-size: 1rem;
     color: ${Colors.textColor};
+  }
+
+
+  &:hover{
+    background: lightgrey;
   }
 `;
 

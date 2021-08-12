@@ -16,10 +16,10 @@ function Companies({ companies }) {
       <CompanyToggle>
         {companies.map((element, index) => {
           return (
-            <>
+            <div key={index}>
               <Company company={element} />
               {index + 1 < companies.length && <div className="line"></div>}
-            </>
+            </div>
           );
         })}
       </CompanyToggle>

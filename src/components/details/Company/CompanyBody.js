@@ -8,6 +8,7 @@ function CompanyBody({ company, toggle }) {
       {toggle && (
         <CoBody>
           <table>
+            <tbody>
             {company.branch && (
               <tr>
                 <td className="table-title">Branche:</td>
@@ -17,8 +18,7 @@ function CompanyBody({ company, toggle }) {
             {company.website && (
               <tr>
                 <td className="table-title">Website:</td>
-                <td className="table-text">
-                  <a
+                <td className="table-text"><a
                     href={
                       company.website.includes("http")
                         ? company.website
@@ -26,34 +26,23 @@ function CompanyBody({ company, toggle }) {
                     }
                     target="_blank"
                     rel="noreferrer"
-                  >
-                    {company.website}
-                  </a>
-                </td>
+                  >{company.website}</a></td>
               </tr>
             )}
             {company.email && (
               <tr>
                 <td className="table-title">Email:</td>
-                <td className="table-text">
-                  {" "}
-                  <a href={"mailto:" + company.email}>{company.email}</a>
-                </td>
+                <td className="table-text"><a href={"mailto:" + company.email}>{company.email}</a></td>
               </tr>
             )}
-            {company.mobileNr && (
-              <tr>
-                <td className="table-title">Mobile:</td>
-                <td className="table-text">{company.mobileNr}</td>
-                <a href={"tel:" + company.mobileNr}>{company.mobileNr}</a>
-              </tr>
-            )}
+            
             {company.location && (
               <tr>
                 <td className="table-title">Location:</td>
                 <td className="table-text">{company.location}</td>
               </tr>
             )}
+            </tbody>
           </table>
           <div className="company-icons">
             {company.facebookURL && (

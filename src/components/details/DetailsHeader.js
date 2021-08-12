@@ -10,13 +10,13 @@ import {
 import { FiShare } from "react-icons/fi";
 
 import Icon from "../shared/Icon";
-import profilePicture from "../../img/profile.JPG";
+import defaultProfilePicture from "../../img/profile.png";
 import logo from "../../img/logo.png";
 
 function DetailsHeader({ user, setPopupDisplayed }) {
   return (
     <Header>
-      <ProfilePicture src={profilePicture} />
+      <ProfilePicture src={user.image && typeof user.image !== 'string' ? URL.createObjectURL(user.image) : defaultProfilePicture} />
       <div>
         <h3>
           {user.firstname} {user.lastname}

@@ -15,8 +15,9 @@ import Edit from "../edit/Edit";
 
 function Details() {
   let { id } = useParams();
-  const [popupDisplayed, setPopupDisplayed] = useState(false);
+  const currentUserEmail = JSON.parse(localStorage.getItem("user"))?.email;
 
+  const [popupDisplayed, setPopupDisplayed] = useState(false);
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
   const [editVisible, setEditVisible] = useState(false);
@@ -43,6 +44,8 @@ function Details() {
               <FiDownload className="btn-icon" />
               download
             </button>
+            {
+              (currentUserEmail && currentUserEmail === user.email) && 
             <button
               onClick={() => {
                 setEditVisible(true);
@@ -50,7 +53,7 @@ function Details() {
             >
               <FaUserEdit className="btn-icon" />
               edit
-            </button>
+            </button>}
           </DetailsContent>
           <SharePopup
             user={user}

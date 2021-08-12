@@ -30,12 +30,14 @@ function Login() {
         <TextInput
           onChange={(event) => setEmail(event.target.value)}
           placeholder="email"
+          required
           Icon={FaEnvelope}
         />
         <TextInput
           onChange={(event) => {
             setPassword(event.target.value);
           }}
+          required
           placeholder="password"
           isPassword
           Icon={FaLock}

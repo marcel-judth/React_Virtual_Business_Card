@@ -1,13 +1,13 @@
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import styled from "styled-components";
-import logo from "../../../img/Infineon-Logo.png";
 import { Colors } from "../../../styles/Colors";
 
 function CompanyHeader({ company, toggle, setToggle }) {
+  console.log(company.logo)
   return (
     <CoHeader onClick={() => setToggle(!toggle)}>
       <div className="co-logo-text-wrapper">
-        <img src={logo} alt="company-logo" height="30px" />
+        {company.logo && <img src={URL.createObjectURL(company.logo)} alt="company-logo" height="30px" />}
         <div className="co-text">
           <h5>{company.name}</h5>
           <span>{company.position}</span>
@@ -53,6 +53,9 @@ const CoHeader = styled.div`
   img {
     width: 5rem;
     height: auto;
+
+    max-height: 5rem;
+      object-fit: cover;
   }
 
   @media (max-width: 600px) {

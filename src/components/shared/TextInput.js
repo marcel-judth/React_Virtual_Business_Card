@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { Colors } from "../../styles/Colors";
 
-function TextInput({ placeholder, value, Icon, onChange, isPassword = false }) {
+function TextInput({ placeholder, value, Icon, required = false, onChange, isPassword = false }) {
   return (
     <InputWrapper>
       <input
-        required
+        required={required ? "true" : "false"}
         type={isPassword ? "password" : "text"}
         onChange={onChange}
         value={value}
