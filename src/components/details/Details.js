@@ -5,7 +5,7 @@ import DetailsHeader from './DetailsHeader';
 import DetailsBody from './DetailsBody';
 import { useParams } from 'react-router-dom';
 import { Colors } from '../../styles/Colors';
-import { FiDownload } from 'react-icons/fi';
+import { FiDownload, FiShare } from 'react-icons/fi';
 import SharePopup from './SharePopup';
 import Loading from '../shared/Loading';
 import { API_BaseURL } from '../../utils/constants';
@@ -36,6 +36,14 @@ function Details() {
           <DetailsContent>
             <DetailsHeader user={user} setPopupDisplayed={setPopupDisplayed} />
             <DetailsBody user={user} />
+            <button
+              onClick={() => {
+                setPopupDisplayed(true);
+              }}
+            >
+              <FiShare className='btn-icon' />
+              Share
+            </button>
             <button
               onClick={() => {
                 window.open(API_BaseURL + '/users/download/' + user.email);

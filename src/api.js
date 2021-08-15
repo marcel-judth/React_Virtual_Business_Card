@@ -8,7 +8,7 @@ const authHeader = {
 
 function reloggin() {
   localStorage.clear();
-  window.location.href = '#/login';
+  window.location.href = '/login';
 }
 
 function getBase64(file) {
@@ -32,28 +32,30 @@ async function urltoFile(url, filename, mimeType) {
 }
 
 const getUserByID = async (id, setUser, setLoading) => {
-  console.log('getting data from db...');
-  const res = await axios.get(API_BaseURL + '/users/' + id);
-  console.log('data received');
+  try {
+    const res = await axios.get(API_BaseURL + '/users/' + id);
 
-  if (res.data.image)
-    res.data.image = await urltoFile(res.data.image, 'test', 'test');
+    if (res.data.image)
+      res.data.image = await urltoFile(res.data.image, 'test', 'test');
 
-  if (res.data.companies)
-    for (let i = 0; i < res.data.companies.length; i++)
-      if (res.data.companies[i].logo) {
-        res.data.companies[i].logo = await urltoFile(
-          res.data.companies[i].logo,
-          'company-logo' + i,
-          'company-logo' + i
-        );
-      }
+    if (res.data.companies)
+      for (let i = 0; i < res.data.companies.length; i++)
+        if (res.data.companies[i].logo) {
+          res.data.companies[i].logo = await urltoFile(
+            res.data.companies[i].logo,
+            'company-logo' + i,
+            'company-logo' + i
+          );
+        }
 
-  console.log('setting data');
+    setUser(res.data);
+    setLoading(false);
+  } catch (error) {
+    console.log(error.response.status);
+    if (error.response.status === 404) window.location.href = '/notfound';
 
-  setUser(res.data);
-  setLoading(false);
-  console.log('finshed');
+    window.location.href = '/';
+  }
 };
 
 async function parseCompanyImages(user) {

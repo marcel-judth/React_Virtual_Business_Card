@@ -6,6 +6,8 @@ import Login from './components/login/Login';
 import Register from './components/register/Register';
 import Nav from './components/home/Nav';
 import Logout from './components/logout/Logout';
+import NotFound from './components/notfound/NotFound';
+import QrCode from './components/qrcode/QrCode';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
           <Route path='/logout' component={Logout} />
+          <Route path='/notfound' component={NotFound} />
+          <Route path='/qrcode' component={QrCode} />
           <Route path='/details/:id' component={Details} />
         </Switch>
       </div>

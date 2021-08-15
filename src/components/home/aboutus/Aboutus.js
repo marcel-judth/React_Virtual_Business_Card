@@ -102,6 +102,7 @@ const About = styled.div`
     img {
       position: relative;
       height: 20rem;
+      max-width: 90%;
       width: fit-content;
       margin-left: auto;
       margin-right: auto;

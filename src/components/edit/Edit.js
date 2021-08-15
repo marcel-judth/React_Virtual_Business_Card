@@ -83,6 +83,7 @@ function Edit({
             <input
               style={{ display: 'none' }}
               type='file'
+              accept='image/*'
               onChange={handleImgChange}
               ref={(file) => (fileInput.current = file)}
             />
@@ -224,6 +225,11 @@ const EditWrapper = styled.div`
   position: absolute;
   top: 15vh;
   z-index: 1;
+  max-width: 100vw;
+
+  @media (max-width: 500px) {
+    width: 100vw;
+  }
 `;
 
 const EditForm = styled.form`
@@ -267,6 +273,11 @@ const EditForm = styled.form`
 
   .company-list {
     width: 100%;
+  }
+
+  @media (max-width: 600px) {
+    padding: 3rem 5vh;
+    min-width: 15rem;
   }
 `;
 export default Edit;

@@ -61,22 +61,24 @@ function CompanyBody({ company, toggle }) {
                 </tr>
               )}
               <tr>
-                <td colSpan='2' className='company-icons'>
-                  {company.phoneNr && (
-                    <Icon Icon={FaPhone} url={'tel:' + company.phoneNr} />
-                  )}
-                  {company.email && (
-                    <Icon Icon={FaEnvelope} url={'mailto:' + company.email} />
-                  )}
-                  {company.facebookURL && (
-                    <Icon Icon={FaFacebookF} url={company.facebookURL} />
-                  )}
-                  {company.instagramURL && (
-                    <Icon Icon={FaInstagram} url={company.instagramURL} />
-                  )}
-                  {company.linkedInURL && (
-                    <Icon Icon={FaLinkedinIn} url={company.linkedInURL} />
-                  )}
+                <td colSpan='2'>
+                  <div className='company-icons'>
+                    {company.phoneNr && (
+                      <Icon Icon={FaPhone} url={'tel:' + company.phoneNr} />
+                    )}
+                    {company.email && (
+                      <Icon Icon={FaEnvelope} url={'mailto:' + company.email} />
+                    )}
+                    {company.facebookURL && (
+                      <Icon Icon={FaFacebookF} url={company.facebookURL} />
+                    )}
+                    {company.instagramURL && (
+                      <Icon Icon={FaInstagram} url={company.instagramURL} />
+                    )}
+                    {company.linkedInURL && (
+                      <Icon Icon={FaLinkedinIn} url={company.linkedInURL} />
+                    )}
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -103,9 +105,9 @@ const CoBody = styled.div`
   .company-icons {
     display: flex;
     margin-top: 0.5rem;
-
+    column-span: 2;
     > * {
-      margin-right: 0.2rem;
+      margin-right: 0.3rem;
     }
   }
 

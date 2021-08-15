@@ -24,6 +24,7 @@ const LogoContainer = styled.div`
     overflow: hidden;
     width: 10vw;
     cursor: pointer;
+    min-width: 10rem;
   }
 
   .rounded {
