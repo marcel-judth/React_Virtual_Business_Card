@@ -6,6 +6,7 @@ import TextInput from '../shared/TextInput';
 import ScrollTop from '../shared/ScrollTop';
 import _ from 'lodash';
 import { RiToolsFill } from 'react-icons/ri';
+import CloseIcon from '../shared/CloseIcon';
 
 function SkillsEdit({
   currentUser,
@@ -46,31 +47,26 @@ function SkillsEdit({
 
   return (
     <SkillEditWrapper>
-      <h3>Edit Skill</h3>
-      <TextInput
-        placeholder='Skill'
-        Icon={RiToolsFill}
-        value={user.skills[index]}
-        onChange={(e) => {
-          const tmp = user;
-          tmp.skills[index] = e.target.value;
+      <SkillForm>
+        <h3>Edit Skill</h3>
+        <TextInput
+          placeholder='Skill'
+          Icon={RiToolsFill}
+          value={user.skills[index]}
+          onChange={(e) => {
+            const tmp = user;
+            tmp.skills[index] = e.target.value;
 
-          setUser({ ...user, skills: tmp.skills });
-        }}
-      />
+            setUser({ ...user, skills: tmp.skills });
+          }}
+        />
 
-      <CustomButton onClick={handleSubmit}>Save</CustomButton>
-      <br />
-      <CancelButton onClick={removeSkill}>Remove</CancelButton>
-      <br />
-      <CancelButton
-        onClick={() => {
-          closePopup();
-        }}
-      >
-        Cancel
-      </CancelButton>
-      <ScrollTop />
+        <CustomButton onClick={handleSubmit}>Save</CustomButton>
+        <br />
+        <CancelButton onClick={removeSkill}>Remove</CancelButton>
+        <ScrollTop />
+        <CloseIcon onClick={closePopup} />
+      </SkillForm>
     </SkillEditWrapper>
   );
 }
@@ -79,6 +75,10 @@ const SkillEditWrapper = styled.div`
   position: absolute;
   z-index: 1;
   top: 15vh;
+`;
+
+const SkillForm = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;

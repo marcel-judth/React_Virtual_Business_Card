@@ -11,7 +11,6 @@ import {
 } from 'react-icons/fa';
 
 import CustomButton from '../shared/CustomButton';
-import CancelButton from '../shared/CancelButton';
 import { Colors } from '../../styles/Colors';
 import TextInput from '../shared/TextInput';
 import CompanyHeader from './CompanyHeader';
@@ -24,6 +23,7 @@ import _ from 'lodash';
 import { IoIosAddCircle } from 'react-icons/io';
 import SkillHeader from './SkillHeader';
 import SkillsEdit from './SkillsEdit';
+import CloseIcon from '../shared/CloseIcon';
 
 function Edit({
   currentUser,
@@ -78,115 +78,122 @@ function Edit({
   return (
     <>
       {visible && (
-        <EditWrapper onSubmit={handleSubmit}>
-          <input
-            style={{ display: 'none' }}
-            type='file'
-            onChange={handleImgChange}
-            ref={(file) => (fileInput.current = file)}
-          />
-          <Logo
-            src={
-              user.image && typeof user.image !== 'string'
-                ? URL.createObjectURL(user.image)
-                : defaultProfilePicture
-            }
-            fileInput={fileInput}
-            isRounded
-          />
-          <TextInput
-            placeholder='Firstname'
-            Icon={FaUser}
-            required
-            value={user.firstname}
-            onChange={(e) => setUser({ ...user, firstname: e.target.value })}
-          />
-          <TextInput
-            placeholder='Lastname'
-            Icon={FaUser}
-            required
-            value={user.lastname}
-            onChange={(e) => setUser({ ...user, lastname: e.target.value })}
-          />
-          <TextInput
-            placeholder='Jobtitle'
-            Icon={FaIdCardAlt}
-            value={user.jobtitle}
-            onChange={(e) => setUser({ ...user, jobtitle: e.target.value })}
-          />
-          <TextInput
-            placeholder='Description'
-            Icon={FaPen}
-            value={user.description}
-            onChange={(e) => setUser({ ...user, description: e.target.value })}
-          />
-          <TextInput
-            placeholder='Phone Nr.'
-            Icon={FaPhoneAlt}
-            value={user.mobileNr}
-            onChange={(e) => setUser({ ...user, mobileNr: e.target.value })}
-          />
-          <TextInput
-            placeholder='Facebook Url'
-            Icon={FaFacebookF}
-            value={user.facebookURL}
-            onChange={(e) => setUser({ ...user, facebookURL: e.target.value })}
-          />
-          <TextInput
-            placeholder='Instagram Url'
-            Icon={FaInstagram}
-            value={user.instagramURL}
-            onChange={(e) => setUser({ ...user, instagramURL: e.target.value })}
-          />
-          <TextInput
-            placeholder='LinkedIn Url'
-            Icon={FaLinkedinIn}
-            value={user.linkedInURL}
-            onChange={(e) => setUser({ ...user, linkedInURL: e.target.value })}
-          />
-          <h4>Companies</h4>
-          <div className='company-list'>
-            {user.companies.map((company, index) => {
-              return (
-                <CompanyHeader
-                  onclick={() => openCompanyEdit(index)}
-                  key={index}
-                  company={company}
-                />
-              );
-            })}
-            <button className='add-btn' type='button' onClick={addNewCompany}>
-              <IoIosAddCircle />
-            </button>
-          </div>
+        <EditWrapper>
+          <EditForm onSubmit={handleSubmit}>
+            <input
+              style={{ display: 'none' }}
+              type='file'
+              onChange={handleImgChange}
+              ref={(file) => (fileInput.current = file)}
+            />
+            <Logo
+              src={
+                user.image && typeof user.image !== 'string'
+                  ? URL.createObjectURL(user.image)
+                  : defaultProfilePicture
+              }
+              fileInput={fileInput}
+              isRounded
+            />
+            <TextInput
+              placeholder='Firstname'
+              Icon={FaUser}
+              required
+              value={user.firstname}
+              onChange={(e) => setUser({ ...user, firstname: e.target.value })}
+            />
+            <TextInput
+              placeholder='Lastname'
+              Icon={FaUser}
+              required
+              value={user.lastname}
+              onChange={(e) => setUser({ ...user, lastname: e.target.value })}
+            />
+            <TextInput
+              placeholder='Jobtitle'
+              Icon={FaIdCardAlt}
+              value={user.jobtitle}
+              onChange={(e) => setUser({ ...user, jobtitle: e.target.value })}
+            />
+            <TextInput
+              placeholder='Description'
+              Icon={FaPen}
+              value={user.description}
+              onChange={(e) =>
+                setUser({ ...user, description: e.target.value })
+              }
+            />
+            <TextInput
+              placeholder='Phone Nr.'
+              Icon={FaPhoneAlt}
+              value={user.mobileNr}
+              onChange={(e) => setUser({ ...user, mobileNr: e.target.value })}
+            />
+            <TextInput
+              placeholder='Facebook Url'
+              Icon={FaFacebookF}
+              value={user.facebookURL}
+              onChange={(e) =>
+                setUser({ ...user, facebookURL: e.target.value })
+              }
+            />
+            <TextInput
+              placeholder='Instagram Url'
+              Icon={FaInstagram}
+              value={user.instagramURL}
+              onChange={(e) =>
+                setUser({ ...user, instagramURL: e.target.value })
+              }
+            />
+            <TextInput
+              placeholder='LinkedIn Url'
+              Icon={FaLinkedinIn}
+              value={user.linkedInURL}
+              onChange={(e) =>
+                setUser({ ...user, linkedInURL: e.target.value })
+              }
+            />
+            <h4>Companies</h4>
+            <div className='company-list'>
+              {user.companies.map((company, index) => {
+                return (
+                  <CompanyHeader
+                    onclick={() => openCompanyEdit(index)}
+                    key={index}
+                    company={company}
+                  />
+                );
+              })}
+              <button className='add-btn' type='button' onClick={addNewCompany}>
+                <IoIosAddCircle />
+              </button>
+            </div>
 
-          <h4>Skills</h4>
-          <div className='skills-list'>
-            {user.skills.map((skill, index) => {
-              return (
-                <SkillHeader
-                  skill={skill}
-                  key={index}
-                  onclick={() => openSkillsEdit(index)}
-                />
-              );
-            })}
-            <button className='add-btn' type='button' onClick={addNewSkill}>
-              <IoIosAddCircle />
-            </button>
-          </div>
-          <span className='error-label'>{error}</span>
-          <CustomButton onClick={handleSubmit}>Save</CustomButton>
-          <br />
-          <CancelButton
+            <h4>Skills</h4>
+            <div className='skills-list'>
+              {user.skills.map((skill, index) => {
+                return (
+                  <SkillHeader
+                    skill={skill}
+                    key={index}
+                    onclick={() => openSkillsEdit(index)}
+                  />
+                );
+              })}
+              <button className='add-btn' type='button' onClick={addNewSkill}>
+                <IoIosAddCircle />
+              </button>
+            </div>
+            <span className='error-label'>{error}</span>
+            <CustomButton onClick={handleSubmit}>Save</CustomButton>
+            <ScrollTop />
+          </EditForm>
+          <CloseIcon
             onClick={() => {
               setVisible(false);
               setUser(_.cloneDeep(currentUser));
             }}
-          >
-            Cancel
-          </CancelButton>
-          <ScrollTop />
+          />
         </EditWrapper>
       )}
       {editCompanyOpen && (
@@ -213,10 +220,14 @@ function Edit({
   );
 }
 
-const EditWrapper = styled.form`
+const EditWrapper = styled.div`
   position: absolute;
-  z-index: 1;
   top: 15vh;
+  z-index: 1;
+`;
+
+const EditForm = styled.form`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -8,6 +8,7 @@ import defaultProfilePicture from '../../img/profile.png';
 import Logo from '../shared/Logo';
 import ScrollTop from '../shared/ScrollTop';
 import _ from 'lodash';
+import CloseIcon from '../shared/CloseIcon';
 
 function CompanyEdit({
   currentUser,
@@ -56,180 +57,175 @@ function CompanyEdit({
 
   return (
     <CompanyEditWrapper>
-      <input
-        style={{ display: 'none' }}
-        type='file'
-        onChange={handleImgChange}
-        ref={(file) => (fileInput.current = file)}
-      />
-      <Logo
-        src={
-          user.companies[index].logo
-            ? URL.createObjectURL(user.companies[index].logo)
-            : defaultProfilePicture
-        }
-        fileInput={fileInput}
-      />
-      <TextInput
-        placeholder='Name'
-        Icon={FaUser}
-        value={user.companies[index].name}
-        onChange={(e) => {
-          const tmp = user;
-          tmp.companies[index].name = e.target.value;
+      <CompanyEditForm>
+        <input
+          style={{ display: 'none' }}
+          type='file'
+          onChange={handleImgChange}
+          ref={(file) => (fileInput.current = file)}
+        />
+        <Logo
+          src={
+            user.companies[index].logo
+              ? URL.createObjectURL(user.companies[index].logo)
+              : defaultProfilePicture
+          }
+          fileInput={fileInput}
+        />
+        <TextInput
+          placeholder='Name'
+          Icon={FaUser}
+          value={user.companies[index].name}
+          onChange={(e) => {
+            const tmp = user;
+            tmp.companies[index].name = e.target.value;
 
-          setUser({ ...user, companies: tmp.companies });
-        }}
-      />
+            setUser({ ...user, companies: tmp.companies });
+          }}
+        />
 
-      <TextInput
-        placeholder='Field'
-        required
-        Icon={FaUser}
-        value={user.companies[index].field}
-        onChange={(e) => {
-          const tmp = user;
-          tmp.companies[index].field = e.target.value;
+        <TextInput
+          placeholder='Field'
+          required
+          Icon={FaUser}
+          value={user.companies[index].field}
+          onChange={(e) => {
+            const tmp = user;
+            tmp.companies[index].field = e.target.value;
 
-          setUser({ ...user, companies: tmp.companies });
-        }}
-      />
+            setUser({ ...user, companies: tmp.companies });
+          }}
+        />
 
-      <TextInput
-        placeholder='Position'
-        Icon={FaUser}
-        value={user.companies[index].position}
-        onChange={(e) => {
-          const tmp = user;
-          tmp.companies[index].position = e.target.value;
+        <TextInput
+          placeholder='Position'
+          Icon={FaUser}
+          value={user.companies[index].position}
+          onChange={(e) => {
+            const tmp = user;
+            tmp.companies[index].position = e.target.value;
 
-          setUser({ ...user, companies: tmp.companies });
-        }}
-      />
-      <TextInput
-        placeholder='Website'
-        Icon={FaUser}
-        value={user.companies[index].website}
-        onChange={(e) => {
-          const tmp = user;
-          tmp.companies[index].website = e.target.value;
+            setUser({ ...user, companies: tmp.companies });
+          }}
+        />
+        <TextInput
+          placeholder='Website'
+          Icon={FaUser}
+          value={user.companies[index].website}
+          onChange={(e) => {
+            const tmp = user;
+            tmp.companies[index].website = e.target.value;
 
-          setUser({ ...user, companies: tmp.companies });
-        }}
-      />
-      <TextInput
-        placeholder='Email'
-        Icon={FaUser}
-        value={user.companies[index].email}
-        onChange={(e) => {
-          const tmp = user;
-          tmp.companies[index].email = e.target.value;
+            setUser({ ...user, companies: tmp.companies });
+          }}
+        />
+        <TextInput
+          placeholder='Email'
+          Icon={FaUser}
+          value={user.companies[index].email}
+          onChange={(e) => {
+            const tmp = user;
+            tmp.companies[index].email = e.target.value;
 
-          setUser({ ...user, companies: tmp.companies });
-        }}
-      />
-      <TextInput
-        placeholder='Phone Nr.'
-        Icon={FaUser}
-        value={user.companies[index].phoneNr}
-        onChange={(e) => {
-          const tmp = user;
-          tmp.companies[index].phoneNr = e.target.value;
+            setUser({ ...user, companies: tmp.companies });
+          }}
+        />
+        <TextInput
+          placeholder='Phone Nr.'
+          Icon={FaUser}
+          value={user.companies[index].phoneNr}
+          onChange={(e) => {
+            const tmp = user;
+            tmp.companies[index].phoneNr = e.target.value;
 
-          setUser({ ...user, companies: tmp.companies });
-        }}
-      />
-      <TextInput
-        placeholder='Address'
-        Icon={FaUser}
-        value={user.companies[index].address}
-        onChange={(e) => {
-          const tmp = user;
-          tmp.companies[index].address = e.target.value;
+            setUser({ ...user, companies: tmp.companies });
+          }}
+        />
+        <TextInput
+          placeholder='Address'
+          Icon={FaUser}
+          value={user.companies[index].address}
+          onChange={(e) => {
+            const tmp = user;
+            tmp.companies[index].address = e.target.value;
 
-          setUser({ ...user, companies: tmp.companies });
-        }}
-      />
-      <TextInput
-        placeholder='Postcode'
-        Icon={FaUser}
-        value={user.companies[index].postcode}
-        onChange={(e) => {
-          const tmp = user;
-          tmp.companies[index].postcode = e.target.value;
+            setUser({ ...user, companies: tmp.companies });
+          }}
+        />
+        <TextInput
+          placeholder='Postcode'
+          Icon={FaUser}
+          value={user.companies[index].postcode}
+          onChange={(e) => {
+            const tmp = user;
+            tmp.companies[index].postcode = e.target.value;
 
-          setUser({ ...user, companies: tmp.companies });
-        }}
-      />
-      <TextInput
-        placeholder='City'
-        Icon={FaUser}
-        value={user.companies[index].city}
-        onChange={(e) => {
-          const tmp = user;
-          tmp.companies[index].city = e.target.value;
+            setUser({ ...user, companies: tmp.companies });
+          }}
+        />
+        <TextInput
+          placeholder='City'
+          Icon={FaUser}
+          value={user.companies[index].city}
+          onChange={(e) => {
+            const tmp = user;
+            tmp.companies[index].city = e.target.value;
 
-          setUser({ ...user, companies: tmp.companies });
-        }}
-      />
-      <TextInput
-        placeholder='Country'
-        Icon={FaUser}
-        value={user.companies[index].country}
-        onChange={(e) => {
-          const tmp = user;
-          tmp.companies[index].country = e.target.value;
+            setUser({ ...user, companies: tmp.companies });
+          }}
+        />
+        <TextInput
+          placeholder='Country'
+          Icon={FaUser}
+          value={user.companies[index].country}
+          onChange={(e) => {
+            const tmp = user;
+            tmp.companies[index].country = e.target.value;
 
-          setUser({ ...user, companies: tmp.companies });
-        }}
-      />
+            setUser({ ...user, companies: tmp.companies });
+          }}
+        />
 
-      <TextInput
-        placeholder='Facebook Url'
-        Icon={FaFacebookF}
-        value={user.companies[index].facebookURL}
-        onChange={(e) => {
-          const tmp = user;
-          tmp.companies[index].facebookURL = e.target.value;
+        <TextInput
+          placeholder='Facebook Url'
+          Icon={FaFacebookF}
+          value={user.companies[index].facebookURL}
+          onChange={(e) => {
+            const tmp = user;
+            tmp.companies[index].facebookURL = e.target.value;
 
-          setUser({ ...user, companies: tmp.companies });
-        }}
-      />
-      <TextInput
-        placeholder='Instagram Url'
-        Icon={FaInstagram}
-        value={user.companies[index].instagramURL}
-        onChange={(e) => {
-          const tmp = user;
-          tmp.companies[index].instagramURL = e.target.value;
+            setUser({ ...user, companies: tmp.companies });
+          }}
+        />
+        <TextInput
+          placeholder='Instagram Url'
+          Icon={FaInstagram}
+          value={user.companies[index].instagramURL}
+          onChange={(e) => {
+            const tmp = user;
+            tmp.companies[index].instagramURL = e.target.value;
 
-          setUser({ ...user, companies: tmp.companies });
-        }}
-      />
-      <TextInput
-        placeholder='LinkedIn Url'
-        Icon={FaLinkedinIn}
-        value={user.companies[index].linkedInURL}
-        onChange={(e) => {
-          const tmp = user;
-          tmp.companies[index].linkedInURL = e.target.value;
+            setUser({ ...user, companies: tmp.companies });
+          }}
+        />
+        <TextInput
+          placeholder='LinkedIn Url'
+          Icon={FaLinkedinIn}
+          value={user.companies[index].linkedInURL}
+          onChange={(e) => {
+            const tmp = user;
+            tmp.companies[index].linkedInURL = e.target.value;
 
-          setUser({ ...user, companies: tmp.companies });
-        }}
-      />
+            setUser({ ...user, companies: tmp.companies });
+          }}
+        />
 
-      <CustomButton onClick={handleSubmit}>Save</CustomButton>
-      <br />
-      <CancelButton onClick={removeCompany}>Remove</CancelButton>
-      <br />
-      <CancelButton
-        onClick={() => {
-          closePopup();
-        }}
-      >
-        Cancel
-      </CancelButton>
-      <ScrollTop />
+        <CustomButton onClick={handleSubmit}>Save</CustomButton>
+        <br />
+        <CancelButton onClick={removeCompany}>Remove</CancelButton>
+        <ScrollTop />
+        <CloseIcon onClick={closePopup} />
+      </CompanyEditForm>
     </CompanyEditWrapper>
   );
 }
@@ -238,6 +234,10 @@ const CompanyEditWrapper = styled.div`
   position: absolute;
   z-index: 1;
   top: 15vh;
+`;
+
+const CompanyEditForm = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
