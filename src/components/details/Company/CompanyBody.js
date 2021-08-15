@@ -1,6 +1,12 @@
-import Icon from "../../shared/Icon";
-import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
-import styled from "styled-components";
+import Icon from '../../shared/Icon';
+import {
+  FaEnvelope,
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaPhone,
+} from 'react-icons/fa';
+import styled from 'styled-components';
 
 function CompanyBody({ company, toggle }) {
   return (
@@ -9,42 +15,60 @@ function CompanyBody({ company, toggle }) {
         <CoBody>
           <table>
             <tbody>
-            {company.branch && (
-              <tr>
-                <td className="table-title">Branche:</td>
-                <td className="table-text">{company.branch}</td>
-              </tr>
-            )}
-            {company.website && (
-              <tr>
-                <td className="table-title">Website:</td>
-                <td className="table-text"><a
-                    href={
-                      company.website.includes("http")
-                        ? company.website
-                        : "http://" + company.website
-                    }
-                    target="_blank"
-                    rel="noreferrer"
-                  >{company.website}</a></td>
-              </tr>
-            )}
-            {company.email && (
-              <tr>
-                <td className="table-title">Email:</td>
-                <td className="table-text"><a href={"mailto:" + company.email}>{company.email}</a></td>
-              </tr>
-            )}
-            
-            {company.location && (
-              <tr>
-                <td className="table-title">Location:</td>
-                <td className="table-text">{company.location}</td>
-              </tr>
-            )}
+              {company.field && (
+                <tr>
+                  <td className='table-title'>Field:</td>
+                  <td className='table-text'>{company.field}</td>
+                </tr>
+              )}
+              {company.position && (
+                <tr>
+                  <td className='table-title'>Position:</td>
+                  <td className='table-text'>{company.position}</td>
+                </tr>
+              )}
+              {company.website && (
+                <tr>
+                  <td className='table-title'>Website:</td>
+                  <td className='table-text'>
+                    <a
+                      href={
+                        company.website.includes('http')
+                          ? company.website
+                          : 'http://' + company.website
+                      }
+                      target='_blank'
+                      rel='noreferrer'
+                    >
+                      {company.website}
+                    </a>
+                  </td>
+                </tr>
+              )}
+              {company.address && (
+                <tr>
+                  <td className='table-title'>Adress:</td>
+                  <td className='table-text'>{company.address}</td>
+                </tr>
+              )}
+              {company.city && (
+                <tr>
+                  <td className='table-title'>City:</td>
+                  <td className='table-text'>
+                    {(company.postcode ? company.postcode + ' ' : '') +
+                      company.city}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
-          <div className="company-icons">
+          <div className='company-icons'>
+            {company.phoneNr && (
+              <Icon Icon={FaPhone} url={'tel:' + company.phoneNr} />
+            )}
+            {company.email && (
+              <Icon Icon={FaEnvelope} url={'mailto:' + company.email} />
+            )}
             {company.facebookURL && (
               <Icon Icon={FaFacebookF} url={company.facebookURL} />
             )}
@@ -74,6 +98,15 @@ const CoBody = styled.div`
     }
   }
 
+  .company-icons {
+    margin-left: 6.5rem;
+    display: flex;
+
+    > * {
+      margin-right: 0.2rem;
+    }
+  }
+
   .table-text {
     opacity: 0.5;
   }
@@ -85,6 +118,10 @@ const CoBody = styled.div`
       td {
         max-width: 15rem;
       }
+    }
+
+    .company-icons {
+      margin-left: 0 auto;
     }
   }
 `;

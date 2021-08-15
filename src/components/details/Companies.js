@@ -1,16 +1,16 @@
-import { HiOfficeBuilding } from "react-icons/hi";
-import styled from "styled-components";
+import { HiOfficeBuilding } from 'react-icons/hi';
+import styled from 'styled-components';
 
-import DetailsContentHeading from "./DetailsContentHeading";
-import DeatailsContentLine from "./DeatailsContentLine";
-import Company from "./Company/Company";
+import DetailsContentHeading from './DetailsContentHeading';
+import DeatailsContentLine from './DeatailsContentLine';
+import Company from './Company/Company';
 
 function Companies({ companies }) {
   return (
     <CompaniesWrapper>
       <DetailsContentHeading
         iconType={HiOfficeBuilding}
-        headingText="Companies"
+        headingText='Companies'
       />
       <DeatailsContentLine />
       <CompanyToggle>
@@ -18,7 +18,7 @@ function Companies({ companies }) {
           return (
             <div key={index}>
               <Company company={element} />
-              {index + 1 < companies.length && <div className="line"></div>}
+              {index + 1 < companies.length && <div className='line'></div>}
             </div>
           );
         })}

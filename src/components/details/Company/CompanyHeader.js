@@ -1,23 +1,28 @@
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import styled from "styled-components";
-import { Colors } from "../../../styles/Colors";
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import styled from 'styled-components';
+import { Colors } from '../../../styles/Colors';
 
 function CompanyHeader({ company, toggle, setToggle }) {
-  console.log(company.logo)
   return (
     <CoHeader onClick={() => setToggle(!toggle)}>
-      <div className="co-logo-text-wrapper">
-        {company.logo && <img src={URL.createObjectURL(company.logo)} alt="company-logo" height="30px" />}
-        <div className="co-text">
+      <div className='co-logo-text-wrapper'>
+        {company.logo && (
+          <img
+            src={URL.createObjectURL(company.logo)}
+            alt='company-logo'
+            height='30px'
+          />
+        )}
+        <div className='co-text'>
           <h5>{company.name}</h5>
           <span>{company.position}</span>
         </div>
       </div>
 
       {toggle ? (
-        <IoIosArrowUp className="co-arrow" />
+        <IoIosArrowUp className='co-arrow' />
       ) : (
-        <IoIosArrowDown className="co-arrow" />
+        <IoIosArrowDown className='co-arrow' />
       )}
     </CoHeader>
   );
@@ -50,12 +55,24 @@ const CoHeader = styled.div`
     max-width: 30rem;
   }
 
+  span {
+    color: ${Colors.textColor};
+    margin-top: 1rem;
+    font-size: 0.8rem;
+  }
+
+  h5 {
+    color: black;
+    opacity: 0.8;
+    font-weight: 500;
+  }
+
   img {
     width: 5rem;
     height: auto;
 
     max-height: 5rem;
-      object-fit: cover;
+    object-fit: cover;
   }
 
   @media (max-width: 600px) {

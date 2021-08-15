@@ -1,24 +1,28 @@
-import { useEffect, useRef } from "react";
-import {  FaUser } from "react-icons/fa";
-import styled from "styled-components";
-import CancelButton from "../shared/CancelButton";
-import CustomButton from "../shared/CustomButton";
-import TextInput from "../shared/TextInput";
-import defaultProfilePicture from "../../img/profile.png";
-import Logo from "../shared/Logo";
+import { useEffect, useRef, useState } from 'react';
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaUser } from 'react-icons/fa';
+import styled from 'styled-components';
+import CancelButton from '../shared/CancelButton';
+import CustomButton from '../shared/CustomButton';
+import TextInput from '../shared/TextInput';
+import defaultProfilePicture from '../../img/profile.png';
+import Logo from '../shared/Logo';
+import ScrollTop from '../shared/ScrollTop';
+import _ from 'lodash';
 
 function CompanyEdit({
-  user,
-  setUser,
+  currentUser,
+  setCurrentUser,
   index,
   setVisible,
   setOverlayVisible,
   setParentVisible,
 }) {
+  const fileInput = useRef();
+  const [user, setUser] = useState(_.cloneDeep(currentUser));
+
   useEffect(() => {
     setOverlayVisible(true);
   }, [setOverlayVisible]);
-  const fileInput = useRef();
 
   function handleImgChange(event) {
     const tmp = user;
@@ -26,16 +30,25 @@ function CompanyEdit({
     setUser({ ...user, companies: tmp.companies });
   }
 
-  function removeComapany(){
+  function removeCompany() {
     setVisible(false);
     setOverlayVisible(false);
     setParentVisible(true);
     const tmp = user;
-    tmp.companies.splice(index, 1); 
+    tmp.companies.splice(index, 1);
     setUser({ ...user, companies: tmp.companies });
   }
 
   function handleSubmit() {
+    const tmp = currentUser;
+    currentUser.companies[index] = user.companies[index];
+    console.log(tmp);
+    setCurrentUser({ ...currentUser, companies: tmp.companies });
+    console.log(currentUser);
+    closePopup();
+  }
+
+  function closePopup() {
     setVisible(false);
     setOverlayVisible(false);
     setParentVisible(true);
@@ -44,14 +57,21 @@ function CompanyEdit({
   return (
     <CompanyEditWrapper>
       <input
-        style={{ display: "none" }}
-        type="file"
+        style={{ display: 'none' }}
+        type='file'
         onChange={handleImgChange}
         ref={(file) => (fileInput.current = file)}
       />
-      <Logo src={user.companies[index].logo ? URL.createObjectURL(user.companies[index].logo) : defaultProfilePicture} fileInput={fileInput}/>
+      <Logo
+        src={
+          user.companies[index].logo
+            ? URL.createObjectURL(user.companies[index].logo)
+            : defaultProfilePicture
+        }
+        fileInput={fileInput}
+      />
       <TextInput
-        placeholder="Name"
+        placeholder='Name'
         Icon={FaUser}
         value={user.companies[index].name}
         onChange={(e) => {
@@ -60,10 +80,10 @@ function CompanyEdit({
 
           setUser({ ...user, companies: tmp.companies });
         }}
-      /> 
+      />
 
       <TextInput
-        placeholder="Field"
+        placeholder='Field'
         required
         Icon={FaUser}
         value={user.companies[index].field}
@@ -76,7 +96,7 @@ function CompanyEdit({
       />
 
       <TextInput
-        placeholder="Position"
+        placeholder='Position'
         Icon={FaUser}
         value={user.companies[index].position}
         onChange={(e) => {
@@ -87,7 +107,7 @@ function CompanyEdit({
         }}
       />
       <TextInput
-        placeholder="Website"
+        placeholder='Website'
         Icon={FaUser}
         value={user.companies[index].website}
         onChange={(e) => {
@@ -98,7 +118,7 @@ function CompanyEdit({
         }}
       />
       <TextInput
-        placeholder="Email"
+        placeholder='Email'
         Icon={FaUser}
         value={user.companies[index].email}
         onChange={(e) => {
@@ -109,7 +129,7 @@ function CompanyEdit({
         }}
       />
       <TextInput
-        placeholder="Phone Nr."
+        placeholder='Phone Nr.'
         Icon={FaUser}
         value={user.companies[index].phoneNr}
         onChange={(e) => {
@@ -120,7 +140,7 @@ function CompanyEdit({
         }}
       />
       <TextInput
-        placeholder="Address"
+        placeholder='Address'
         Icon={FaUser}
         value={user.companies[index].address}
         onChange={(e) => {
@@ -131,7 +151,7 @@ function CompanyEdit({
         }}
       />
       <TextInput
-        placeholder="Postcode"
+        placeholder='Postcode'
         Icon={FaUser}
         value={user.companies[index].postcode}
         onChange={(e) => {
@@ -142,7 +162,7 @@ function CompanyEdit({
         }}
       />
       <TextInput
-        placeholder="City"
+        placeholder='City'
         Icon={FaUser}
         value={user.companies[index].city}
         onChange={(e) => {
@@ -153,7 +173,7 @@ function CompanyEdit({
         }}
       />
       <TextInput
-        placeholder="Country"
+        placeholder='Country'
         Icon={FaUser}
         value={user.companies[index].country}
         onChange={(e) => {
@@ -163,21 +183,53 @@ function CompanyEdit({
           setUser({ ...user, companies: tmp.companies });
         }}
       />
+
+      <TextInput
+        placeholder='Facebook Url'
+        Icon={FaFacebookF}
+        value={user.companies[index].facebookURL}
+        onChange={(e) => {
+          const tmp = user;
+          tmp.companies[index].facebookURL = e.target.value;
+
+          setUser({ ...user, companies: tmp.companies });
+        }}
+      />
+      <TextInput
+        placeholder='Instagram Url'
+        Icon={FaInstagram}
+        value={user.companies[index].instagramURL}
+        onChange={(e) => {
+          const tmp = user;
+          tmp.companies[index].instagramURL = e.target.value;
+
+          setUser({ ...user, companies: tmp.companies });
+        }}
+      />
+      <TextInput
+        placeholder='LinkedIn Url'
+        Icon={FaLinkedinIn}
+        value={user.companies[index].linkedInURL}
+        onChange={(e) => {
+          const tmp = user;
+          tmp.companies[index].linkedInURL = e.target.value;
+
+          setUser({ ...user, companies: tmp.companies });
+        }}
+      />
+
       <CustomButton onClick={handleSubmit}>Save</CustomButton>
       <br />
-      <CancelButton
-        onClick={removeComapany}
-      >
-        Remove
-      </CancelButton>
+      <CancelButton onClick={removeCompany}>Remove</CancelButton>
       <br />
       <CancelButton
         onClick={() => {
-          window.location.reload();
+          closePopup();
         }}
       >
         Cancel
       </CancelButton>
+      <ScrollTop />
     </CompanyEditWrapper>
   );
 }

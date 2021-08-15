@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
-import DetailsHeader from "./DetailsHeader";
-import DetailsBody from "./DetailsBody";
-import { useParams } from "react-router-dom";
-import { Colors } from "../../styles/Colors";
-import { FiDownload } from "react-icons/fi";
-import SharePopup from "./SharePopup";
-import Loading from "../shared/Loading";
-import { API_BaseURL } from "../../utils/constants";
-import { getUserByID } from "../../api";
-import { FaUserEdit } from "react-icons/fa";
-import Edit from "../edit/Edit";
+import DetailsHeader from './DetailsHeader';
+import DetailsBody from './DetailsBody';
+import { useParams } from 'react-router-dom';
+import { Colors } from '../../styles/Colors';
+import { FiDownload } from 'react-icons/fi';
+import SharePopup from './SharePopup';
+import Loading from '../shared/Loading';
+import { API_BaseURL } from '../../utils/constants';
+import { getUserByID } from '../../api';
+import { FaUserEdit } from 'react-icons/fa';
+import Edit from '../edit/Edit';
 
 function Details() {
   let { id } = useParams();
-  const currentUserEmail = JSON.parse(localStorage.getItem("user"))?.email;
+  const currentUserEmail = JSON.parse(localStorage.getItem('user'))?.email;
 
   const [popupDisplayed, setPopupDisplayed] = useState(false);
   const [user, setUser] = useState();
@@ -38,22 +38,22 @@ function Details() {
             <DetailsBody user={user} />
             <button
               onClick={() => {
-                window.open(API_BaseURL + "/users/download/" + user.email);
+                window.open(API_BaseURL + '/users/download/' + user.email);
               }}
             >
-              <FiDownload className="btn-icon" />
+              <FiDownload className='btn-icon' />
               download
             </button>
-            {
-              (currentUserEmail && currentUserEmail === user.email) && 
-            <button
-              onClick={() => {
-                setEditVisible(true);
-              }}
-            >
-              <FaUserEdit className="btn-icon" />
-              edit
-            </button>}
+            {currentUserEmail && currentUserEmail === user.email && (
+              <button
+                onClick={() => {
+                  setEditVisible(true);
+                }}
+              >
+                <FaUserEdit className='btn-icon' />
+                edit
+              </button>
+            )}
           </DetailsContent>
           <SharePopup
             user={user}
@@ -62,8 +62,7 @@ function Details() {
             setOverlayVisible={setOverlayVisible}
           />
           <Edit
-            setUser={setUser}
-            user={user}
+            currentUser={user}
             visible={editVisible}
             setVisible={setEditVisible}
             setLoading={setLoading}

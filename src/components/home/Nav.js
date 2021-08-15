@@ -1,73 +1,73 @@
 //styles
-import styled from "styled-components";
+import styled from 'styled-components';
 //images
-import logoImg from "../../img/logo.png";
+import logoImg from '../../img/logo.png';
 //router
-import { useLocation } from "react-router-dom";
-import { HashLink as Link } from "react-router-hash-link";
+import { useLocation } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 
 //animation
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { Colors } from "../../styles/Colors";
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { Colors } from '../../styles/Colors';
 
 const Nav = () => {
   const location = useLocation();
   const [navStatus, setNavStatus] = useState(false);
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem('user'));
 
   return (
     <StyledNav>
-      <Link to="/">
-        <div className="nav-logo">
-          <img src={logoImg} alt="logo x-act.me" />
+      <Link to='/'>
+        <div className='nav-logo'>
+          <img src={logoImg} alt='logo x-act.me' />
           X-Act.me
         </div>
       </Link>
 
       <Burger
-        className={`burger ${navStatus ? "toggle" : ""}`}
+        className={`burger ${navStatus ? 'toggle' : ''}`}
         onClick={() => setNavStatus(!navStatus)}
       >
-        <span className="line1"></span>
-        <span className="line2"></span>
-        <span className="line3"></span>
+        <span className='line1'></span>
+        <span className='line2'></span>
+        <span className='line3'></span>
       </Burger>
 
-      <ul className={`${navStatus ? "active" : ""}`}>
+      <ul className={`${navStatus ? 'active' : ''}`}>
         <li onClick={() => setNavStatus(!navStatus)}>
-          <Link to="/">Home</Link>
+          <Link to='/'>Home</Link>
           <Line
             transition={{ duration: 0.75 }}
-            initial={{ width: "0%" }}
-            animate={{ width: location.pathname === "/" ? "100%" : "0%" }}
+            initial={{ width: '0%' }}
+            animate={{ width: location.pathname === '/' ? '100%' : '0%' }}
           />
         </li>
 
         {user ? (
           <>
             <li onClick={() => setNavStatus(!navStatus)}>
-              <Link to={"/details/" + user.email}>My page</Link>
+              <Link to={'/details/' + user.email}>My page</Link>
               <Line
                 transition={{ duration: 0.75 }}
-                initial={{ width: "0%" }}
+                initial={{ width: '0%' }}
                 animate={{
-                  width: location.pathname.startsWith("/details/" + user.email)
-                    ? "100%"
-                    : "0%",
+                  width: location.pathname.startsWith('/details/' + user.email)
+                    ? '100%'
+                    : '0%',
                 }}
               />
             </li>
             <li onClick={() => setNavStatus(!navStatus)}>
-              <Link to={"/logout"}>Logout</Link>
+              <Link to={'/logout'}>Logout</Link>
               <Line
                 transition={{ duration: 0.75 }}
-                initial={{ width: "0%" }}
+                initial={{ width: '0%' }}
                 animate={{
                   width:
-                    location.pathname === "/logout" + user.email
-                      ? "100%"
-                      : "0%",
+                    location.pathname === '/logout' + user.email
+                      ? '100%'
+                      : '0%',
                 }}
               />
             </li>
@@ -75,22 +75,22 @@ const Nav = () => {
         ) : (
           <>
             <li onClick={() => setNavStatus(!navStatus)}>
-              <Link to="/login">Login</Link>
+              <Link to='/login'>Login</Link>
               <Line
                 transition={{ duration: 0.75 }}
-                initial={{ width: "0%" }}
+                initial={{ width: '0%' }}
                 animate={{
-                  width: location.pathname === "/login" ? "100%" : "0%",
+                  width: location.pathname === '/login' ? '100%' : '0%',
                 }}
               />
             </li>
             <li onClick={() => setNavStatus(!navStatus)}>
-              <Link to="/register">Register</Link>
+              <Link to='/register'>Register</Link>
               <Line
                 transition={{ duration: 0.75 }}
-                initial={{ width: "0%" }}
+                initial={{ width: '0%' }}
                 animate={{
-                  width: location.pathname === "/register" ? "100%" : "0%",
+                  width: location.pathname === '/register' ? '100%' : '0%',
                 }}
               />
             </li>

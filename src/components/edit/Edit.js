@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { useRef, useState } from "react";
+import styled from 'styled-components';
+import { useRef, useState } from 'react';
 import {
   FaFacebookF,
   FaIdCardAlt,
@@ -8,22 +8,25 @@ import {
   FaPen,
   FaPhoneAlt,
   FaUser,
-} from "react-icons/fa";
+} from 'react-icons/fa';
 
-import CustomButton from "../shared/CustomButton";
-import CancelButton from "../shared/CancelButton";
-import { Colors } from "../../styles/Colors";
-import TextInput from "../shared/TextInput";
-import CompanyHeader from "./CompanyHeader";
-import { update } from "../../api";
-import CompanyEdit from "./CompanyEdit";
-import defaultProfilePicture from "../../img/profile.png";
-import Logo from "../shared/Logo";
-
+import CustomButton from '../shared/CustomButton';
+import CancelButton from '../shared/CancelButton';
+import { Colors } from '../../styles/Colors';
+import TextInput from '../shared/TextInput';
+import CompanyHeader from './CompanyHeader';
+import { update } from '../../api';
+import CompanyEdit from './CompanyEdit';
+import defaultProfilePicture from '../../img/profile.png';
+import Logo from '../shared/Logo';
+import ScrollTop from '../shared/ScrollTop';
+import _ from 'lodash';
+import { IoIosAddCircle } from 'react-icons/io';
+import SkillHeader from './SkillHeader';
+import SkillsEdit from './SkillsEdit';
 
 function Edit({
-  user,
-  setUser,
+  currentUser,
   visible,
   setVisible,
   setLoading,
@@ -32,17 +35,20 @@ function Edit({
   const [error, setError] = useState();
   const fileInput = useRef();
   const [editCompanyOpen, setEditCompanyOpen] = useState(false);
+  const [editSkillOpen, setEditSkillOpen] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState();
+  const [selectedSkill, setSelectedSkill] = useState();
+  const [user, setUser] = useState(_.cloneDeep(currentUser));
 
   function handleImgChange(event) {
     setUser({ ...user, image: event.target.files[0] });
   }
 
-  function addNewCompany(){
+  function addNewCompany() {
     const tmp = user;
-    tmp.companies.push({})
+    tmp.companies.push({});
     setUser({ ...user, companies: tmp.companies });
-    openCompanyEdit(user.companies.length - 1)
+    openCompanyEdit(user.companies.length - 1);
   }
 
   function openCompanyEdit(index) {
@@ -51,8 +57,20 @@ function Edit({
     setVisible(false);
   }
 
+  function addNewSkill() {
+    const tmp = user;
+    tmp.skills.push('new skill');
+    console.log(user.skills);
+    setUser({ ...user, skills: tmp.skills });
+  }
+
+  function openSkillsEdit(index) {
+    setSelectedSkill(index);
+    setEditSkillOpen(true);
+    setVisible(false);
+  }
+
   async function handleSubmit() {
-    console.log(user.image)
     setLoading(true);
     await update(user, setError, setLoading);
   }
@@ -62,64 +80,72 @@ function Edit({
       {visible && (
         <EditWrapper onSubmit={handleSubmit}>
           <input
-            style={{ display: "none" }}
-            type="file"
+            style={{ display: 'none' }}
+            type='file'
             onChange={handleImgChange}
             ref={(file) => (fileInput.current = file)}
           />
-          <Logo src={user.image && typeof user.image !== 'string' ? URL.createObjectURL(user.image) : defaultProfilePicture} fileInput={fileInput} isRounded/>
+          <Logo
+            src={
+              user.image && typeof user.image !== 'string'
+                ? URL.createObjectURL(user.image)
+                : defaultProfilePicture
+            }
+            fileInput={fileInput}
+            isRounded
+          />
           <TextInput
-            placeholder="Firstname"
+            placeholder='Firstname'
             Icon={FaUser}
             required
             value={user.firstname}
             onChange={(e) => setUser({ ...user, firstname: e.target.value })}
           />
           <TextInput
-            placeholder="Lastname"
+            placeholder='Lastname'
             Icon={FaUser}
             required
             value={user.lastname}
             onChange={(e) => setUser({ ...user, lastname: e.target.value })}
           />
           <TextInput
-            placeholder="Jobtitle"
+            placeholder='Jobtitle'
             Icon={FaIdCardAlt}
             value={user.jobtitle}
             onChange={(e) => setUser({ ...user, jobtitle: e.target.value })}
           />
           <TextInput
-            placeholder="Description"
+            placeholder='Description'
             Icon={FaPen}
             value={user.description}
             onChange={(e) => setUser({ ...user, description: e.target.value })}
           />
           <TextInput
-            placeholder="Phone Nr."
+            placeholder='Phone Nr.'
             Icon={FaPhoneAlt}
             value={user.mobileNr}
             onChange={(e) => setUser({ ...user, mobileNr: e.target.value })}
           />
           <TextInput
-            placeholder="Facebook Url"
+            placeholder='Facebook Url'
             Icon={FaFacebookF}
             value={user.facebookURL}
             onChange={(e) => setUser({ ...user, facebookURL: e.target.value })}
           />
           <TextInput
-            placeholder="Instagram Url"
+            placeholder='Instagram Url'
             Icon={FaInstagram}
             value={user.instagramURL}
             onChange={(e) => setUser({ ...user, instagramURL: e.target.value })}
           />
           <TextInput
-            placeholder="LinkedIn Url"
+            placeholder='LinkedIn Url'
             Icon={FaLinkedinIn}
             value={user.linkedInURL}
             onChange={(e) => setUser({ ...user, linkedInURL: e.target.value })}
           />
           <h4>Companies</h4>
-          <div className="company-list">
+          <div className='company-list'>
             {user.companies.map((company, index) => {
               return (
                 <CompanyHeader
@@ -129,26 +155,56 @@ function Edit({
                 />
               );
             })}
-            <button type="button" onClick={addNewCompany}>Add new</button>
+            <button className='add-btn' type='button' onClick={addNewCompany}>
+              <IoIosAddCircle />
+            </button>
           </div>
-          <span className="error-label">{error}</span>
+
+          <h4>Skills</h4>
+          <div className='skills-list'>
+            {user.skills.map((skill, index) => {
+              return (
+                <SkillHeader
+                  skill={skill}
+                  key={index}
+                  onclick={() => openSkillsEdit(index)}
+                />
+              );
+            })}
+            <button className='add-btn' type='button' onClick={addNewSkill}>
+              <IoIosAddCircle />
+            </button>
+          </div>
+          <span className='error-label'>{error}</span>
           <CustomButton onClick={handleSubmit}>Save</CustomButton>
           <br />
           <CancelButton
             onClick={() => {
-              window.location.reload();
+              setVisible(false);
+              setUser(_.cloneDeep(currentUser));
             }}
           >
             Cancel
           </CancelButton>
+          <ScrollTop />
         </EditWrapper>
       )}
       {editCompanyOpen && (
         <CompanyEdit
-          user={user}
-          setUser={setUser}
+          currentUser={user}
+          setCurrentUser={setUser}
           index={selectedCompany}
           setVisible={setEditCompanyOpen}
+          setOverlayVisible={setOverlayVisible}
+          setParentVisible={setVisible}
+        />
+      )}
+      {editSkillOpen && (
+        <SkillsEdit
+          currentUser={user}
+          setCurrentUser={setUser}
+          index={selectedSkill}
+          setVisible={setEditSkillOpen}
           setOverlayVisible={setOverlayVisible}
           setParentVisible={setVisible}
         />
@@ -170,6 +226,26 @@ const EditWrapper = styled.form`
   border-radius: 1rem;
   min-width: 25rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  .add-btn {
+    font-size: 2rem;
+    color: ${Colors.primaryColor};
+    border: none;
+    width: 2rem;
+    display: block;
+    background: none;
+    margin-left: auto;
+    margin-right: auto;
+    transition: 0.5s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  h4 {
+    margin-top: 2rem;
+  }
 
   .error-label {
     color: ${Colors.warningColor};
