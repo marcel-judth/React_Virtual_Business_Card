@@ -60,25 +60,27 @@ function CompanyBody({ company, toggle }) {
                   </td>
                 </tr>
               )}
+              <tr>
+                <td colSpan='2' className='company-icons'>
+                  {company.phoneNr && (
+                    <Icon Icon={FaPhone} url={'tel:' + company.phoneNr} />
+                  )}
+                  {company.email && (
+                    <Icon Icon={FaEnvelope} url={'mailto:' + company.email} />
+                  )}
+                  {company.facebookURL && (
+                    <Icon Icon={FaFacebookF} url={company.facebookURL} />
+                  )}
+                  {company.instagramURL && (
+                    <Icon Icon={FaInstagram} url={company.instagramURL} />
+                  )}
+                  {company.linkedInURL && (
+                    <Icon Icon={FaLinkedinIn} url={company.linkedInURL} />
+                  )}
+                </td>
+              </tr>
             </tbody>
           </table>
-          <div className='company-icons'>
-            {company.phoneNr && (
-              <Icon Icon={FaPhone} url={'tel:' + company.phoneNr} />
-            )}
-            {company.email && (
-              <Icon Icon={FaEnvelope} url={'mailto:' + company.email} />
-            )}
-            {company.facebookURL && (
-              <Icon Icon={FaFacebookF} url={company.facebookURL} />
-            )}
-            {company.instagramURL && (
-              <Icon Icon={FaInstagram} url={company.instagramURL} />
-            )}
-            {company.linkedInURL && (
-              <Icon Icon={FaLinkedinIn} url={company.linkedInURL} />
-            )}
-          </div>
         </CoBody>
       )}
     </>
@@ -99,8 +101,8 @@ const CoBody = styled.div`
   }
 
   .company-icons {
-    margin-left: 6.5rem;
     display: flex;
+    margin-top: 0.5rem;
 
     > * {
       margin-right: 0.2rem;
@@ -118,10 +120,6 @@ const CoBody = styled.div`
       td {
         max-width: 15rem;
       }
-    }
-
-    .company-icons {
-      margin-left: 0 auto;
     }
   }
 `;
