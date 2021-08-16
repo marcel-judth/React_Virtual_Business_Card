@@ -1,54 +1,62 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 import {
   FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
   FaEnvelope,
   FaPhone,
-} from "react-icons/fa";
-import { FiShare } from "react-icons/fi";
+} from 'react-icons/fa';
+import { FiShare } from 'react-icons/fi';
 
-import Icon from "../shared/Icon";
-import defaultProfilePicture from "../../img/profile.png";
-import logo from "../../img/logo.png";
+import Icon from '../shared/Icon';
+import defaultProfilePicture from '../../img/profile.png';
 
-function DetailsHeader({ user, setPopupDisplayed }) {
+function DetailsHeader({ user, theme, setPopupDisplayed }) {
   return (
     <Header>
-      <ProfilePicture src={user.image && typeof user.image !== 'string' ? URL.createObjectURL(user.image) : defaultProfilePicture} />
+      <ProfilePicture
+        src={
+          user.image && typeof user.image !== 'string'
+            ? URL.createObjectURL(user.image)
+            : defaultProfilePicture
+        }
+      />
       <div>
         <h3>
           {user.firstname} {user.lastname}
         </h3>
-        <h5 className="jobtitle">{user.jobtitle}</h5>
-        <p className="description">{user.description}</p>
+        <h5 className='jobtitle'>{user.jobtitle}</h5>
+        <p className='description'>{user.description}</p>
         <IconsWrapper>
           {user.mobileNr && (
-            <Icon Icon={FaPhone} url={"tel:" + user.mobileNr} />
+            <Icon theme={theme} Icon={FaPhone} url={'tel:' + user.mobileNr} />
           )}
           {user.email && (
-            <Icon Icon={FaEnvelope} url={"mailto:" + user.email} />
+            <Icon
+              theme={theme}
+              Icon={FaEnvelope}
+              url={'mailto:' + user.email}
+            />
           )}
           {user.facebookURL && (
-            <Icon Icon={FaFacebookF} url={user.facebookURL} />
+            <Icon theme={theme} Icon={FaFacebookF} url={user.facebookURL} />
           )}
           {user.instagramURL && (
-            <Icon Icon={FaInstagram} url={user.instagramURL} />
+            <Icon theme={theme} Icon={FaInstagram} url={user.instagramURL} />
           )}
           {user.linkedInURL && (
-            <Icon Icon={FaLinkedinIn} url={user.linkedInURL} />
+            <Icon theme={theme} Icon={FaLinkedinIn} url={user.linkedInURL} />
           )}
         </IconsWrapper>
       </div>
-      <div className="logo-wrapper">
-        <img src={logo} alt="logo-nfc-card" className="logo" />
+      <div className='logo-wrapper'>
         <button
           onClick={() => {
             setPopupDisplayed(true);
           }}
         >
-          <FiShare className="btn-icon" />
+          <FiShare className='btn-icon' />
           Share
         </button>
       </div>

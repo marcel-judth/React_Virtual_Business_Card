@@ -8,6 +8,7 @@ import Nav from './components/home/Nav';
 import Logout from './components/logout/Logout';
 import NotFound from './components/notfound/NotFound';
 import QrCode from './components/qrcode/QrCode';
+import HomeRedirect from './components/homeredirect/HomeRedirect';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Nav />
         <Switch>
           <Route path='/' component={Home} exact />
+          <Route path='/home' component={HomeRedirect} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
           <Route path='/logout' component={Logout} />

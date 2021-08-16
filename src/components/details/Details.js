@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import DetailsHeader from './DetailsHeader';
 import DetailsBody from './DetailsBody';
 import { useParams } from 'react-router-dom';
-import { Colors } from '../../styles/Colors';
 import { FiDownload, FiShare } from 'react-icons/fi';
 import SharePopup from './SharePopup';
 import Loading from '../shared/Loading';
@@ -12,19 +11,20 @@ import { API_BaseURL } from '../../utils/constants';
 import { getUserByID } from '../../api';
 import { FaUserEdit } from 'react-icons/fa';
 import Edit from '../edit/Edit';
+import { Colors } from '../../styles/Colors';
 
 function Details() {
   let { id } = useParams();
   const currentUserEmail = JSON.parse(localStorage.getItem('user'))?.email;
-
   const [popupDisplayed, setPopupDisplayed] = useState(false);
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
   const [editVisible, setEditVisible] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(false);
+  const [theme, setTheme] = useState({ userColor: Colors.primaryColor });
 
   useEffect(() => {
-    getUserByID(id, setUser, setLoading);
+    getUserByID(id, setUser, setLoading, setTheme);
   }, [id]);
 
   return (
@@ -33,9 +33,13 @@ function Details() {
         <Loading />
       ) : (
         <DetailsWrapper>
-          <DetailsContent>
-            <DetailsHeader user={user} setPopupDisplayed={setPopupDisplayed} />
-            <DetailsBody user={user} />
+          <DetailsContent theme={theme}>
+            <DetailsHeader
+              theme={theme}
+              user={user}
+              setPopupDisplayed={setPopupDisplayed}
+            />
+            <DetailsBody theme={theme} user={user} />
             <button
               onClick={() => {
                 setPopupDisplayed(true);
@@ -65,6 +69,7 @@ function Details() {
           </DetailsContent>
           <SharePopup
             user={user}
+            theme={theme}
             popupDisplayed={popupDisplayed}
             setPopupDisplayed={setPopupDisplayed}
             setOverlayVisible={setOverlayVisible}
@@ -103,7 +108,7 @@ const DetailsContent = styled.div`
     border-radius: 1rem;
     border: none;
     font-size: 1rem;
-    background: ${Colors.userColor};
+    background: ${(props) => props.theme?.userColor ?? Colors.primaryColor};
     color: white;
     transition: 0.5s ease;
     width: 8rem;

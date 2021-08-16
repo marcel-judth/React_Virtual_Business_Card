@@ -5,10 +5,11 @@ import DetailsContentHeading from './DetailsContentHeading';
 import DeatailsContentLine from './DeatailsContentLine';
 import Company from './Company/Company';
 
-function Companies({ companies }) {
+function Companies({ companies, theme }) {
   return (
     <CompaniesWrapper>
       <DetailsContentHeading
+        theme={theme}
         iconType={HiOfficeBuilding}
         headingText='Companies'
       />
@@ -17,7 +18,7 @@ function Companies({ companies }) {
         {companies.map((element, index) => {
           return (
             <div key={index}>
-              <Company company={element} />
+              <Company theme={theme} company={element} />
               {index + 1 < companies.length && <div className='line'></div>}
             </div>
           );
@@ -39,8 +40,6 @@ const CompanyToggle = styled.div`
 `;
 
 const CompaniesWrapper = styled.div`
-  margin-right: 2rem;
-
   @media (max-width: 1100px) {
     width: 100%;
     margin-right: 0rem;

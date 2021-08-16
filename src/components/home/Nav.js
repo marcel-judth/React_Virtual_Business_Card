@@ -18,7 +18,7 @@ const Nav = () => {
 
   return (
     <StyledNav>
-      <Link to='/'>
+      <Link to='/home'>
         <div className='nav-logo'>
           <img src={logoImg} alt='logo x-act.me' />
           X-Act.me
@@ -36,7 +36,7 @@ const Nav = () => {
 
       <ul className={`${navStatus ? 'active' : ''}`}>
         <li onClick={() => setNavStatus(!navStatus)}>
-          <Link to='/'>Home</Link>
+          <Link to='/home'>Home</Link>
           <Line
             transition={{ duration: 0.75 }}
             initial={{ width: '0%' }}

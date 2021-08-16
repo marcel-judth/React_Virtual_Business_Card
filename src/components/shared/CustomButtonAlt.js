@@ -20,8 +20,8 @@ const Button = styled.button`
   border-radius: 0.2rem;
   font-size: 1rem;
   background: white;
-  color: ${Colors.primaryColor};
-  border: 0.2rem solid ${Colors.primaryColor};
+  color: ${Colors.secondaryColor};
+  border: 0.2rem solid ${Colors.secondaryColor};
   display: flex;
   align-items: center;
   justify-content: center;

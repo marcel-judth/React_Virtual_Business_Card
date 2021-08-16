@@ -8,7 +8,7 @@ import {
 } from 'react-icons/fa';
 import styled from 'styled-components';
 
-function CompanyBody({ company, toggle }) {
+function CompanyBody({ company, toggle, theme }) {
   return (
     <>
       {toggle && (
@@ -64,19 +64,39 @@ function CompanyBody({ company, toggle }) {
                 <td colSpan='2'>
                   <div className='company-icons'>
                     {company.phoneNr && (
-                      <Icon Icon={FaPhone} url={'tel:' + company.phoneNr} />
+                      <Icon
+                        theme={theme}
+                        Icon={FaPhone}
+                        url={'tel:' + company.phoneNr}
+                      />
                     )}
                     {company.email && (
-                      <Icon Icon={FaEnvelope} url={'mailto:' + company.email} />
+                      <Icon
+                        theme={theme}
+                        Icon={FaEnvelope}
+                        url={'mailto:' + company.email}
+                      />
                     )}
                     {company.facebookURL && (
-                      <Icon Icon={FaFacebookF} url={company.facebookURL} />
+                      <Icon
+                        theme={theme}
+                        Icon={FaFacebookF}
+                        url={company.facebookURL}
+                      />
                     )}
                     {company.instagramURL && (
-                      <Icon Icon={FaInstagram} url={company.instagramURL} />
+                      <Icon
+                        theme={theme}
+                        Icon={FaInstagram}
+                        url={company.instagramURL}
+                      />
                     )}
                     {company.linkedInURL && (
-                      <Icon Icon={FaLinkedinIn} url={company.linkedInURL} />
+                      <Icon
+                        theme={theme}
+                        Icon={FaLinkedinIn}
+                        url={company.linkedInURL}
+                      />
                     )}
                   </div>
                 </td>

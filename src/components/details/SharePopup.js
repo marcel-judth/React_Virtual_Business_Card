@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import ScrollTop from '../shared/ScrollTop';
 import CloseIcon from '../shared/CloseIcon';
 
-function SharePopup({ user, popupDisplayed, setPopupDisplayed }) {
+function SharePopup({ user, popupDisplayed, theme, setPopupDisplayed }) {
   function copyURL() {
     var dummy = document.createElement('input'),
       text = window.location.href;
@@ -26,9 +26,9 @@ function SharePopup({ user, popupDisplayed, setPopupDisplayed }) {
     <>
       {popupDisplayed && (
         <Popup>
-          <h2>Share Your Card</h2>
+          <h3>Share Your Card</h3>
           <div className='share-list-item'>
-            <Icon Icon={RiQrCodeLine} url={''} />
+            <Icon theme={theme} Icon={RiQrCodeLine} url={''} />
             <span>
               <Link to={'/qrcode/' + user.email}>Share QR-Code</Link>
             </span>
@@ -36,7 +36,7 @@ function SharePopup({ user, popupDisplayed, setPopupDisplayed }) {
           <div className='share-line'></div>
 
           <div className='share-list-item'>
-            <Icon Icon={BsLink} url={''} />
+            <Icon theme={theme} Icon={BsLink} url={''} />
             <span>
               <a href={window.location.pathname} onClick={copyURL}>
                 Copy URL
@@ -46,10 +46,10 @@ function SharePopup({ user, popupDisplayed, setPopupDisplayed }) {
           <div className='share-line'></div>
 
           <div className='share-list-item'>
-            <Icon Icon={ImWhatsapp} url={''} />
+            <Icon theme={theme} Icon={ImWhatsapp} url={''} />
             <span>
               <a
-                href='whatsapp://send?text=The text to share!'
+                href={'whatsapp://send?text=' + window.location.href}
                 data-action='share/whatsapp/share'
               >
                 Share via Whatsapp
@@ -71,7 +71,7 @@ const Popup = styled.div`
   max-width: 100vw;
 
   background: white;
-  padding: 2.5rem 2rem;
+  padding: 2.5rem 3rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 1rem;
   display: flex;
@@ -91,6 +91,14 @@ const Popup = styled.div`
     }
   }
 
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   .share-line {
     width: 60%;
     height: 0.1rem;
@@ -104,7 +112,7 @@ const Popup = styled.div`
     margin-top: 1rem;
   }
 
-  h2 {
+  h3 {
     margin-bottom: 1rem;
   }
 

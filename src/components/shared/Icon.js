@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import { Colors } from "../../styles/Colors";
+import { Colors } from '../../styles/Colors';
 
-function Icon({ Icon, url }) {
+function Icon({ Icon, theme, url }) {
   return (
     <a href={url}>
-      <IconWrapper>
+      <IconWrapper theme={theme}>
         <Icon />
       </IconWrapper>
     </a>
@@ -17,7 +17,7 @@ const IconWrapper = styled.div`
   height: 2.2rem;
   width: 2.2rem;
   border-radius: 50%;
-  background: ${Colors.userColor};
+  background: ${(props) => props.theme?.userColor ?? Colors.primaryColor};
   display: flex;
   align-items: center;
   justify-content: center;

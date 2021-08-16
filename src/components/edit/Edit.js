@@ -24,6 +24,7 @@ import { IoIosAddCircle } from 'react-icons/io';
 import SkillHeader from './SkillHeader';
 import SkillsEdit from './SkillsEdit';
 import CloseIcon from '../shared/CloseIcon';
+import { SwatchesPicker } from 'react-color';
 
 function Edit({
   currentUser,
@@ -44,6 +45,10 @@ function Edit({
     setUser({ ...user, image: event.target.files[0] });
   }
 
+  function handleColorChange(color) {
+    setUser({ ...user, color: color.hex });
+  }
+
   function addNewCompany() {
     const tmp = user;
     tmp.companies.push({});
@@ -60,7 +65,6 @@ function Edit({
   function addNewSkill() {
     const tmp = user;
     tmp.skills.push('new skill');
-    console.log(user.skills);
     setUser({ ...user, skills: tmp.skills });
   }
 
@@ -154,6 +158,7 @@ function Edit({
                 setUser({ ...user, linkedInURL: e.target.value })
               }
             />
+
             <h4>Companies</h4>
             <div className='company-list'>
               {user.companies.map((company, index) => {
@@ -185,6 +190,11 @@ function Edit({
                 <IoIosAddCircle />
               </button>
             </div>
+
+            <SwatchesPicker
+              color={user.color}
+              onChangeComplete={handleColorChange}
+            />
             <span className='error-label'>{error}</span>
             <CustomButton onClick={handleSubmit}>Save</CustomButton>
             <ScrollTop />

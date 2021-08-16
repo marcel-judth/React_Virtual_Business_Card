@@ -2,10 +2,6 @@ import axios from 'axios';
 import _ from 'lodash';
 import { API_BaseURL } from './utils/constants';
 
-const authHeader = {
-  'x-auth-token': JSON.parse(localStorage.getItem('user'))?.token,
-};
-
 function reloggin() {
   localStorage.clear();
   window.location.href = '/login';
@@ -31,7 +27,7 @@ async function urltoFile(url, filename, mimeType) {
     });
 }
 
-const getUserByID = async (id, setUser, setLoading) => {
+const getUserByID = async (id, setUser, setLoading, setTheme) => {
   try {
     const res = await axios.get(API_BaseURL + '/users/' + id);
 
@@ -48,10 +44,11 @@ const getUserByID = async (id, setUser, setLoading) => {
           );
         }
 
+    if (res.data.color) setTheme({ userColor: res.data.color });
     setUser(res.data);
     setLoading(false);
   } catch (error) {
-    console.log(error.response.status);
+    console.log(error);
     if (error.response.status === 404) window.location.href = '/notfound';
 
     window.location.href = '/';
@@ -76,18 +73,16 @@ const update = async (user, setError, setLoading) => {
 
   axios
     .put(API_BaseURL + '/users/' + user.email, copy, {
-      headers: authHeader,
+      headers: {
+        'x-auth-token': JSON.parse(localStorage.getItem('user'))?.token,
+      },
     })
-    .then(() => {
-      window.location.reload();
-    })
-    .catch(async (err) => {
-      console.log(err);
-
-      if (err.response.status === 401) reloggin();
+    .then(() => window.location.reload())
+    .catch((error) => {
+      if (error.response.status === 401) reloggin();
       else {
         setLoading(false);
-        setError(err.response.data);
+        setError(error.response.data);
         setTimeout(() => setError(''), 3000);
       }
     });

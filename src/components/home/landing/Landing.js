@@ -24,7 +24,7 @@ function Landing() {
             <CustomButton>Sign Up</CustomButton>
           </Link>
           <Link to='#Aboutus'>
-            <CustomButtonAlt>About X-Act Me</CustomButtonAlt>
+            <CustomButtonAlt>About Us</CustomButtonAlt>
           </Link>
         </div>
       </Heading>
@@ -131,6 +131,7 @@ const LandingWrapper = styled.div`
       margin: 0rem;
       margin-bottom: 5vh;
       transform: none;
+      width: 80vw;
     }
   }
 `;

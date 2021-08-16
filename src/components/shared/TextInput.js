@@ -1,17 +1,24 @@
-import styled from "styled-components";
-import { Colors } from "../../styles/Colors";
+import styled from 'styled-components';
+import { Colors } from '../../styles/Colors';
 
-function TextInput({ placeholder, value, Icon, required = false, onChange, isPassword = false }) {
+function TextInput({
+  placeholder,
+  value,
+  Icon,
+  required = false,
+  onChange,
+  isPassword = false,
+}) {
   return (
     <InputWrapper>
       <input
-        required={required ? "true" : "false"}
-        type={isPassword ? "password" : "text"}
+        required={required ? 'true' : 'false'}
+        type={isPassword ? 'password' : 'text'}
         onChange={onChange}
         value={value}
       />
-      <label htmlFor="name" className="label-name">
-        <span className="content-name">
+      <label htmlFor='name' className='label-name'>
+        <span className='content-name'>
           <Icon /> {placeholder}
         </span>
       </label>
@@ -56,14 +63,15 @@ const InputWrapper = styled.div`
     color: gray;
     border-bottom: 1px solid grey;
   }
+
   label::after {
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
     bottom: -2px;
     height: 100%;
     width: 100%;
-    border-bottom: 3px solid ${Colors.userColor};
+    border-bottom: 3px solid ${Colors.primaryColor};
     transform: translateX(-100%);
     transition: transform 1s ease-in-out;
   }

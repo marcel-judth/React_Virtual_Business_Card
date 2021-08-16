@@ -1,12 +1,12 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import Icon from "../shared/Icon";
+import Icon from '../shared/Icon';
 
-function DetailsContentHeading({ iconType, headingText }) {
+function DetailsContentHeading({ iconType, theme, headingText }) {
   return (
     <HeadingWrapper>
-      <Icon Icon={iconType} />
-      <h4 className="heading">{headingText}</h4>
+      <Icon theme={theme} Icon={iconType} />
+      <h4 className='heading'>{headingText}</h4>
     </HeadingWrapper>
   );
 }

@@ -1,19 +1,23 @@
-import { RiToolsFill } from "react-icons/ri";
-import DetailsContentHeading from "./DetailsContentHeading";
-import DeatailsContentLine from "./DeatailsContentLine";
-import styled from "styled-components";
-import { Colors } from "../../styles/Colors";
+import { RiToolsFill } from 'react-icons/ri';
+import DetailsContentHeading from './DetailsContentHeading';
+import DeatailsContentLine from './DeatailsContentLine';
+import styled from 'styled-components';
+import { Colors } from '../../styles/Colors';
 
-function Skills({ skills }) {
+function Skills({ skills, theme }) {
   return (
     <SkillsWrapper>
-      <DetailsContentHeading iconType={RiToolsFill} headingText="Skills" />
+      <DetailsContentHeading
+        theme={theme}
+        iconType={RiToolsFill}
+        headingText='Skills'
+      />
       <DeatailsContentLine />
 
       {skills.map((element, index) => {
         return (
-          <Skill key={index}>
-            <div className="dot" />
+          <Skill theme={theme} key={index}>
+            <div className='dot' />
             <p>{element}</p>
           </Skill>
         );
@@ -31,7 +35,7 @@ const Skill = styled.div`
   .dot {
     min-width: 0.8rem;
     height: 0.8rem;
-    background: ${Colors.userColor};
+    background: ${(props) => props.theme?.userColor ?? Colors.primaryColor};
     border-radius: 50%;
   }
 
@@ -42,7 +46,7 @@ const Skill = styled.div`
 `;
 
 const SkillsWrapper = styled.div`
-  margin-left: 2rem;
+  margin-left: 4rem;
 
   @media (max-width: 1100px) {
     width: 100%;

@@ -1,20 +1,22 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import Companies from "./Companies";
-import Skills from "./Skills";
+import Companies from './Companies';
+import Skills from './Skills';
 
-function DetailsBody({ user }) {
+function DetailsBody({ user, theme }) {
   return (
     <BodyWrapper>
-      {user.companies.length > 0 && <Companies companies={user.companies} />}
-      {user.skills.length > 0 && <Skills skills={user.skills} />}
+      {user.companies.length > 0 && (
+        <Companies theme={theme} companies={user.companies} />
+      )}
+      {user.skills.length > 0 && <Skills theme={theme} skills={user.skills} />}
     </BodyWrapper>
   );
 }
 
 const BodyWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
   margin-top: 5rem;
 

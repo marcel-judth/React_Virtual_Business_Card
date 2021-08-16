@@ -49,9 +49,10 @@
     <script src="./shopify.js"></script>
 
     <script type="text/javascript">
-      document.addEventListener('DOMContentLoaded', function (event) {
-        showProducts();
-      });
+      function loadProducts(event) {
+        if (window.location.pathname === '/') showProducts();
+      }
+      document.addEventListener('DOMContentLoaded', loadProducts);
     </script>
   </body>
 </html>

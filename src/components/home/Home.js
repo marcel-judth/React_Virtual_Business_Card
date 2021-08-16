@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Footer from '../shared/Footer';
 import Aboutus from './aboutus/Aboutus';
 import Contact from './contact/Contact';
@@ -6,6 +7,7 @@ import Landing from './landing/Landing';
 import Products from './products/Products';
 
 function Home() {
+  useEffect(() => {}, []);
   return (
     <>
       <Landing />

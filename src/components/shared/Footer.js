@@ -20,16 +20,16 @@ function Footer() {
           </li>
           <li>
             <Link className='link' to='/'>
-              Details
+              AGBs
             </Link>
           </li>
           <li>
-            <Link className='link' to='/'>
+            <Link className='link' to='/privacy'>
               Privacy
             </Link>
           </li>
           <li>
-            <Link className='link' to='/'>
+            <Link className='link' to='/impressum'>
               Impressum
             </Link>
           </li>
