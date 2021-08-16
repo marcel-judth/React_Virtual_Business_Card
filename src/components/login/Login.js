@@ -1,12 +1,12 @@
-import { FaLock, FaEnvelope, FaUserAlt } from "react-icons/fa";
-import styled from "styled-components";
-import CustomButton from "../shared/CustomButton";
-import IconImage from "../shared/IconImage";
-import TextInput from "../shared/TextInput";
-import { login } from "../../api";
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { Colors } from "../../styles/Colors";
+import { FaLock, FaEnvelope, FaUserAlt } from 'react-icons/fa';
+import styled from 'styled-components';
+import CustomButton from '../shared/CustomButton';
+import IconImage from '../shared/IconImage';
+import TextInput from '../shared/TextInput';
+import { login } from '../../api';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Colors } from '../../styles/Colors';
 
 function Login() {
   const [email, setEmail] = useState();
@@ -22,14 +22,14 @@ function Login() {
 
   return (
     <LoginWrapper onSubmit={handleSubmit}>
-      <div className="content-wrapper">
+      <div className='content-wrapper'>
         <IconImage>
           <FaUserAlt />
         </IconImage>
         <br />
         <TextInput
           onChange={(event) => setEmail(event.target.value)}
-          placeholder="email"
+          placeholder='Email'
           required
           Icon={FaEnvelope}
         />
@@ -38,13 +38,13 @@ function Login() {
             setPassword(event.target.value);
           }}
           required
-          placeholder="password"
+          placeholder='Password'
           isPassword
           Icon={FaLock}
         />
-        <span className="error-label">{error}</span>
+        <span className='error-label'>{error}</span>
         <CustomButton>Login</CustomButton>
-        <a href="/forgotpassword" className="forgot-password">
+        <a href='/forgotpassword' className='forgot-password'>
           Forgot Password?
         </a>
       </div>

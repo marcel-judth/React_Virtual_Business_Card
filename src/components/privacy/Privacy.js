@@ -4,6 +4,7 @@ const Privacy = (props) => {
   return (
     <PrivacyWrapper>
       <h2>Privacy</h2>
+      <p></p>
     </PrivacyWrapper>
   );
 };

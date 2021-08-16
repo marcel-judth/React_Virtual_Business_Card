@@ -1,12 +1,12 @@
-import { FaLock, FaUser, FaEnvelope, FaUserAlt } from "react-icons/fa";
-import styled from "styled-components";
-import CustomButton from "../shared/CustomButton";
-import TextInput from "../shared/TextInput";
-import { register } from "../../api";
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { Colors } from "../../styles/Colors";
-import IconImage from "../shared/IconImage";
+import { FaLock, FaUser, FaEnvelope, FaUserAlt } from 'react-icons/fa';
+import styled from 'styled-components';
+import CustomButton from '../shared/CustomButton';
+import TextInput from '../shared/TextInput';
+import { register } from '../../api';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Colors } from '../../styles/Colors';
+import IconImage from '../shared/IconImage';
 
 function Register() {
   const [firstname, setFirstname] = useState();
@@ -23,7 +23,7 @@ function Register() {
 
   return (
     <RegisterWrapper onSubmit={handleSubmit}>
-      <div className="content-wrapper">
+      <div className='content-wrapper'>
         <IconImage>
           <FaUserAlt />
         </IconImage>
@@ -31,28 +31,28 @@ function Register() {
 
         <TextInput
           onChange={(event) => setFirstname(event.target.value)}
-          placeholder="firstname"
+          placeholder='First Name'
           Icon={FaUser}
         />
         <TextInput
           onChange={(event) => setLastname(event.target.value)}
-          placeholder="lastname"
+          placeholder='Last Name'
           Icon={FaUser}
         />
         <TextInput
           onChange={(event) => setEmail(event.target.value)}
-          placeholder="email"
+          placeholder='Email'
           Icon={FaEnvelope}
         />
         <TextInput
           onChange={(event) => {
             setPassword(event.target.value);
           }}
-          placeholder="password"
+          placeholder='Password'
           isPassword
           Icon={FaLock}
         />
-        <span className="error-label">{error}</span>
+        <span className='error-label'>{error}</span>
         <CustomButton>Register</CustomButton>
       </div>
     </RegisterWrapper>

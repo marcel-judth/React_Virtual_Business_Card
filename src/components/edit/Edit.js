@@ -101,21 +101,21 @@ function Edit({
               isRounded
             />
             <TextInput
-              placeholder='Firstname'
+              placeholder='First Name'
               Icon={FaUser}
               required
               value={user.firstname}
               onChange={(e) => setUser({ ...user, firstname: e.target.value })}
             />
             <TextInput
-              placeholder='Lastname'
+              placeholder='Last Name'
               Icon={FaUser}
               required
               value={user.lastname}
               onChange={(e) => setUser({ ...user, lastname: e.target.value })}
             />
             <TextInput
-              placeholder='Jobtitle'
+              placeholder='Job Title'
               Icon={FaIdCardAlt}
               value={user.jobtitle}
               onChange={(e) => setUser({ ...user, jobtitle: e.target.value })}
@@ -281,7 +281,8 @@ const EditForm = styled.form`
     margin-bottom: 1rem;
   }
 
-  .company-list {
+  .company-list,
+  .skills-list {
     width: 100%;
   }
 

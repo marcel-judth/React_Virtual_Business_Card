@@ -99,7 +99,8 @@ const login = async (email, password, setError, history) => {
       history.push('/details/' + res.data.email);
     })
     .catch((err) => {
-      setError(err.response.data);
+      console.log(err);
+      setError(err.response?.data);
       setTimeout(() => setError(''), 3000);
     });
 };

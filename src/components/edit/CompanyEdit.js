@@ -1,5 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaUser } from 'react-icons/fa';
+import {
+  FaCity,
+  FaEnvelope,
+  FaFacebookF,
+  FaIdCardAlt,
+  FaIndustry,
+  FaInstagram,
+  FaLinkedinIn,
+  FaPhone,
+} from 'react-icons/fa';
+import { BsCardHeading } from 'react-icons/bs';
+import { AiOutlineGlobal } from 'react-icons/ai';
+import { GoLocation } from 'react-icons/go';
+import { GiPostStamp } from 'react-icons/gi';
 import styled from 'styled-components';
 import CancelButton from '../shared/CancelButton';
 import CustomButton from '../shared/CustomButton';
@@ -75,7 +88,7 @@ function CompanyEdit({
         />
         <TextInput
           placeholder='Name'
-          Icon={FaUser}
+          Icon={BsCardHeading}
           value={user.companies[index].name}
           onChange={(e) => {
             const tmp = user;
@@ -88,7 +101,7 @@ function CompanyEdit({
         <TextInput
           placeholder='Field'
           required
-          Icon={FaUser}
+          Icon={FaIndustry}
           value={user.companies[index].field}
           onChange={(e) => {
             const tmp = user;
@@ -100,7 +113,7 @@ function CompanyEdit({
 
         <TextInput
           placeholder='Position'
-          Icon={FaUser}
+          Icon={FaIdCardAlt}
           value={user.companies[index].position}
           onChange={(e) => {
             const tmp = user;
@@ -111,7 +124,7 @@ function CompanyEdit({
         />
         <TextInput
           placeholder='Website'
-          Icon={FaUser}
+          Icon={AiOutlineGlobal}
           value={user.companies[index].website}
           onChange={(e) => {
             const tmp = user;
@@ -122,7 +135,7 @@ function CompanyEdit({
         />
         <TextInput
           placeholder='Email'
-          Icon={FaUser}
+          Icon={FaEnvelope}
           value={user.companies[index].email}
           onChange={(e) => {
             const tmp = user;
@@ -133,7 +146,7 @@ function CompanyEdit({
         />
         <TextInput
           placeholder='Phone Nr.'
-          Icon={FaUser}
+          Icon={FaPhone}
           value={user.companies[index].phoneNr}
           onChange={(e) => {
             const tmp = user;
@@ -144,7 +157,7 @@ function CompanyEdit({
         />
         <TextInput
           placeholder='Address'
-          Icon={FaUser}
+          Icon={GoLocation}
           value={user.companies[index].address}
           onChange={(e) => {
             const tmp = user;
@@ -155,7 +168,7 @@ function CompanyEdit({
         />
         <TextInput
           placeholder='Postcode'
-          Icon={FaUser}
+          Icon={GiPostStamp}
           value={user.companies[index].postcode}
           onChange={(e) => {
             const tmp = user;
@@ -166,7 +179,7 @@ function CompanyEdit({
         />
         <TextInput
           placeholder='City'
-          Icon={FaUser}
+          Icon={FaCity}
           value={user.companies[index].city}
           onChange={(e) => {
             const tmp = user;
@@ -177,7 +190,7 @@ function CompanyEdit({
         />
         <TextInput
           placeholder='Country'
-          Icon={FaUser}
+          Icon={GoLocation}
           value={user.companies[index].country}
           onChange={(e) => {
             const tmp = user;
