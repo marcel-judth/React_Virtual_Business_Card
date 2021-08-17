@@ -7,48 +7,57 @@ import { login } from '../../api';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Colors } from '../../styles/Colors';
+import Loading from '../shared/Loading';
 
 function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    login(email, password, setError, history);
+    login(email, password, setError, setLoading, history);
   };
 
   return (
-    <LoginWrapper onSubmit={handleSubmit}>
-      <div className='content-wrapper'>
-        <IconImage>
-          <FaUserAlt />
-        </IconImage>
-        <br />
-        <TextInput
-          onChange={(event) => setEmail(event.target.value)}
-          placeholder='Email'
-          required
-          Icon={FaEnvelope}
-        />
-        <TextInput
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-          required
-          placeholder='Password'
-          isPassword
-          Icon={FaLock}
-        />
-        <span className='error-label'>{error}</span>
-        <CustomButton>Login</CustomButton>
-        <a href='/forgotpassword' className='forgot-password'>
-          Forgot Password?
-        </a>
-      </div>
-    </LoginWrapper>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <LoginWrapper onSubmit={handleSubmit}>
+          <div className='content-wrapper'>
+            <IconImage>
+              <FaUserAlt />
+            </IconImage>
+            <br />
+            <TextInput
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder='Email'
+              required
+              Icon={FaEnvelope}
+            />
+            <TextInput
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
+              required
+              placeholder='Password'
+              isPassword
+              Icon={FaLock}
+            />
+            <span className='error-label'>{error}</span>
+            <CustomButton>Login</CustomButton>
+            <a href='/forgotpassword' className='forgot-password'>
+              Forgot Password?
+            </a>
+          </div>
+        </LoginWrapper>
+      )}
+    </>
   );
 }
 

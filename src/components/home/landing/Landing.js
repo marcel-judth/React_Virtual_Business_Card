@@ -10,9 +10,11 @@ function Landing() {
   return (
     <LandingWrapper>
       <Heading>
-        <h1>
-          Welcome at <br className='heading-line-break' /> X-Act.me!
-        </h1>
+        <Hide>
+          <h1>
+            Welcome at <br className='heading-line-break' /> X-Act.me!
+          </h1>
+        </Hide>
         <p>
           Lorem ipsum door sit amet, consectetur adip corporis doloribus o d io
           magni quo eos dolo res omnis incidunt vitae praesentium! Ipsum he
@@ -100,6 +102,10 @@ const Heading = styled.div`
       max-width: 100%;
     }
   }
+`;
+
+const Hide = styled.div`
+  overflow: hidden;
 `;
 
 const LandingWrapper = styled.div`

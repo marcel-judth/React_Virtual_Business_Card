@@ -88,7 +88,7 @@ const update = async (user, setError, setLoading) => {
     });
 };
 
-const login = async (email, password, setError, history) => {
+const login = async (email, password, setError, setLoading, history) => {
   axios
     .post(API_BaseURL + '/users/login', {
       email,
@@ -100,6 +100,7 @@ const login = async (email, password, setError, history) => {
     })
     .catch((err) => {
       console.log(err);
+      setLoading(false);
       setError(err.response?.data);
       setTimeout(() => setError(''), 3000);
     });

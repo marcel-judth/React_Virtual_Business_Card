@@ -20,14 +20,6 @@ export const pageAnimation = {
   },
 };
 
-export const titleAnim = {
-  hidden: { y: 200 },
-  show: {
-    y: 0,
-    transition: { duration: 0.75, ease: 'easeOut' },
-  },
-};
-
 export const fade = {
   hidden: { opacity: 0 },
   show: {
@@ -76,5 +68,13 @@ export const scrollReveal = {
     transition: {
       duration: 0.5,
     },
+  },
+};
+
+export const titleAnim = {
+  hidden: { y: 200 },
+  show: {
+    y: 0,
+    transition: { duration: 0.75, ease: 'easeOut' },
   },
 };

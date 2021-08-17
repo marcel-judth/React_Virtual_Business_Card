@@ -45,7 +45,6 @@ const Faq = () => {
 };
 
 const FaqWrapper = styled(motion.div)`
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
