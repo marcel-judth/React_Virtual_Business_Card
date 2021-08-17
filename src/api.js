@@ -130,4 +130,31 @@ const register = async (
     });
 };
 
-export { getUserByID, login, register, update };
+const forgotPassword = async (email, setSuccess) => {
+  axios
+    .post(API_BaseURL + '/users/forgotPassword', {
+      email,
+    })
+    .then((res) => {
+      setSuccess(true);
+    })
+    .catch((err) => {
+      window.location.href = '/';
+    });
+};
+
+const changePassword = async (token, password, setSuccess) => {
+  axios
+    .post(API_BaseURL + '/users/changePassword', {
+      token,
+      password,
+    })
+    .then((res) => {
+      setSuccess(true);
+    })
+    .catch((err) => {
+      window.location.href = '/';
+    });
+};
+
+export { getUserByID, login, register, update, forgotPassword, changePassword };

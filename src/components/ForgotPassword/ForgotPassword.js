@@ -1,59 +1,84 @@
-import { FaLock, FaEnvelope, FaUserAlt } from 'react-icons/fa';
+import { FaEnvelope, FaLock, FaUserAlt } from 'react-icons/fa';
 import styled from 'styled-components';
 import CustomButton from '../shared/CustomButton';
 import IconImage from '../shared/IconImage';
 import TextInput from '../shared/TextInput';
-import { login } from '../../api';
+import { forgotPassword, changePassword } from '../../api';
 import { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
 import { Colors } from '../../styles/Colors';
-import CancelButton from '../shared/CancelButton';
+import { useParams } from 'react-router-dom';
 
 function ForgotPassword() {
+  let { token } = useParams();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [error, setError] = useState();
-  const history = useHistory();
+  const [success, setSuccess] = useState();
+
+  const handlePwdChange = (e) => {
+    e.preventDefault();
+
+    changePassword(token, password, setSuccess);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    login(email, password, setError, history);
+    forgotPassword(email, setSuccess);
   };
 
   return (
-    <LoginWrapper onSubmit={handleSubmit}>
+    <ForgotWrapper onSubmit={handleSubmit}>
       <div className='content-wrapper'>
-        <IconImage>
-          <FaUserAlt />
-        </IconImage>
-        <br />
-        <TextInput
-          onChange={(event) => setEmail(event.target.value)}
-          placeholder='email'
-          required
-          Icon={FaEnvelope}
-        />
-        <TextInput
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-          required
-          placeholder='password'
-          isPassword
-          Icon={FaLock}
-        />
-        <span className='error-label'>{error}</span>
-        <CustomButton>Change Password</CustomButton>
-        <Link to='/'>
-          <CancelButton>Cancel</CancelButton>
-        </Link>
+        {token ? (
+          <>
+            <h2>Reset Password</h2>
+            <TextInput
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
+              required
+              placeholder='New Password'
+              isPassword
+              Icon={FaLock}
+            />
+            <CustomButton onClick={handlePwdChange}>
+              Change Password
+            </CustomButton>
+          </>
+        ) : (
+          <>
+            {success ? (
+              <>
+                <p>You will receive an email to change your password!</p>
+                <CustomButton onClick={() => (window.location.href = '/')}>
+                  Return
+                </CustomButton>
+              </>
+            ) : (
+              <>
+                <IconImage>
+                  <FaUserAlt />
+                </IconImage>
+                <br />
+                <TextInput
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder='email'
+                  required
+                  Icon={FaEnvelope}
+                />
+                <CustomButton onClick={handleSubmit}>
+                  Change Password
+                </CustomButton>
+              </>
+            )}
+          </>
+        )}
       </div>
-    </LoginWrapper>
+    </ForgotWrapper>
   );
 }
 
-const LoginWrapper = styled.form`
+const ForgotWrapper = styled.form`
   width: 100vw;
   height: 100vh;
   display: flex;

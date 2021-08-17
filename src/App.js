@@ -9,6 +9,7 @@ import Logout from './components/logout/Logout';
 import NotFound from './components/notfound/NotFound';
 import QrCode from './components/qrcode/QrCode';
 import HomeRedirect from './components/homeredirect/HomeRedirect';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
           <Route path='/register' component={Register} />
           <Route path='/logout' component={Logout} />
           <Route path='/notfound' component={NotFound} />
+          <Route path='/forgotpassword' component={ForgotPassword} exact />
+          <Route path='/forgotpassword/:token' component={ForgotPassword} />
           <Route path='/qrcode' component={QrCode} />
           <Route path='/details/:id' component={Details} />
         </Switch>
