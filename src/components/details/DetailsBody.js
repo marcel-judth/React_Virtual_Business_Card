@@ -6,10 +6,10 @@ import Skills from './Skills';
 function DetailsBody({ user, theme }) {
   return (
     <BodyWrapper>
-      {user.companies.length > 0 && (
+      {user.companies?.length > 0 && (
         <Companies theme={theme} companies={user.companies} />
       )}
-      {user.skills.length > 0 && <Skills theme={theme} skills={user.skills} />}
+      {user.skills?.length > 0 && <Skills theme={theme} skills={user.skills} />}
     </BodyWrapper>
   );
 }

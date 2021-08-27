@@ -16,8 +16,9 @@ function getBase64(file) {
   });
 }
 
-async function urltoFile(url, filename, mimeType) {
-  mimeType = mimeType || (url.match(/^data:([^;]+);/) || '')[1];
+async function urltoFile(url, filename) {
+  const mimeType = url.split(';')[0].split('/')[1];
+
   return fetch(url)
     .then(function (res) {
       return res.arrayBuffer();
@@ -32,14 +33,13 @@ const getUserByID = async (id, setUser, setLoading, setTheme) => {
     const res = await axios.get(API_BaseURL + '/users/' + id);
 
     if (res.data.image)
-      res.data.image = await urltoFile(res.data.image, 'test', 'test');
+      res.data.image = await urltoFile(res.data.image, 'profile-picture');
 
     if (res.data.companies)
       for (let i = 0; i < res.data.companies.length; i++)
         if (res.data.companies[i].logo) {
           res.data.companies[i].logo = await urltoFile(
             res.data.companies[i].logo,
-            'company-logo' + i,
             'company-logo' + i
           );
         }
@@ -49,7 +49,8 @@ const getUserByID = async (id, setUser, setLoading, setTheme) => {
     setLoading(false);
   } catch (error) {
     console.log(error);
-    if (error.response.status === 404) window.location.href = '/notfound';
+    if (error.response.status === 404)
+      return (window.location.href = '/notfound');
 
     window.location.href = '/';
   }

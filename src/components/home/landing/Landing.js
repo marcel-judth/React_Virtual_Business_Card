@@ -22,8 +22,8 @@ function Landing() {
           magni quo eos dolo res omnis incidunt vitae praesentium! Ipsum he
         </p>
         <div className='btn-wrapper'>
-          <Link to='/register'>
-            <CustomButton>Sign Up</CustomButton>
+          <Link to='/redirectshop'>
+            <CustomButton>Products</CustomButton>
           </Link>
           <Link to='#Aboutus'>
             <CustomButtonAlt>About Us</CustomButtonAlt>

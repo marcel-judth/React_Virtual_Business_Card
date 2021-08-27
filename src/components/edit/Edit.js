@@ -192,7 +192,7 @@ function Edit({
             </div>
 
             <SwatchesPicker
-              color={user.color}
+              color={user.color ? user.color : undefined}
               onChangeComplete={handleColorChange}
             />
             <span className='error-label'>{error}</span>

@@ -28,7 +28,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cp _redirects build/_redirects",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -49,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "terser-brunch": "^4.1.0"
   }
 }

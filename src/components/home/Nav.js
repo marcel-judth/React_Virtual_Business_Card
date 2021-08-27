@@ -43,7 +43,16 @@ const Nav = () => {
             animate={{ width: location.pathname === '/' ? '100%' : '0%' }}
           />
         </li>
-
+        <li onClick={() => setNavStatus(!navStatus)}>
+          <Link to='/redirectShop'>Shop</Link>
+          <Line
+            transition={{ duration: 0.75 }}
+            initial={{ width: '0%' }}
+            animate={{
+              width: location.pathname === '/shop' ? '100%' : '0%',
+            }}
+          />
+        </li>
         {user ? (
           <>
             <li onClick={() => setNavStatus(!navStatus)}>
@@ -81,16 +90,6 @@ const Nav = () => {
                 initial={{ width: '0%' }}
                 animate={{
                   width: location.pathname === '/login' ? '100%' : '0%',
-                }}
-              />
-            </li>
-            <li onClick={() => setNavStatus(!navStatus)}>
-              <Link to='/register'>Register</Link>
-              <Line
-                transition={{ duration: 0.75 }}
-                initial={{ width: '0%' }}
-                animate={{
-                  width: location.pathname === '/register' ? '100%' : '0%',
                 }}
               />
             </li>

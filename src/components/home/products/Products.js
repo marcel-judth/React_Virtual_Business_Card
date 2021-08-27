@@ -1,18 +1,7 @@
-import { useEffect } from 'react';
 import styled from 'styled-components';
-
 import { Colors } from '../../../styles/Colors';
 
 function Products() {
-  useEffect(() => {
-    // const element = document.getElementById(
-    //   'collection-component-1628940789227'
-    // );
-    // console.log('elemnt:');
-    // console.log(element);
-    // document.getElementById('products').innerHTML = element.innerHTML;
-  }, []);
-
   return (
     <ProductsWrapper>
       <h2>
