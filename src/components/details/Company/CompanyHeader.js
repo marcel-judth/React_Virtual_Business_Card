@@ -92,7 +92,7 @@ const CoHeader = styled.div`
   }
 
   @media (max-width: 600px) {
-    min-width: auto;
+    min-width: 90vw;
   }
 `;
 
