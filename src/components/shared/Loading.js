@@ -1,13 +1,13 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 function Loading() {
   return (
     <LoadingWrapper>
       <lottie-player
-        className="loading"
-        src="https://assets6.lottiefiles.com/packages/lf20_slv159gh.json"
-        background="transparent"
-        speed="1"
+        className='loading'
+        src='https://assets6.lottiefiles.com/packages/lf20_slv159gh.json'
+        background='transparent'
+        speed='1'
         loop
         autoplay
       ></lottie-player>
@@ -20,7 +20,7 @@ const LoadingWrapper = styled.div`
   height: auto;
   max-width: 20rem;
   position: absolute;
-  top: 50%;
+  top: 50vh;
   left: 50%;
   transform: translate(-50%, -50%);
 `;

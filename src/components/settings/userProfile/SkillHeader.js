@@ -1,6 +1,6 @@
 import { MdEdit } from 'react-icons/md';
 import styled from 'styled-components';
-import { Colors } from '../../styles/Colors';
+import { Colors } from '../../../styles/Colors';
 
 function SkillHeader({ skill, onclick }) {
   return (

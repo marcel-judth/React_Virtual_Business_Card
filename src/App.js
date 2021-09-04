@@ -11,6 +11,7 @@ import HomeRedirect from './components/homeredirect/HomeRedirect';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import ShopRedirect from './components/shop/ShopRedirect';
 import Shop from './components/shop/Shop';
+import Settings from './components/settings/Settings';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path='/forgotpassword/:token' component={ForgotPassword} />
           <Route path='/qrcode' component={QrCode} />
           <Route path='/details/:id' component={Details} />
+          <Route path='/settings' component={Settings} />
         </Switch>
       </div>
     </Router>

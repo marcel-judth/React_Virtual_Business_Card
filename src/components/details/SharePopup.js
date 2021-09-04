@@ -17,7 +17,7 @@ function SharePopup({ user, popupDisplayed, theme, setPopupDisplayed }) {
     document.body.appendChild(dummy);
     dummy.value = text;
     dummy.select();
-    dummy.setSelectionRange(0, 99999); /* For mobile devices */
+    dummy.setSelectionRange(0, 99999);
     document.execCommand('copy');
     document.body.removeChild(dummy);
   }
@@ -69,10 +69,11 @@ const Popup = styled.div`
   top: 15vh;
   z-index: 1;
   max-width: 100vw;
-
   background: white;
   padding: 2.5rem 3rem;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  -webkit-box-shadow: 11px 12px 36px -10px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 11px 12px 36px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 11px 12px 36px -10px rgba(0, 0, 0, 0.75);
   border-radius: 1rem;
   display: flex;
   flex-direction: column;

@@ -10,8 +10,8 @@ import Loading from '../shared/Loading';
 import { API_BaseURL } from '../../utils/constants';
 import { getUserByID } from '../../api';
 import { FaUserEdit } from 'react-icons/fa';
-import Edit from '../edit/Edit';
 import { Colors } from '../../styles/Colors';
+import { HashLink as Link } from 'react-router-hash-link';
 
 function Details() {
   let { id } = useParams();
@@ -19,7 +19,6 @@ function Details() {
   const [popupDisplayed, setPopupDisplayed] = useState(false);
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
-  const [editVisible, setEditVisible] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [theme, setTheme] = useState({ userColor: Colors.primaryColor });
 
@@ -40,32 +39,33 @@ function Details() {
               setPopupDisplayed={setPopupDisplayed}
             />
             <DetailsBody theme={theme} user={user} />
-            <button
-              onClick={() => {
-                setPopupDisplayed(true);
-              }}
-            >
-              <FiShare className='btn-icon' />
-              Share
-            </button>
-            <button
-              onClick={() => {
-                window.open(API_BaseURL + '/users/download/' + user.email);
-              }}
-            >
-              <FiDownload className='btn-icon' />
-              download
-            </button>
-            {currentUserEmail && currentUserEmail === user.email && (
+            <div className='btn-group'>
               <button
+                className='share-btn'
                 onClick={() => {
-                  setEditVisible(true);
+                  setPopupDisplayed(true);
                 }}
               >
-                <FaUserEdit className='btn-icon' />
-                edit
+                <FiShare className='btn-icon' />
+                Share
               </button>
-            )}
+              <button
+                onClick={() => {
+                  window.open(API_BaseURL + '/users/download/' + user.email);
+                }}
+              >
+                <FiDownload className='btn-icon' />
+                download
+              </button>
+              {currentUserEmail && currentUserEmail === user.email && (
+                <Link to='/settings'>
+                  <button>
+                    <FaUserEdit className='btn-icon' />
+                    edit
+                  </button>
+                </Link>
+              )}
+            </div>
           </DetailsContent>
           <SharePopup
             user={user}
@@ -74,16 +74,7 @@ function Details() {
             setPopupDisplayed={setPopupDisplayed}
             setOverlayVisible={setOverlayVisible}
           />
-          <Edit
-            currentUser={user}
-            visible={editVisible}
-            setVisible={setEditVisible}
-            setLoading={setLoading}
-            setOverlayVisible={setOverlayVisible}
-          />
-          {(overlayVisible || editVisible || popupDisplayed) && (
-            <ScreenOverlay />
-          )}
+          {(overlayVisible || popupDisplayed) && <ScreenOverlay />}
         </DetailsWrapper>
       )}
     </>
@@ -96,9 +87,15 @@ const DetailsContent = styled.div`
   padding: 15vh 5%;
   min-width: 60%;
 
+  .btn-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
   button {
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0rem 0.5rem;
     margin-top: 5vh;
     display: flex;
     justify-content: center;
@@ -106,7 +103,7 @@ const DetailsContent = styled.div`
     width: fit-content;
     padding: 0.5rem 0rem;
     cursor: pointer;
-    border-radius: 1rem;
+    border-radius: 0.4rem;
     border: none;
     font-size: 1rem;
     background: ${(props) => props.theme?.userColor ?? Colors.primaryColor};
@@ -114,11 +111,20 @@ const DetailsContent = styled.div`
     transition: 0.5s ease;
     width: 8rem;
     &:hover {
-      transform: scale(1.2);
+      transform: scale(1.05);
     }
 
     .btn-icon {
       margin-right: 0.5rem;
+    }
+  }
+  .share-btn {
+    display: none;
+  }
+
+  @media (max-width: 800px) {
+    .share-btn {
+      display: flex;
     }
   }
 `;

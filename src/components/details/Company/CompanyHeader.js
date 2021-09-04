@@ -71,8 +71,8 @@ const CoHeader = styled.div`
     width: 5rem;
     height: auto;
 
-    max-height: 5rem;
-    object-fit: cover;
+    max-height: 3.5rem;
+    object-fit: contain;
   }
 
   @media (max-width: 600px) {

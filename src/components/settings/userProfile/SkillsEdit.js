@@ -1,30 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import CancelButton from '../shared/CancelButton';
-import CustomButton from '../shared/CustomButton';
-import TextInput from '../shared/TextInput';
-import ScrollTop from '../shared/ScrollTop';
+import CancelButton from '../../shared/CancelButton';
+import CustomButton from '../../shared/CustomButton';
+import TextInput from '../../shared/TextInput';
+import ScrollTop from '../../shared/ScrollTop';
 import _ from 'lodash';
 import { RiToolsFill } from 'react-icons/ri';
-import CloseIcon from '../shared/CloseIcon';
+import CloseIcon from '../../shared/CloseIcon';
 
 function SkillsEdit({
   currentUser,
   setCurrentUser,
   index,
   setVisible,
-  setOverlayVisible,
   setParentVisible,
 }) {
   const [user, setUser] = useState(_.cloneDeep(currentUser));
 
-  useEffect(() => {
-    setOverlayVisible(true);
-  }, [setOverlayVisible]);
-
   function removeSkill() {
     setVisible(false);
-    setOverlayVisible(false);
     setParentVisible(true);
     const tmp = user;
     tmp.skills.splice(index, 1);
@@ -41,7 +35,6 @@ function SkillsEdit({
 
   function closePopup() {
     setVisible(false);
-    setOverlayVisible(false);
     setParentVisible(true);
   }
 
@@ -72,9 +65,16 @@ function SkillsEdit({
 }
 
 const SkillEditWrapper = styled.div`
-  position: absolute;
-  z-index: 1;
-  top: 15vh;
+  width: 30vw;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15vh;
+  margin-bottom: 10vh;
+  @media (max-width: 700px) {
+    width: 100vw;
+    border: none;
+  }
 `;
 
 const SkillForm = styled.div`
@@ -91,6 +91,12 @@ const SkillForm = styled.div`
 
   input {
     margin-top: 2rem;
+  }
+
+  @media (max-width: 700px) {
+    padding: 3rem 5vh;
+    min-width: 15rem;
+    box-shadow: none;
   }
 `;
 

@@ -4,6 +4,7 @@ import {
   FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
+  FaMobileAlt,
   FaPhone,
 } from 'react-icons/fa';
 import styled from 'styled-components';
@@ -68,6 +69,13 @@ function CompanyBody({ company, toggle, theme }) {
                         theme={theme}
                         Icon={FaPhone}
                         url={'tel:' + company.phoneNr}
+                      />
+                    )}
+                    {company.mobileNr && (
+                      <Icon
+                        theme={theme}
+                        Icon={FaMobileAlt}
+                        url={'tel:' + company.mobileNr}
                       />
                     )}
                     {company.email && (

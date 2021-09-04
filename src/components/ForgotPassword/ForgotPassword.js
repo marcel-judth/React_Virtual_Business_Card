@@ -3,83 +3,102 @@ import styled from 'styled-components';
 import CustomButton from '../shared/CustomButton';
 import IconImage from '../shared/IconImage';
 import TextInput from '../shared/TextInput';
-import { forgotPassword, changePassword } from '../../api';
+import { forgotPassword, resetPassword } from '../../api';
 import { useState } from 'react';
 import { Colors } from '../../styles/Colors';
 import { useParams } from 'react-router-dom';
+import Loading from '../shared/Loading';
 
 function ForgotPassword() {
   let { token } = useParams();
+  const [isLoading, setIsLoading] = useState();
+  const [error, setError] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [success, setSuccess] = useState();
+  const [successMessage, setSuccessMessage] = useState();
 
   const handlePwdChange = (e) => {
     e.preventDefault();
-
-    changePassword(token, password, setSuccess);
+    setIsLoading(true);
+    setSuccessMessage('Successfully changed password!');
+    resetPassword(token, password, setSuccess, setIsLoading, setError);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    forgotPassword(email, setSuccess);
+    setIsLoading(true);
+    setSuccessMessage('You will receive an email to change your password!');
+    forgotPassword(email, setSuccess, setIsLoading, setError);
   };
 
   return (
-    <ForgotWrapper onSubmit={handleSubmit}>
-      <div className='content-wrapper'>
-        {token ? (
-          <>
-            <h2>Reset Password</h2>
-            <TextInput
-              onChange={(event) => {
-                setPassword(event.target.value);
-              }}
-              required
-              placeholder='New Password'
-              isPassword
-              Icon={FaLock}
-            />
-            <CustomButton onClick={handlePwdChange}>
-              Change Password
-            </CustomButton>
-          </>
-        ) : (
-          <>
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <ForgotWrapper onSubmit={handleSubmit}>
+          <div className='content-wrapper'>
             {success ? (
               <>
-                <p>You will receive an email to change your password!</p>
+                <IconImage>
+                  <FaUserAlt />
+                </IconImage>
+                <p className='info-message'>{successMessage}</p>
+                <span className='error-label'>{error}</span>
                 <CustomButton onClick={() => (window.location.href = '/')}>
                   Return
                 </CustomButton>
               </>
             ) : (
               <>
-                <IconImage>
-                  <FaUserAlt />
-                </IconImage>
-                <br />
-                <TextInput
-                  onChange={(event) => setEmail(event.target.value)}
-                  placeholder='email'
-                  required
-                  Icon={FaEnvelope}
-                />
-                <CustomButton onClick={handleSubmit}>
-                  Change Password
-                </CustomButton>
+                {token ? (
+                  <>
+                    <h2>Reset Password</h2>
+                    <TextInput
+                      onChange={(event) => {
+                        setPassword(event.target.value);
+                      }}
+                      required
+                      placeholder='New Password'
+                      isPassword
+                      Icon={FaLock}
+                    />
+                    <span className='error-label'>{error}</span>
+
+                    <CustomButton onClick={handlePwdChange}>
+                      Change Password
+                    </CustomButton>
+                  </>
+                ) : (
+                  <>
+                    <IconImage>
+                      <FaUserAlt />
+                    </IconImage>
+                    <br />
+                    <TextInput
+                      onChange={(event) => setEmail(event.target.value)}
+                      placeholder='email'
+                      required
+                      Icon={FaEnvelope}
+                    />
+                    <span className='error-label'>{error}</span>
+                    <CustomButton onClick={handleSubmit}>
+                      Change Password
+                    </CustomButton>
+                  </>
+                )}
               </>
             )}
-          </>
-        )}
-      </div>
-    </ForgotWrapper>
+          </div>
+        </ForgotWrapper>
+      )}
+    </>
   );
 }
 
 const ForgotWrapper = styled.form`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -110,9 +129,20 @@ const ForgotWrapper = styled.form`
     align-items: center;
     background: white;
     padding: 3rem 4rem;
-    border-radius: 1rem;
+    border-radius: 5%;
     border: 1px solid lightgrey;
     min-width: 25rem;
+  }
+
+  .error-label {
+    color: ${Colors.warningColor};
+    font-size: 0.8rem;
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .info-message {
+    margin: 2rem 0rem;
   }
 
   @media (max-width: 600px) {

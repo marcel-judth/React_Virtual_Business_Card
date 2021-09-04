@@ -82,9 +82,7 @@ const update = async (user, setError, setLoading) => {
     .catch((error) => {
       if (error.response.status === 401) reloggin();
       else {
-        setLoading(false);
-        setError(error.response.data);
-        setTimeout(() => setError(''), 3000);
+        displayError(error, setError, setLoading);
       }
     });
 };
@@ -101,9 +99,7 @@ const login = async (email, password, setError, setLoading, history) => {
     })
     .catch((err) => {
       console.log(err);
-      setLoading(false);
-      setError(err.response?.data);
-      setTimeout(() => setError(''), 3000);
+      displayError(err, setError, setLoading);
     });
 };
 
@@ -132,31 +128,87 @@ const register = async (
     });
 };
 
-const forgotPassword = async (email, setSuccess) => {
+const forgotPassword = async (email, setSuccess, setIsLoading, setError) => {
   axios
     .post(API_BaseURL + '/users/forgotPassword', {
       email,
     })
-    .then((res) => {
+    .then(() => {
       setSuccess(true);
+      setIsLoading(false);
     })
     .catch((err) => {
-      window.location.href = '/';
+      displayError(err, setError, setIsLoading);
     });
 };
 
-const changePassword = async (token, password, setSuccess) => {
+const resetPassword = async (
+  token,
+  password,
+  setSuccess,
+  setIsLoading,
+  setError
+) => {
   axios
-    .post(API_BaseURL + '/users/changePassword', {
+    .post(API_BaseURL + '/users/resetPassword', {
       token,
       password,
     })
-    .then((res) => {
+    .then(() => {
       setSuccess(true);
+      setIsLoading(false);
     })
     .catch((err) => {
-      window.location.href = '/';
+      displayError(err, setError, setIsLoading);
     });
 };
 
-export { getUserByID, login, register, update, forgotPassword, changePassword };
+const changePassword = async (
+  email,
+  currentPassword,
+  newPassword,
+  setSuccess,
+  setIsLoading,
+  setError
+) => {
+  axios
+    .post(
+      API_BaseURL + '/users/changePassword',
+      {
+        newPassword,
+        currentPassword,
+        email,
+      },
+      {
+        headers: {
+          'x-auth-token': JSON.parse(localStorage.getItem('user'))?.token,
+        },
+      }
+    )
+    .then(() => {
+      setSuccess(true);
+      setIsLoading(false);
+    })
+    .catch((err) => {
+      displayError(err, setError, setIsLoading);
+    });
+};
+
+function displayError(httpError, setError, setIsLoading) {
+  if (httpError.response?.data) setError(httpError.response.data);
+  else setError('An unexpected error happened!');
+  setIsLoading(false);
+  setTimeout(() => {
+    setError(undefined);
+  }, 4000);
+}
+
+export {
+  getUserByID,
+  login,
+  register,
+  update,
+  forgotPassword,
+  changePassword,
+  resetPassword,
+};

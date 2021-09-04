@@ -6,6 +6,7 @@ import {
   FaLinkedinIn,
   FaEnvelope,
   FaPhone,
+  FaMobileAlt,
 } from 'react-icons/fa';
 import { FiShare } from 'react-icons/fi';
 
@@ -29,8 +30,15 @@ function DetailsHeader({ user, theme, setPopupDisplayed }) {
         <h5 className='jobtitle'>{user.jobtitle}</h5>
         <p className='description'>{user.description}</p>
         <IconsWrapper>
+          {user.phoneNr && (
+            <Icon theme={theme} Icon={FaPhone} url={'tel:' + user.phoneNr} />
+          )}
           {user.mobileNr && (
-            <Icon theme={theme} Icon={FaPhone} url={'tel:' + user.mobileNr} />
+            <Icon
+              theme={theme}
+              Icon={FaMobileAlt}
+              url={'tel:' + user.mobileNr}
+            />
           )}
           {user.email && (
             <Icon

@@ -1,14 +1,20 @@
-import { MdEdit } from "react-icons/md";
-import styled from "styled-components";
-import { Colors } from "../../styles/Colors";
+import { MdEdit } from 'react-icons/md';
+import styled from 'styled-components';
+import { Colors } from '../../../styles/Colors';
 
 function CompanyHeader({ company, onclick }) {
   return (
     <Company onClick={onclick}>
-      {company.logo && <img src={URL.createObjectURL(company.logo)} alt="company-logo" height="30px" />}
+      {company.logo && (
+        <img
+          src={URL.createObjectURL(company.logo)}
+          alt='company-logo'
+          height='30px'
+        />
+      )}
       <p>{company.name}</p>
 
-      <MdEdit className="icon" />
+      <MdEdit className='icon' />
     </Company>
   );
 }
@@ -27,8 +33,8 @@ const Company = styled.div`
     width: 3rem;
     height: auto;
     margin-right: 1rem;
-    max-height: 3rem;
-      object-fit: cover;
+    max-height: 2rem;
+    object-fit: contain;
   }
   p {
     font-size: 0.8rem;
@@ -41,8 +47,7 @@ const Company = styled.div`
     color: ${Colors.textColor};
   }
 
-
-  &:hover{
+  &:hover {
     background: lightgrey;
   }
 `;

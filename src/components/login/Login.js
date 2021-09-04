@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Colors } from '../../styles/Colors';
 import Loading from '../shared/Loading';
+import Footer from '../shared/Footer';
 
 function Login() {
   const [email, setEmail] = useState();
@@ -28,42 +29,47 @@ function Login() {
       {loading ? (
         <Loading />
       ) : (
-        <LoginWrapper onSubmit={handleSubmit}>
-          <div className='content-wrapper'>
-            <IconImage>
-              <FaUserAlt />
-            </IconImage>
-            <br />
-            <TextInput
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder='Email'
-              required
-              Icon={FaEnvelope}
-            />
-            <TextInput
-              onChange={(event) => {
-                setPassword(event.target.value);
-              }}
-              required
-              placeholder='Password'
-              isPassword
-              Icon={FaLock}
-            />
-            <span className='error-label'>{error}</span>
-            <CustomButton>Login</CustomButton>
-            <a href='/forgotpassword' className='forgot-password'>
-              Forgot Password?
-            </a>
-          </div>
-        </LoginWrapper>
+        <>
+          <LoginWrapper onSubmit={handleSubmit}>
+            <div className='content-wrapper'>
+              <IconImage>
+                <FaUserAlt />
+              </IconImage>
+              <br />
+              <TextInput
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder='Email'
+                required
+                Icon={FaEnvelope}
+              />
+              <TextInput
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+                required
+                placeholder='Password'
+                isPassword
+                Icon={FaLock}
+              />
+              <span className='error-label'>{error}</span>
+              <CustomButton>Login</CustomButton>
+              <a href='/forgotpassword' className='forgot-password'>
+                Forgot Password?
+              </a>
+            </div>
+          </LoginWrapper>
+          <Footer />
+        </>
       )}
     </>
   );
 }
 
 const LoginWrapper = styled.form`
-  width: 100vw;
-  height: 100vh;
+  max-width: 100vw;
+  width: 100%;
+  height: auto;
+  min-height: 95vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -93,7 +99,7 @@ const LoginWrapper = styled.form`
     align-items: center;
     background: white;
     padding: 3rem 4rem;
-    border-radius: 1rem;
+    border-radius: 5%;
     border: 1px solid lightgrey;
     min-width: 25rem;
   }

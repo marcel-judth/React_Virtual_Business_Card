@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   FaCity,
   FaEnvelope,
@@ -7,6 +7,7 @@ import {
   FaIndustry,
   FaInstagram,
   FaLinkedinIn,
+  FaMobile,
   FaPhone,
 } from 'react-icons/fa';
 import { BsCardHeading } from 'react-icons/bs';
@@ -14,29 +15,24 @@ import { AiOutlineGlobal } from 'react-icons/ai';
 import { GoLocation } from 'react-icons/go';
 import { GiPostStamp } from 'react-icons/gi';
 import styled from 'styled-components';
-import CancelButton from '../shared/CancelButton';
-import CustomButton from '../shared/CustomButton';
-import TextInput from '../shared/TextInput';
-import defaultProfilePicture from '../../img/profile.png';
-import Logo from '../shared/Logo';
-import ScrollTop from '../shared/ScrollTop';
+import CancelButton from '../../shared/CancelButton';
+import CustomButton from '../../shared/CustomButton';
+import TextInput from '../../shared/TextInput';
+import defaultProfilePicture from '../../../img/profile.png';
+import Logo from '../../shared/Logo';
+import ScrollTop from '../../shared/ScrollTop';
 import _ from 'lodash';
-import CloseIcon from '../shared/CloseIcon';
+import CloseIcon from '../../shared/CloseIcon';
 
 function CompanyEdit({
   currentUser,
   setCurrentUser,
   index,
   setVisible,
-  setOverlayVisible,
   setParentVisible,
 }) {
   const fileInput = useRef();
   const [user, setUser] = useState(_.cloneDeep(currentUser));
-
-  useEffect(() => {
-    setOverlayVisible(true);
-  }, [setOverlayVisible]);
 
   function handleImgChange(event) {
     const tmp = user;
@@ -46,7 +42,6 @@ function CompanyEdit({
 
   function removeCompany() {
     setVisible(false);
-    setOverlayVisible(false);
     setParentVisible(true);
     const tmp = user;
     tmp.companies.splice(index, 1);
@@ -64,7 +59,6 @@ function CompanyEdit({
 
   function closePopup() {
     setVisible(false);
-    setOverlayVisible(false);
     setParentVisible(true);
   }
 
@@ -151,6 +145,17 @@ function CompanyEdit({
           onChange={(e) => {
             const tmp = user;
             tmp.companies[index].phoneNr = e.target.value;
+
+            setUser({ ...user, companies: tmp.companies });
+          }}
+        />
+        <TextInput
+          placeholder='Mobile Nr.'
+          Icon={FaMobile}
+          value={user.companies[index].mobileNr}
+          onChange={(e) => {
+            const tmp = user;
+            tmp.companies[index].mobileNr = e.target.value;
 
             setUser({ ...user, companies: tmp.companies });
           }}
@@ -245,13 +250,15 @@ function CompanyEdit({
 }
 
 const CompanyEditWrapper = styled.div`
-  position: absolute;
-  top: 15vh;
-  z-index: 1;
-  max-width: 100vw;
-
-  @media (max-width: 500px) {
+  width: 30vw;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15vh;
+  margin-bottom: 10vh;
+  @media (max-width: 700px) {
     width: 100vw;
+    border: none;
   }
 `;
 
@@ -266,6 +273,11 @@ const CompanyEditForm = styled.div`
   border-radius: 1rem;
   min-width: 25rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  @media (max-width: 700px) {
+    padding: 3rem 5vh;
+    min-width: 15rem;
+    box-shadow: none;
+  }
 `;
 
 export default CompanyEdit;

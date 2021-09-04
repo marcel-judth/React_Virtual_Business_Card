@@ -10,6 +10,7 @@ import { HashLink as Link } from 'react-router-hash-link';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Colors } from '../../styles/Colors';
+import { RiSettings4Fill } from 'react-icons/ri';
 
 const Nav = () => {
   const location = useLocation();
@@ -68,13 +69,15 @@ const Nav = () => {
               />
             </li>
             <li onClick={() => setNavStatus(!navStatus)}>
-              <Link to={'/logout'}>Logout</Link>
+              <Link to={'/settings'}>
+                <RiSettings4Fill className='settings-icon' />
+              </Link>
               <Line
                 transition={{ duration: 0.75 }}
                 initial={{ width: '0%' }}
                 animate={{
                   width:
-                    location.pathname === '/logout' + user.email
+                    location.pathname === '/settings' + user.email
                       ? '100%'
                       : '0%',
                 }}
@@ -124,6 +127,7 @@ const StyledNav = styled.nav`
   ul {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     list-style: none;
     width: 60%;
   }
@@ -134,6 +138,10 @@ const StyledNav = styled.nav`
     color: ${Colors.textColor};
     font-weight: 400;
     text-decoration: none;
+  }
+
+  .settings-icon {
+    font-size: 2rem;
   }
 
   .nav-logo {
