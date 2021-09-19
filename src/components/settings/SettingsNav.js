@@ -1,12 +1,16 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { FaLock, FaUser } from 'react-icons/fa';
+import { FaChartLine, FaLock, FaUser } from 'react-icons/fa';
 import { BsFillChatFill } from 'react-icons/bs';
 import { RiLogoutBoxFill } from 'react-icons/ri';
 import { VscChromeClose } from 'react-icons/vsc';
+import { IoIosWifi } from 'react-icons/io';
+import { Colors } from '../../styles/Colors';
 
 const SettingsNav = ({ setNavStatus, navStatus }) => {
+  const location = useLocation();
+
   return (
     <SettingsNavWrapper>
       <div className={navStatus ? ' sticky-nav active' : 'sticky-nav'}>
@@ -16,25 +20,74 @@ const SettingsNav = ({ setNavStatus, navStatus }) => {
         />
         <ul>
           <li onClick={() => setNavStatus(!navStatus)}>
-            <Link className='link' to='/settings'>
+            <Link
+              className={
+                'link ' + (location.pathname === '/settings' ? 'selected' : '')
+              }
+              to='/settings'
+            >
               <FaUser className='icon' />
               User Profile
             </Link>
           </li>
           <li onClick={() => setNavStatus(!navStatus)}>
-            <Link className='link' to='/settings/changePassword'>
+            <Link
+              className={
+                'link ' +
+                (location.pathname === '/settings/statistics' ? 'selected' : '')
+              }
+              to='/settings/statistics'
+            >
+              <FaChartLine className='icon' />
+              Statistics
+            </Link>
+          </li>
+          <li onClick={() => setNavStatus(!navStatus)}>
+            <Link
+              className={
+                'link ' +
+                (location.pathname === '/settings/additem' ? 'selected' : '')
+              }
+              to='/settings/additem'
+            >
+              <IoIosWifi className='icon rotated' />
+              Add Item
+            </Link>
+          </li>
+          <li onClick={() => setNavStatus(!navStatus)}>
+            <Link
+              className={
+                'link ' +
+                (location.pathname === '/settings/changePassword'
+                  ? 'selected'
+                  : '')
+              }
+              to='/settings/changePassword'
+            >
               <FaLock className='icon' />
               Change Password
             </Link>
           </li>
           <li onClick={() => setNavStatus(!navStatus)}>
-            <Link className='link' to='/settings/support'>
+            <Link
+              className={
+                'link ' +
+                (location.pathname === '/settings/support' ? 'selected' : '')
+              }
+              to='/settings/support'
+            >
               <BsFillChatFill className='icon' />
               Support
             </Link>
           </li>
           <li onClick={() => setNavStatus(!navStatus)}>
-            <Link className='link' to='/settings/logout'>
+            <Link
+              className={
+                'link ' +
+                (location.pathname === '/settings/logou' ? 'selected' : '')
+              }
+              to='/settings/logout'
+            >
               <RiLogoutBoxFill className='icon' />
               Logout
             </Link>
@@ -74,7 +127,9 @@ const SettingsNavWrapper = styled.div`
     width: 20vw;
     min-height: 90vh;
     margin-top: 10vh;
-    padding: 20vh 5vw;
+    padding: 0 5vw;
+    padding-top: 20vh;
+    padding-bottom: 2rem;
     transition: all 0.75s ease-out;
     .link {
       color: white;
@@ -92,6 +147,14 @@ const SettingsNavWrapper = styled.div`
     .icon {
       margin-right: 0.75rem;
     }
+
+    .rotated {
+      transform: rotate(90deg);
+    }
+  }
+
+  .selected {
+    color: ${Colors.primaryColor} !important;
   }
 
   @media (max-width: 920px) {

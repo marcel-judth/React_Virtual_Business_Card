@@ -8,6 +8,8 @@ import SettingsNav from './SettingsNav';
 import UserProfile from './userProfile/UserProfile';
 import ChangePassword from './changePassword/ChangePassword';
 import Support from './support/Support';
+import Statistics from './statistics/Statistics';
+import AddItem from './addItem/AddItem';
 
 const Settings = (props) => {
   const [navActive, setNavActive] = useState(false);
@@ -25,6 +27,8 @@ const Settings = (props) => {
           <Route path='/settings/changepassword' component={ChangePassword} />
           <Route path='/settings/support' component={Support} />
           <Route path='/settings/logout' component={Logout} />
+          <Route path='/settings/statistics' component={Statistics} />
+          <Route path='/settings/additem' component={AddItem} />
         </Switch>
       </main>
     </SettingsWrapper>

@@ -8,7 +8,6 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Colors } from '../../styles/Colors';
 import Loading from '../shared/Loading';
-import Footer from '../shared/Footer';
 
 function Login() {
   const [email, setEmail] = useState();
@@ -38,7 +37,7 @@ function Login() {
               <br />
               <TextInput
                 onChange={(event) => setEmail(event.target.value)}
-                placeholder='Email'
+                placeholder='Email or Username'
                 required
                 Icon={FaEnvelope}
               />
@@ -58,7 +57,6 @@ function Login() {
               </a>
             </div>
           </LoginWrapper>
-          <Footer />
         </>
       )}
     </>

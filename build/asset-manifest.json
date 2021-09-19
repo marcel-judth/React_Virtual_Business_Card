@@ -1,19 +1,23 @@
 {
   "files": {
-    "main.js": "/static/js/main.1777fbe0.chunk.js",
-    "main.js.map": "/static/js/main.1777fbe0.chunk.js.map",
+    "main.js": "/static/js/main.dc9eed14.chunk.js",
+    "main.js.map": "/static/js/main.dc9eed14.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.975dc153.js",
     "runtime-main.js.map": "/static/js/runtime-main.975dc153.js.map",
-    "static/js/2.fe5ad277.chunk.js": "/static/js/2.fe5ad277.chunk.js",
-    "static/js/2.fe5ad277.chunk.js.map": "/static/js/2.fe5ad277.chunk.js.map",
+    "static/css/2.9426454a.chunk.css": "/static/css/2.9426454a.chunk.css",
+    "static/js/2.bf32bee4.chunk.js": "/static/js/2.bf32bee4.chunk.js",
+    "static/js/2.bf32bee4.chunk.js.map": "/static/js/2.bf32bee4.chunk.js.map",
     "index.html": "/index.html",
-    "static/js/2.fe5ad277.chunk.js.LICENSE.txt": "/static/js/2.fe5ad277.chunk.js.LICENSE.txt",
+    "static/css/2.9426454a.chunk.css.map": "/static/css/2.9426454a.chunk.css.map",
+    "static/js/2.bf32bee4.chunk.js.LICENSE.txt": "/static/js/2.bf32bee4.chunk.js.LICENSE.txt",
     "static/media/iPhoneMockup.45c60916.jpg": "/static/media/iPhoneMockup.45c60916.jpg",
+    "static/media/logo-x-Act.me.acfc9270.png": "/static/media/logo-x-Act.me.acfc9270.png",
     "static/media/profile.6a08ef5c.png": "/static/media/profile.6a08ef5c.png"
   },
   "entrypoints": [
     "static/js/runtime-main.975dc153.js",
-    "static/js/2.fe5ad277.chunk.js",
-    "static/js/main.1777fbe0.chunk.js"
+    "static/css/2.9426454a.chunk.css",
+    "static/js/2.bf32bee4.chunk.js",
+    "static/js/main.dc9eed14.chunk.js"
   ]
 }

@@ -8,14 +8,14 @@ import { FiDownload, FiShare } from 'react-icons/fi';
 import SharePopup from './SharePopup';
 import Loading from '../shared/Loading';
 import { API_BaseURL } from '../../utils/constants';
-import { getUserByID } from '../../api';
+import { getMyAccount, getUserByID } from '../../api';
 import { FaUserEdit } from 'react-icons/fa';
 import { Colors } from '../../styles/Colors';
 import { HashLink as Link } from 'react-router-hash-link';
 
 function Details() {
   let { id } = useParams();
-  const currentUserEmail = JSON.parse(localStorage.getItem('user'))?.email;
+  const currentUsername = JSON.parse(localStorage.getItem('user'))?.username;
   const [popupDisplayed, setPopupDisplayed] = useState(false);
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
@@ -23,8 +23,10 @@ function Details() {
   const [theme, setTheme] = useState({ userColor: Colors.primaryColor });
 
   useEffect(() => {
-    getUserByID(id, setUser, setLoading, setTheme);
-  }, [id]);
+    if (id?.toLowerCase() === currentUsername?.toLowerCase())
+      getMyAccount(setUser, setLoading, setTheme);
+    else getUserByID(id, setUser, setLoading, setTheme);
+  }, [id, currentUsername]);
 
   return (
     <>
@@ -51,13 +53,13 @@ function Details() {
               </button>
               <button
                 onClick={() => {
-                  window.open(API_BaseURL + '/users/download/' + user.email);
+                  window.open(API_BaseURL + '/users/download/' + user.username);
                 }}
               >
                 <FiDownload className='btn-icon' />
                 download
               </button>
-              {currentUserEmail && currentUserEmail === user.email && (
+              {currentUsername && currentUsername === user.username && (
                 <Link to='/settings'>
                   <button>
                     <FaUserEdit className='btn-icon' />

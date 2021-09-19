@@ -16,13 +16,7 @@ import defaultProfilePicture from '../../img/profile.png';
 function DetailsHeader({ user, theme, setPopupDisplayed }) {
   return (
     <Header>
-      <ProfilePicture
-        src={
-          user.image && typeof user.image !== 'string'
-            ? URL.createObjectURL(user.image)
-            : defaultProfilePicture
-        }
-      />
+      <ProfilePicture src={user.image ? user.image : defaultProfilePicture} />
       <div>
         <h3>
           {user.firstname} {user.lastname}

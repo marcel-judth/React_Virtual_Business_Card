@@ -6,11 +6,7 @@ function CompanyHeader({ company, onclick }) {
   return (
     <Company onClick={onclick}>
       {company.logo && (
-        <img
-          src={URL.createObjectURL(company.logo)}
-          alt='company-logo'
-          height='30px'
-        />
+        <img src={company.logo} alt='company-logo' height='30px' />
       )}
       <p>{company.name}</p>
 

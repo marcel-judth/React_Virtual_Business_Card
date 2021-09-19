@@ -4,14 +4,11 @@ import { Colors } from '../../../styles/Colors';
 function Products() {
   return (
     <ProductsWrapper>
-      <h2>
-        Get Your Card <span>Now</span>
-      </h2>
+      <h2>Our Products</h2>
       <p>
-        You can choose the color of your NFC card and personalize it with your
-        name, or create your own personalized NFC card with your brand.
+        Choose one of our products and get started with <span>x-ACT.me.</span>
       </p>
-      <div id='collection-component-1628940789227'></div>
+      <div id='collection-component-1632069914946'></div>
     </ProductsWrapper>
   );
 }
@@ -28,11 +25,12 @@ const ProductsWrapper = styled.div`
     max-width: 40rem;
     text-align: center;
     margin: 2rem 0rem;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
   }
 
   span {
     color: ${Colors.primaryColor};
+    font-weight: 600;
   }
 `;
 

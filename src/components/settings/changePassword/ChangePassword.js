@@ -15,14 +15,14 @@ function ChangePassword() {
   const [currentPassword, setCurrentPassword] = useState();
   const [success, setSuccess] = useState();
   const [successMessage, setSuccessMessage] = useState();
-  const currentUserEmail = JSON.parse(localStorage.getItem('user'))?.email;
+  const currentUsername = JSON.parse(localStorage.getItem('user'))?.username;
 
   const handlePwdChange = (e) => {
     e.preventDefault();
     setIsLoading(true);
     setSuccessMessage('Successfully changed password!');
     changePassword(
-      currentUserEmail,
+      currentUsername,
       currentPassword,
       password,
       setSuccess,
@@ -45,7 +45,11 @@ function ChangePassword() {
                 </IconImage>
                 <p className='info-message'>{successMessage}</p>
                 <span className='error-label'>{error}</span>
-                <CustomButton onClick={() => (window.location.href = '/')}>
+                <CustomButton
+                  onClick={() => {
+                    window.location.href = '/';
+                  }}
+                >
                   Return
                 </CustomButton>
               </>

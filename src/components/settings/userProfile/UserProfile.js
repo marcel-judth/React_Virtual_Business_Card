@@ -15,7 +15,7 @@ import CustomButton from '../../shared/CustomButton';
 import { Colors } from '../../../styles/Colors';
 import TextInput from '../../shared/TextInput';
 import CompanyHeader from './CompanyHeader';
-import { getUserByID, update } from '../../../api';
+import { getMyAccount, update, uploadImage } from '../../../api';
 import CompanyEdit from './CompanyEdit';
 import defaultProfilePicture from '../../../img/profile.png';
 import Logo from '../../shared/Logo';
@@ -37,14 +37,11 @@ function UserProfile() {
   const [loading, setLoading] = useState(true);
   const [visible, setVisible] = useState(true);
   const [user, setUser] = useState();
-  const [currentUser, setCurrentUser] = useState();
   const currentUserEmail = JSON.parse(localStorage.getItem('user'))?.email;
 
   useEffect(() => {
-    getUserByID(
-      currentUserEmail,
+    getMyAccount(
       (userObj) => {
-        setCurrentUser(userObj);
         setUser(_.cloneDeep(userObj));
       },
       setLoading,
@@ -52,8 +49,14 @@ function UserProfile() {
     );
   }, [currentUserEmail]);
 
-  function handleImgChange(event) {
-    setUser({ ...user, image: event.target.files[0] });
+  async function handleImgChange(event) {
+    setLoading(true);
+    const file = event.target.files[0];
+
+    const url = await uploadImage(file);
+
+    setUser({ ...user, image: url });
+    setLoading(false);
   }
 
   function handleColorChange(color) {
@@ -108,11 +111,7 @@ function UserProfile() {
                     ref={(file) => (fileInput.current = file)}
                   />
                   <Logo
-                    src={
-                      user.image && typeof user.image !== 'string'
-                        ? URL.createObjectURL(user.image)
-                        : defaultProfilePicture
-                    }
+                    src={user.image ? user.image : defaultProfilePicture}
                     fileInput={fileInput}
                     isRounded
                   />

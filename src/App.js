@@ -12,26 +12,38 @@ import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import ShopRedirect from './components/shop/ShopRedirect';
 import Shop from './components/shop/Shop';
 import Settings from './components/settings/Settings';
+import Register from './components/register/Register';
+import PlanCheckout from './components/planCheckout/PlanCheckout';
+import InvalidLicense from './components/invalidLicense/InvalidLicense';
+import Discounts from './components/discounts/Discounts';
+import { useState } from 'react';
 
 function App() {
+  const [theme, setTheme] = useState({ navWhiteColor: false });
   return (
     <Router>
       <div className='App'>
         <GlobalStyles />
-        <Nav />
+        <Nav theme={theme} setTheme={setTheme} />
         <Switch>
-          <Route path='/' component={Home} exact />
+          <Route path='/' exact>
+            <Home setTheme={setTheme} theme={theme}></Home>
+          </Route>
           <Route path='/home' component={HomeRedirect} />
           <Route path='/login' component={Login} />
+          <Route path='/register' component={Register} />
           <Route path='/shop' component={Shop} />
           <Route path='/redirectShop' component={ShopRedirect} />
           <Route path='/logout' component={Logout} />
           <Route path='/notfound' component={NotFound} />
+          <Route path='/invalidlicense' component={InvalidLicense} />
           <Route path='/forgotpassword' component={ForgotPassword} exact />
           <Route path='/forgotpassword/:token' component={ForgotPassword} />
           <Route path='/qrcode' component={QrCode} />
           <Route path='/details/:id' component={Details} />
           <Route path='/settings' component={Settings} />
+          <Route path='/plancheckout' component={PlanCheckout} />
+          <Route path='/discounts' component={Discounts} />
         </Switch>
       </div>
     </Router>

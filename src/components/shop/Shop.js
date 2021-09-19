@@ -13,7 +13,7 @@ const Shop = (props) => {
           You can choose the color of your NFC card and personalize it with your
           name, or create your own personalized NFC card with your brand.
         </p>
-        <div id='collection-component-1628940789227'></div>
+        <div id='collection-component-1632069914946'></div>
       </ShopWrapper>
       <Footer />
     </>

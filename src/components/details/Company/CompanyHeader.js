@@ -7,11 +7,7 @@ function CompanyHeader({ company, toggle, setToggle }) {
     <CoHeader onClick={() => setToggle(!toggle)}>
       <div className='co-logo-text-wrapper'>
         {company.logo && (
-          <img
-            src={URL.createObjectURL(company.logo)}
-            alt='company-logo'
-            height='30px'
-          />
+          <img src={company.logo} alt='company-logo' height='30px' />
         )}
         <div className='co-text'>
           <h5>{company.name}</h5>

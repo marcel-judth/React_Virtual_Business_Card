@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import { Colors } from "./Colors";
+import { createGlobalStyle } from 'styled-components';
+import { Colors } from './Colors';
 
 const GlobalStyles = createGlobalStyle`
 *{
@@ -9,13 +9,13 @@ const GlobalStyles = createGlobalStyle`
 }
 body{
     font-size: 62.5%;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 a{
     text-decoration: underline;
     font-size: 1rem;
     color: ${Colors.textColor};
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     cursor: pointer;
 
     &:hover{
@@ -25,45 +25,45 @@ a{
 p{
     font-size: 1rem;
     color: ${Colors.textColor};
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 h1{
     font-size: 2.5rem;
     font-weight: 400;
     color: ${Colors.headings};
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 h2{
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 400;
     color: ${Colors.headings};
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 h3{
     font-size: 2rem;
     font-weight: 350;
     color: ${Colors.headings};
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 h4{
     font-size: 1.5rem;
     font-weight: 350;
     color: ${Colors.footerColor};
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 h5{
     font-size: 1rem;
     font-weight: 350;
     color: ${Colors.footerColor};
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 button{
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 @media (max-width: 1300px){
     p{
@@ -76,7 +76,7 @@ button{
         font-size: 2rem;
     }
     h2{
-       font-size: 2rem;
+       font-size: 1.8rem;
     }
     h3{
         font-size: 1.5rem;

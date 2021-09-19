@@ -1,5 +1,4 @@
 import axios from 'axios';
-import _ from 'lodash';
 import { API_BaseURL } from './utils/constants';
 
 function reloggin() {
@@ -7,84 +6,93 @@ function reloggin() {
   window.location.href = '/login';
 }
 
-function getBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
-}
-
-async function urltoFile(url, filename) {
-  const mimeType = url.split(';')[0].split('/')[1];
-
-  return fetch(url)
-    .then(function (res) {
-      return res.arrayBuffer();
-    })
-    .then(function (buf) {
-      return new File([buf], filename, { type: mimeType });
-    });
-}
-
 const getUserByID = async (id, setUser, setLoading, setTheme) => {
   try {
-    const res = await axios.get(API_BaseURL + '/users/' + id);
-
-    if (res.data.image)
-      res.data.image = await urltoFile(res.data.image, 'profile-picture');
-
-    if (res.data.companies)
-      for (let i = 0; i < res.data.companies.length; i++)
-        if (res.data.companies[i].logo) {
-          res.data.companies[i].logo = await urltoFile(
-            res.data.companies[i].logo,
-            'company-logo' + i
-          );
-        }
+    const res = await axios.get(API_BaseURL + '/users/details/' + id);
 
     if (res.data.color) setTheme({ userColor: res.data.color });
     setUser(res.data);
     setLoading(false);
   } catch (error) {
     console.log(error);
-    if (error.response.status === 404)
+    if (error.response?.status === 404)
       return (window.location.href = '/notfound');
+
+    if (error.response?.status === 403) {
+      if (JSON.parse(localStorage.getItem('user'))?.email === id)
+        return (window.location.href = '/plancheckout');
+      return (window.location.href = '/invalidlicense');
+    }
 
     window.location.href = '/';
   }
 };
 
-async function parseCompanyImages(user) {
-  for (let i = 0; i < user.companies.length; i++)
-    if (user.companies[i].logo)
-      user.companies[i].logo = await getBase64(user.companies[i].logo);
-}
+const getMyAccount = async (setUser, setLoading, setTheme) => {
+  try {
+    const res = await axios.get(API_BaseURL + '/users/myaccount', {
+      headers: {
+        'x-auth-token': JSON.parse(localStorage.getItem('user'))?.token,
+      },
+    });
 
-async function parseImages(user) {
-  user.image = await getBase64(user.image);
-  await parseCompanyImages(user);
-}
+    if (res.data.color) setTheme({ userColor: res.data.color });
+    setUser(res.data);
+    setLoading(false);
+  } catch (error) {
+    if (error.response?.status === 401) return reloggin();
+
+    if (error.response?.status === 404)
+      return (window.location.href = '/notfound');
+
+    if (error.response?.status === 403)
+      return (window.location.href = '/plancheckout');
+
+    window.location.href = '/';
+  }
+};
 
 const update = async (user, setError, setLoading) => {
-  const copy = _.cloneDeep(user);
-
-  await parseImages(copy);
-
   axios
-    .put(API_BaseURL + '/users/' + user.email, copy, {
+    .put(API_BaseURL + '/users/' + user.username, user, {
       headers: {
         'x-auth-token': JSON.parse(localStorage.getItem('user'))?.token,
       },
     })
-    .then(() => window.location.reload())
+    .then(() => (window.location.href = '/details/' + user.username))
     .catch((error) => {
       if (error.response.status === 401) reloggin();
       else {
         displayError(error, setError, setLoading);
       }
     });
+};
+
+const getScans = async (setLoading, setData) => {
+  try {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const res = await axios.get(
+      API_BaseURL + '/users/getscans/' + user?.username,
+      {
+        headers: {
+          'x-auth-token': user?.token,
+        },
+      }
+    );
+    setLoading(false);
+    setData(res.data);
+  } catch (error) {
+    console.log(error);
+    if (error.response?.status === 401) return reloggin();
+
+    if (error.response?.status === 404)
+      return (window.location.href = '/notfound');
+
+    if (error.response?.status === 403)
+      return (window.location.href = '/invalidlicense');
+
+    window.location.href = '/';
+  }
 };
 
 const login = async (email, password, setError, setLoading, history) => {
@@ -95,7 +103,9 @@ const login = async (email, password, setError, setLoading, history) => {
     })
     .then((res) => {
       localStorage.setItem('user', JSON.stringify(res.data));
-      history.push('/details/' + res.data.email);
+      if (res.data.token !== undefined)
+        history.push('/details/' + res.data.username);
+      else history.push('/plancheckout');
     })
     .catch((err) => {
       console.log(err);
@@ -104,27 +114,42 @@ const login = async (email, password, setError, setLoading, history) => {
 };
 
 const register = async (
-  firstname,
-  lastname,
+  username,
   email,
   password,
+  setLoading,
   setError,
   history
 ) => {
   axios
     .post(API_BaseURL + '/users/register', {
-      firstname,
-      lastname,
+      username,
       email,
       password,
     })
     .then((res) => {
       localStorage.setItem('user', JSON.stringify(res.data));
-      history.push('/');
+      history.push('/plancheckout');
     })
     .catch((err) => {
-      setError(err.response.data);
+      console.log(err);
+      setError(err);
+      setLoading(false);
       setTimeout(() => setError(''), 3000);
+    });
+};
+
+const finalizePlanCheckout = async (email, username) => {
+  axios
+    .post(API_BaseURL + '/users/finalizePlanCheckout', {
+      email,
+    })
+    .then((res) => {
+      if (res.status === 200) window.location.href = '/details/' + username;
+      else window.location.href = '/';
+    })
+    .catch((err) => {
+      window.location.href = '/';
     });
 };
 
@@ -164,7 +189,7 @@ const resetPassword = async (
 };
 
 const changePassword = async (
-  email,
+  username,
   currentPassword,
   newPassword,
   setSuccess,
@@ -177,7 +202,7 @@ const changePassword = async (
       {
         newPassword,
         currentPassword,
-        email,
+        username,
       },
       {
         headers: {
@@ -194,6 +219,49 @@ const changePassword = async (
     });
 };
 
+const addItem = async (username, tagID, setSuccess, setIsLoading, setError) => {
+  axios
+    .post(
+      API_BaseURL + '/tags',
+      {
+        username,
+        tagID,
+      },
+      {
+        headers: {
+          'x-auth-token': JSON.parse(localStorage.getItem('user'))?.token,
+        },
+      }
+    )
+    .then(() => {
+      setSuccess(true);
+      setIsLoading(false);
+    })
+    .catch((err) => {
+      displayError(err, setError, setIsLoading);
+    });
+};
+
+const uploadImage = async (file) => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  let res = await axios.get(API_BaseURL + '/users/imagePostURL', {
+    headers: {
+      'x-auth-token': user?.token,
+    },
+  });
+
+  await fetch(res.data.url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    body: file,
+  });
+
+  const url = res.data.url.split('?')[0];
+  return url;
+};
+
 function displayError(httpError, setError, setIsLoading) {
   if (httpError.response?.data) setError(httpError.response.data);
   else setError('An unexpected error happened!');
@@ -205,10 +273,15 @@ function displayError(httpError, setError, setIsLoading) {
 
 export {
   getUserByID,
+  getMyAccount,
   login,
   register,
   update,
   forgotPassword,
   changePassword,
   resetPassword,
+  finalizePlanCheckout,
+  getScans,
+  uploadImage,
+  addItem,
 };
