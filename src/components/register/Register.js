@@ -19,7 +19,7 @@ function Register({ setTheme }) {
   const history = useHistory();
 
   useEffect(() => {
-    setTheme({ navWhiteColor: false });
+    setTheme({ navWhiteColor: true });
   });
 
   const handleSubmit = (e) => {

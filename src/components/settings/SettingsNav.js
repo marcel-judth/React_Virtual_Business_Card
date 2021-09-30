@@ -4,7 +4,6 @@ import { FaChartLine, FaLock, FaUser } from 'react-icons/fa';
 import { FiPercent } from 'react-icons/fi';
 import { BsArrowRightShort, BsFillChatFill } from 'react-icons/bs';
 import { RiLogoutBoxFill } from 'react-icons/ri';
-import { IoIosWifi } from 'react-icons/io';
 import { Colors } from '../../styles/Colors';
 import NavItem from '../nav/NavItems';
 
@@ -20,7 +19,6 @@ const SettingsNav = ({ setNavStatus, navStatus }) => {
           link='/settings'
           text=''
         />
-
         <NavItem
           setNavStatus={setNavStatus}
           navStatus={navStatus}
@@ -35,14 +33,6 @@ const SettingsNav = ({ setNavStatus, navStatus }) => {
           Icon={<FiPercent />}
           pathname='/settings/discounts'
           link='/settings/discounts'
-          text=''
-        />
-        <NavItem
-          setNavStatus={setNavStatus}
-          navStatus={navStatus}
-          Icon={<IoIosWifi className='rotated' />}
-          pathname='/settings/additem'
-          link='/settings/additem'
           text=''
         />
         <NavItem

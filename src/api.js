@@ -18,11 +18,11 @@ const getUserByID = async (id, setUser, setLoading, setTheme) => {
     if (error.response?.status === 404)
       return (window.location.href = '/notfound');
 
-    if (error.response?.status === 403) {
-      if (JSON.parse(localStorage.getItem('user'))?.email === id)
-        return (window.location.href = '/plancheckout');
+    if (error.response?.status === 400)
+      return (window.location.href = '/activation/' + id);
+
+    if (error.response?.status === 403)
       return (window.location.href = '/invalidlicense');
-    }
 
     window.location.href = '/';
   }
@@ -59,7 +59,7 @@ const update = async (user, setError, setLoading) => {
         'x-auth-token': JSON.parse(localStorage.getItem('user'))?.token,
       },
     })
-    .then(() => (window.location.href = '/details/' + user.username))
+    .then(() => (window.location.href = '/mypage'))
     .catch((error) => {
       if (error.response.status === 401) reloggin();
       else {
@@ -103,13 +103,38 @@ const login = async (email, password, setError, setLoading, history) => {
     })
     .then((res) => {
       localStorage.setItem('user', JSON.stringify(res.data));
-      if (res.data.token !== undefined)
-        history.push('/details/' + res.data.username);
+      if (res.data.token !== undefined) history.push('/mypage');
       else history.push('/plancheckout');
     })
     .catch((err) => {
       console.log(err);
       displayError(err, setError, setLoading);
+    });
+};
+
+const activate = async (
+  id,
+  email,
+  password,
+  setError,
+  setLoading,
+  setSuccess
+) => {
+  axios
+    .post(API_BaseURL + '/users/activate', {
+      id,
+      email,
+      password,
+    })
+    .then((res) => {
+      setLoading(false);
+      setSuccess(true);
+      return;
+    })
+    .catch((err) => {
+      console.log(err);
+      displayError(err, setError, setLoading);
+      setLoading(false);
     });
 };
 
@@ -284,4 +309,5 @@ export {
   getScans,
   uploadImage,
   addItem,
+  activate,
 };

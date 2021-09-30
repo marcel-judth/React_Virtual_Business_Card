@@ -3,25 +3,28 @@ import styled from 'styled-components';
 
 import DetailsHeader from './DetailsHeader';
 import DetailsBody from './DetailsBody';
-import { useParams } from 'react-router-dom';
 import { FiDownload, FiShare } from 'react-icons/fi';
 import SharePopup from './SharePopup';
 import Loading from '../shared/Loading';
 import { API_BaseURL } from '../../utils/constants';
-import { getUserByID } from '../../api';
+import { getMyAccount } from '../../api';
+import { FaUserEdit } from 'react-icons/fa';
 import { Colors } from '../../styles/Colors';
+import { HashLink as Link } from 'react-router-hash-link';
 
-function Details() {
-  let { id } = useParams();
+function MyPage({ setTheme }) {
   const [popupDisplayed, setPopupDisplayed] = useState(false);
   const [user, setUser] = useState();
   const [loading, setLoading] = useState(true);
   const [overlayVisible, setOverlayVisible] = useState(false);
-  const [theme, setTheme] = useState({ userColor: Colors.primaryColor });
+  const [userTheme, setUserTheme] = useState({
+    userColor: Colors.primaryColor,
+  });
 
   useEffect(() => {
-    getUserByID(id, setUser, setLoading, setTheme);
-  }, [id]);
+    setTheme({ navWhiteColor: false });
+    getMyAccount(setUser, setLoading, setUserTheme);
+  }, [setTheme]);
 
   return (
     <>
@@ -29,13 +32,13 @@ function Details() {
         <Loading />
       ) : (
         <DetailsWrapper>
-          <DetailsContent theme={theme}>
+          <DetailsContent theme={userTheme}>
             <DetailsHeader
-              theme={theme}
+              theme={userTheme}
               user={user}
               setPopupDisplayed={setPopupDisplayed}
             />
-            <DetailsBody theme={theme} user={user} />
+            <DetailsBody theme={userTheme} user={user} />
             <div className='btn-group'>
               <button
                 className='share-btn'
@@ -54,11 +57,17 @@ function Details() {
                 <FiDownload className='btn-icon' />
                 download
               </button>
+              <Link to='/settings'>
+                <button>
+                  <FaUserEdit className='btn-icon' />
+                  edit
+                </button>
+              </Link>
             </div>
           </DetailsContent>
           <SharePopup
             user={user}
-            theme={theme}
+            theme={userTheme}
             popupDisplayed={popupDisplayed}
             setPopupDisplayed={setPopupDisplayed}
             setOverlayVisible={setOverlayVisible}
@@ -133,4 +142,4 @@ const ScreenOverlay = styled.div`
   height: 100%;
   backdrop-filter: blur(5px);
 `;
-export default Details;
+export default MyPage;

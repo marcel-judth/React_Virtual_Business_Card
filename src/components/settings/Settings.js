@@ -8,7 +8,6 @@ import UserProfile from './userProfile/UserProfile';
 import ChangePassword from './changePassword/ChangePassword';
 import Support from './support/Support';
 import Statistics from './statistics/Statistics';
-import AddItem from './addItem/AddItem';
 import { useEffect } from 'react';
 
 const Settings = ({ setTheme }) => {

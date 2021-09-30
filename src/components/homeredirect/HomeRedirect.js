@@ -4,7 +4,7 @@ const HomeRedirect = (props) => {
   useEffect(() => {
     window.location.href = '/';
   }, []);
-  return <h2></h2>;
+  return <></>;
 };
 
 export default HomeRedirect;

@@ -3,29 +3,32 @@ import styled from 'styled-components';
 import CustomButton from '../shared/CustomButton';
 import IconImage from '../shared/IconImage';
 import TextInput from '../shared/TextInput';
-import { login } from '../../api';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Colors } from '../../styles/Colors';
 import Loading from '../shared/Loading';
 import { useEffect } from 'react';
+import { activate } from '../../api';
+import { useParams } from 'react-router';
+import { HashLink as Link } from 'react-router-hash-link';
 
-function Login({ setTheme }) {
+function Activation({ setTheme }) {
+  let { id } = useParams();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     setTheme({ navWhiteColor: true });
-  });
+    if (!id) window.location.href = '/notfound';
+  }, [id, setTheme]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
 
-    login(email, password, setError, setLoading, history);
+    activate(id, email, password, setError, setLoading, setSuccess);
   };
 
   return (
@@ -40,26 +43,39 @@ function Login({ setTheme }) {
                 <FaUserAlt />
               </IconImage>
               <br />
-              <TextInput
-                onChange={(event) => setEmail(event.target.value)}
-                placeholder='Email or Username'
-                required
-                Icon={FaEnvelope}
-              />
-              <TextInput
-                onChange={(event) => {
-                  setPassword(event.target.value);
-                }}
-                required
-                placeholder='Password'
-                isPassword
-                Icon={FaLock}
-              />
-              <span className='error-label'>{error}</span>
-              <CustomButton>Login</CustomButton>
-              <a href='/forgotpassword' className='forgot-password'>
-                Forgot Password?
-              </a>
+              {success ? (
+                <>
+                  <br />
+
+                  <h4>Successfully activated!</h4>
+
+                  <br />
+                  <br />
+                  <Link to='/home'>
+                    <CustomButton>Back</CustomButton>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <TextInput
+                    onChange={(event) => setEmail(event.target.value)}
+                    placeholder='Email or Username'
+                    required
+                    Icon={FaEnvelope}
+                  />
+                  <TextInput
+                    onChange={(event) => {
+                      setPassword(event.target.value);
+                    }}
+                    required
+                    placeholder='Password'
+                    isPassword
+                    Icon={FaLock}
+                  />
+                  <span className='error-label'>{error}</span>
+                  <CustomButton>Activate</CustomButton>
+                </>
+              )}
             </div>
           </LoginWrapper>
         </>
@@ -115,4 +131,4 @@ const LoginWrapper = styled.form`
   }
 `;
 
-export default Login;
+export default Activation;

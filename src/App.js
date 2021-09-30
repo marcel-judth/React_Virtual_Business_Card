@@ -16,6 +16,8 @@ import Register from './components/register/Register';
 import PlanCheckout from './components/planCheckout/PlanCheckout';
 import InvalidLicense from './components/invalidLicense/InvalidLicense';
 import { useState } from 'react';
+import MyPage from './components/MyPage/MyPage';
+import Activation from './components/activation/Activation';
 
 function App() {
   const [theme, setTheme] = useState({ navWhiteColor: false });
@@ -33,6 +35,9 @@ function App() {
           <Route path='/login'>
             <Login setTheme={setTheme} />
           </Route>
+          <Route path='/activation/:id'>
+            <Activation setTheme={setTheme} />
+          </Route>
           <Route path='/register'>
             <Register setTheme={setTheme} />
           </Route>
@@ -45,6 +50,9 @@ function App() {
           <Route path='/forgotpassword/:token' component={ForgotPassword} />
           <Route path='/qrcode' component={QrCode} />
           <Route path='/details/:id' component={Details} />
+          <Route path='/mypage'>
+            <MyPage setTheme={setTheme} />
+          </Route>
           <Route path='/settings'>
             <Settings setTheme={setTheme} />
           </Route>
