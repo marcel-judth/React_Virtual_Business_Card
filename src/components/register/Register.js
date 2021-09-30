@@ -8,14 +8,19 @@ import { useHistory } from 'react-router-dom';
 import { Colors } from '../../styles/Colors';
 import IconImage from '../shared/IconImage';
 import Loading from '../shared/Loading';
+import { useEffect } from 'react';
 
-function Register() {
+function Register({ setTheme }) {
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
   const history = useHistory();
+
+  useEffect(() => {
+    setTheme({ navWhiteColor: false });
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,6 +70,8 @@ const RegisterWrapper = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
+  background: ${Colors.primaryColor};
+
   h2 {
     margin: 2rem 0rem;
   }

@@ -8,13 +8,19 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Colors } from '../../styles/Colors';
 import Loading from '../shared/Loading';
+import { useEffect } from 'react';
+import { colors } from '@material-ui/core';
 
-function Login() {
+function Login({ setTheme }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+
+  useEffect(() => {
+    setTheme({ navWhiteColor: false });
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -67,10 +73,11 @@ const LoginWrapper = styled.form`
   max-width: 100vw;
   width: 100%;
   height: auto;
-  min-height: 95vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: ${Colors.primaryColor};
   h2 {
     margin: 2rem 0rem;
   }

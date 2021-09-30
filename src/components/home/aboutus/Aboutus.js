@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { Colors } from '../../../styles/Colors';
 import CustomButton from '../../shared/CustomButton';
+import { HashLink as Link } from 'react-router-hash-link';
 
 function Aboutus() {
   return (
@@ -14,31 +14,9 @@ function Aboutus() {
       </p>
       <br />
       <br />
-      <CustomButton>Join x-ACT.me</CustomButton>
-
-      <br />
-      <br />
-      <br />
-      <br />
-
-      <h2 className='mobile-header'>Why should you choose X-Act.me?</h2>
-
-      <div className='card'>
-        <div className='dot'></div>
-        <p>Easy to use</p>
-      </div>
-      <div className='card'>
-        <div className='dot'></div>
-        <p>No app requierd</p>
-      </div>
-      <div className='card'>
-        <div className='dot'></div>
-        <p>Reduce costs</p>
-      </div>
-      <div className='card'>
-        <div className='dot'></div>
-        <p>Share your data fast</p>
-      </div>
+      <Link to='/register'>
+        <CustomButton>Join the Community</CustomButton>
+      </Link>
     </About>
   );
 }
@@ -47,28 +25,6 @@ const About = styled.div`
   position: relative;
   min-height: 100vh;
   padding: 10vh 10vw;
-
-  .card {
-    min-height: 3rem;
-    width: 100%;
-    max-width: 50rem;
-    padding: 0rem 1.5rem;
-    display: flex;
-    align-items: center;
-    border-radius: 1rem;
-    margin-top: 1rem;
-    -webkit-box-shadow: 5px 11px 40px -19px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 5px 11px 40px -19px rgba(0, 0, 0, 0.75);
-    box-shadow: 5px 11px 40px -19px rgba(0, 0, 0, 0.75);
-  }
-
-  .dot {
-    background: ${Colors.primaryColor};
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    margin-right: 1rem;
-  }
 
   p {
     text-align: center;

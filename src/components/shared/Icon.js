@@ -29,6 +29,12 @@ const IconWrapper = styled.div`
   &:hover {
     transform: scale(1.2);
   }
+
+  @media (max-width: 600px) {
+    height: 2rem;
+    width: 2rem;
+    font-size: 1rem;
+  }
 `;
 
 export default Icon;

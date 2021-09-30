@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 import { useEffect, useRef, useState } from 'react';
 import {
+  FaAddressBook,
+  FaCity,
   FaFacebookF,
+  FaFlag,
   FaIdCardAlt,
   FaInstagram,
   FaLinkedinIn,
+  FaMapMarker,
   FaMobile,
   FaPen,
   FaPhoneAlt,
@@ -26,6 +30,7 @@ import SkillHeader from './SkillHeader';
 import SkillsEdit from './SkillsEdit';
 import { SwatchesPicker } from 'react-color';
 import Loading from '../../shared/Loading';
+import { AiOutlineTwitter } from 'react-icons/ai';
 
 function UserProfile() {
   const [error, setError] = useState();
@@ -115,81 +120,122 @@ function UserProfile() {
                     fileInput={fileInput}
                     isRounded
                   />
-                  <TextInput
-                    placeholder='First Name'
-                    Icon={FaUser}
-                    required
-                    value={user.firstname}
-                    onChange={(e) =>
-                      setUser({ ...user, firstname: e.target.value })
-                    }
-                  />
-                  <TextInput
-                    placeholder='Last Name'
-                    Icon={FaUser}
-                    required
-                    value={user.lastname}
-                    onChange={(e) =>
-                      setUser({ ...user, lastname: e.target.value })
-                    }
-                  />
-                  <TextInput
-                    placeholder='Job Title'
-                    Icon={FaIdCardAlt}
-                    value={user.jobtitle}
-                    onChange={(e) =>
-                      setUser({ ...user, jobtitle: e.target.value })
-                    }
-                  />
-                  <TextInput
-                    placeholder='Description'
-                    Icon={FaPen}
-                    value={user.description}
-                    onChange={(e) =>
-                      setUser({ ...user, description: e.target.value })
-                    }
-                  />
-                  <TextInput
-                    placeholder='Phone Nr.'
-                    Icon={FaPhoneAlt}
-                    value={user.phoneNr}
-                    onChange={(e) =>
-                      setUser({ ...user, phoneNr: e.target.value })
-                    }
-                  />
-                  <TextInput
-                    placeholder='Mobile Nr.'
-                    Icon={FaMobile}
-                    value={user.mobileNr}
-                    onChange={(e) =>
-                      setUser({ ...user, mobileNr: e.target.value })
-                    }
-                  />
-                  <TextInput
-                    placeholder='Facebook Url'
-                    Icon={FaFacebookF}
-                    value={user.facebookURL}
-                    onChange={(e) =>
-                      setUser({ ...user, facebookURL: e.target.value })
-                    }
-                  />
-                  <TextInput
-                    placeholder='Instagram Url'
-                    Icon={FaInstagram}
-                    value={user.instagramURL}
-                    onChange={(e) =>
-                      setUser({ ...user, instagramURL: e.target.value })
-                    }
-                  />
-                  <TextInput
-                    placeholder='LinkedIn Url'
-                    Icon={FaLinkedinIn}
-                    value={user.linkedInURL}
-                    onChange={(e) =>
-                      setUser({ ...user, linkedInURL: e.target.value })
-                    }
-                  />
-
+                  <div className='input-wrappers'>
+                    <TextInput
+                      placeholder='First Name'
+                      Icon={FaUser}
+                      required
+                      value={user.firstname}
+                      onChange={(e) =>
+                        setUser({ ...user, firstname: e.target.value })
+                      }
+                    />
+                    <TextInput
+                      placeholder='Last Name'
+                      Icon={FaUser}
+                      required
+                      value={user.lastname}
+                      onChange={(e) =>
+                        setUser({ ...user, lastname: e.target.value })
+                      }
+                    />
+                    <TextInput
+                      placeholder='Job Title'
+                      Icon={FaIdCardAlt}
+                      value={user.jobtitle}
+                      onChange={(e) =>
+                        setUser({ ...user, jobtitle: e.target.value })
+                      }
+                    />
+                    <TextInput
+                      placeholder='Description'
+                      Icon={FaPen}
+                      value={user.description}
+                      onChange={(e) =>
+                        setUser({ ...user, description: e.target.value })
+                      }
+                    />
+                    <TextInput
+                      placeholder='Phone Nr.'
+                      Icon={FaPhoneAlt}
+                      value={user.phoneNr}
+                      onChange={(e) =>
+                        setUser({ ...user, phoneNr: e.target.value })
+                      }
+                    />
+                    <TextInput
+                      placeholder='Mobile Nr.'
+                      Icon={FaMobile}
+                      value={user.mobileNr}
+                      onChange={(e) =>
+                        setUser({ ...user, mobileNr: e.target.value })
+                      }
+                    />
+                    <TextInput
+                      placeholder='Street Number'
+                      Icon={FaAddressBook}
+                      value={user.street}
+                      onChange={(e) =>
+                        setUser({ ...user, street: e.target.value })
+                      }
+                    />
+                    <TextInput
+                      placeholder='Zip Code'
+                      Icon={FaMapMarker}
+                      value={user.zipCode}
+                      onChange={(e) =>
+                        setUser({ ...user, zipCode: e.target.value })
+                      }
+                    />
+                    <TextInput
+                      placeholder='City'
+                      Icon={FaCity}
+                      value={user.city}
+                      onChange={(e) =>
+                        setUser({ ...user, city: e.target.value })
+                      }
+                    />
+                    <TextInput
+                      placeholder='Country'
+                      Icon={FaFlag}
+                      value={user.country}
+                      onChange={(e) =>
+                        setUser({ ...user, country: e.target.value })
+                      }
+                    />
+                    <TextInput
+                      placeholder='Facebook Url'
+                      Icon={FaFacebookF}
+                      value={user.facebookURL}
+                      onChange={(e) =>
+                        setUser({ ...user, facebookURL: e.target.value })
+                      }
+                    />
+                    <TextInput
+                      placeholder='Instagram Url'
+                      Icon={FaInstagram}
+                      value={user.instagramURL}
+                      onChange={(e) =>
+                        setUser({ ...user, instagramURL: e.target.value })
+                      }
+                    />
+                    <TextInput
+                      placeholder='LinkedIn Url'
+                      Icon={FaLinkedinIn}
+                      value={user.linkedInURL}
+                      onChange={(e) =>
+                        setUser({ ...user, linkedInURL: e.target.value })
+                      }
+                    />
+                    <TextInput
+                      placeholder='Twitter Url'
+                      Icon={AiOutlineTwitter}
+                      value={user.twitterURL}
+                      onChange={(e) =>
+                        setUser({ ...user, twitterURL: e.target.value })
+                      }
+                    />
+                  </div>
                   <h4>Companies</h4>
                   <div className='company-list'>
                     {user.companies.map((company, index) => {
@@ -259,6 +305,7 @@ function UserProfile() {
               setParentVisible={setVisible}
             />
           )}
+          {/* {error && <ErrorPopup error={error} setError={setError} />} */}
         </>
       )}
     </>
@@ -266,17 +313,10 @@ function UserProfile() {
 }
 
 const EditWrapper = styled.div`
-  width: 30vw;
-  min-width: 25rem;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0rem auto;
   margin-top: 15vh;
   margin-bottom: 10vh;
-  @media (max-width: 700px) {
-    width: 100vw;
-    border: none;
-  }
 `;
 
 const EditForm = styled.form`
@@ -287,8 +327,12 @@ const EditForm = styled.form`
   align-items: center;
   background: white;
   padding: 3rem 4rem;
-  border-radius: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  .input-wrappers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
 
   .add-btn {
     font-size: 2rem;

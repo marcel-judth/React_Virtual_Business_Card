@@ -1,28 +1,33 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import { Colors } from '../../styles/Colors';
 
 function Loading() {
   return (
-    <LoadingWrapper>
-      <lottie-player
-        className='loading'
-        src='https://assets6.lottiefiles.com/packages/lf20_slv159gh.json'
-        background='transparent'
-        speed='1'
-        loop
-        autoplay
-      ></lottie-player>
-    </LoadingWrapper>
+    <LodingElemant
+      animate={{
+        scale: [1, 2, 2, 1, 1],
+        rotate: [0, 0, 270, 270, 0],
+        borderRadius: ['20%', '20%', '50%', '50%', '20%'],
+      }}
+      transition={{
+        duration: 2,
+        ease: 'easeInOut',
+        times: [0, 0.2, 0.5, 0.8, 1],
+        loop: Infinity,
+        repeatDelay: 1,
+      }}
+    />
   );
 }
 
-const LoadingWrapper = styled.div`
-  width: 20rem;
-  height: auto;
-  max-width: 20rem;
-  position: absolute;
-  top: 50vh;
-  left: 50%;
-  transform: translate(-50%, -50%);
+const LodingElemant = styled(motion.div)`
+  background: ${Colors.primaryColor};
+  border-radius: 30px;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  margin-top: 40vh;
 `;
 
 export default Loading;

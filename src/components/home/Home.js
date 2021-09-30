@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Footer from '../shared/Footer';
 import Aboutus from './aboutus/Aboutus';
 import Contact from './contact/Contact';
+import Description from './description/Description';
 import Faq from './faq/Faq';
 import Intro from './intro/Intro';
 import Landing from './landing/Landing';
@@ -14,6 +15,7 @@ function Home({ theme, setTheme }) {
       <Landing theme={theme} setTheme={setTheme} />
       <Intro theme={theme} setTheme={setTheme} />
       <Aboutus />
+      <Description />
       <Products />
       <Faq />
       <Contact />

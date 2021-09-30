@@ -6,7 +6,7 @@ import video from '../../../video/mockup_video.mp4';
 import videoMobile from '../../../video/mockup_video_mobile.mp4';
 
 const Intro = ({ theme, setTheme }) => {
-  const [component, view] = useInView({ threshold: 0.9 });
+  const [component, view] = useInView({ threshold: 0.95 });
   if (theme && theme.navWhiteColor && view) setTheme({ navWhiteColor: false });
 
   return (
@@ -20,7 +20,8 @@ const Intro = ({ theme, setTheme }) => {
 };
 
 const IntroWrapper = styled.div`
-  width: 100vw;
+  width: 100%;
+  max-width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -39,6 +40,7 @@ const IntroWrapper = styled.div`
 
   h2 {
     margin-top: 3rem;
+    text-align: center;
   }
 
   .separator {

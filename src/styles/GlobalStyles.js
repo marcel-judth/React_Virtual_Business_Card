@@ -9,13 +9,13 @@ const GlobalStyles = createGlobalStyle`
 }
 body{
     font-size: 62.5%;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 a{
     text-decoration: underline;
     font-size: 1rem;
     color: ${Colors.textColor};
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Nunito', sans-serif;
     cursor: pointer;
 
     &:hover{
@@ -25,47 +25,48 @@ a{
 p{
     font-size: 1rem;
     color: ${Colors.textColor};
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 300;
 }
 
 h1{
     font-size: 2.5rem;
     font-weight: 400;
     color: ${Colors.headings};
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 
 h2{
     font-size: 2.2rem;
     font-weight: 400;
     color: ${Colors.headings};
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 h3{
     font-size: 2rem;
     font-weight: 350;
     color: ${Colors.headings};
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 
 h4{
     font-size: 1.5rem;
     font-weight: 350;
     color: ${Colors.footerColor};
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 
 h5{
     font-size: 1rem;
     font-weight: 350;
     color: ${Colors.footerColor};
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 
 button{
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
-@media (max-width: 1300px){
+@media (max-width: 1000px){
     p{
         font-size: 1rem;
     }

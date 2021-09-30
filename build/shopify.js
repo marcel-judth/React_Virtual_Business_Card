@@ -29,7 +29,7 @@ function showProducts() {
       ShopifyBuy.UI.onReady(client).then(function (ui) {
         ui.createComponent('collection', {
           id: '276127350950',
-          node: document.getElementById('collection-component-1628940789227'),
+          node: document.getElementById('collection-component-1632069914946'),
           moneyFormat: '%E2%82%AC%7B%7Bamount_with_comma_separator%7D%7D',
           options: {
             product: {
@@ -39,43 +39,43 @@ function showProducts() {
                     'max-width': 'calc(25% - 20px)',
                     'margin-left': '20px',
                     'margin-bottom': '50px',
-                    width: 'calc(25% - 20px)',
+                    'width': 'calc(25% - 20px)',
                   },
-                  img: {
+                  'img': {
                     height: 'calc(100% - 15px)',
                     position: 'absolute',
                     left: '0',
                     right: '0',
                     top: '0',
                   },
-                  imgWrapper: {
+                  'imgWrapper': {
                     'padding-top': 'calc(75% + 15px)',
-                    position: 'relative',
-                    height: '0',
+                    'position': 'relative',
+                    'height': '0',
                   },
                 },
                 title: {
-                  'font-family': 'Open Sans, sans-serif',
+                  'font-family': 'Montserrat, sans-serif',
                   'font-weight': 'normal',
                 },
                 button: {
-                  'font-family': 'Open Sans, sans-serif',
+                  'font-family': 'Montserrat, sans-serif',
                   ':hover': {
-                    'background-color': '#637fac',
+                    'background-color': '#314459',
                   },
-                  'background-color': '#6e8dbf',
+                  'background-color': '#364c63',
                   ':focus': {
-                    'background-color': '#637fac',
+                    'background-color': '#314459',
                   },
                 },
                 price: {
-                  'font-family': 'Open Sans, sans-serif',
+                  'font-family': 'Montserrat, sans-serif',
                 },
                 compareAt: {
-                  'font-family': 'Open Sans, sans-serif',
+                  'font-family': 'Montserrat, sans-serif',
                 },
                 unitPrice: {
-                  'font-family': 'Open Sans, sans-serif',
+                  'font-family': 'Montserrat, sans-serif',
                 },
               },
               buttonDestination: 'modal',
@@ -85,7 +85,7 @@ function showProducts() {
               text: {
                 button: 'View product',
               },
-              googleFonts: ['Open Sans'],
+              googleFonts: ['Montserrat'],
             },
             productSet: {
               styles: {
@@ -112,44 +112,44 @@ function showProducts() {
                   },
                 },
                 button: {
-                  'font-family': 'Open Sans, sans-serif',
+                  'font-family': 'Montserrat, sans-serif',
                   ':hover': {
-                    'background-color': '#637fac',
+                    'background-color': '#314459',
                   },
-                  'background-color': '#6e8dbf',
+                  'background-color': '#364c63',
                   ':focus': {
-                    'background-color': '#637fac',
+                    'background-color': '#314459',
                   },
                 },
                 title: {
-                  'font-family': 'Open Sans, sans-serif',
+                  'font-family': 'Montserrat, sans-serif',
                   'font-weight': 'normal',
                   'font-size': '26px',
-                  color: '#4c4c4c',
+                  'color': '#4c4c4c',
                 },
                 price: {
-                  'font-family': 'Open Sans, sans-serif',
+                  'font-family': 'Montserrat, sans-serif',
                   'font-weight': 'normal',
                   'font-size': '18px',
-                  color: '#4c4c4c',
+                  'color': '#4c4c4c',
                 },
                 compareAt: {
-                  'font-family': 'Open Sans, sans-serif',
+                  'font-family': 'Montserrat, sans-serif',
                   'font-weight': 'normal',
                   'font-size': '15.299999999999999px',
-                  color: '#4c4c4c',
+                  'color': '#4c4c4c',
                 },
                 unitPrice: {
-                  'font-family': 'Open Sans, sans-serif',
+                  'font-family': 'Montserrat, sans-serif',
                   'font-weight': 'normal',
                   'font-size': '15.299999999999999px',
-                  color: '#4c4c4c',
+                  'color': '#4c4c4c',
                 },
                 description: {
-                  'font-family': 'Open Sans, sans-serif',
+                  'font-family': 'Montserrat, sans-serif',
                 },
               },
-              googleFonts: ['Open Sans'],
+              googleFonts: ['Montserrat'],
               text: {
                 button: 'Add to cart',
               },
@@ -168,13 +168,13 @@ function showProducts() {
             cart: {
               styles: {
                 button: {
-                  'font-family': 'Open Sans, sans-serif',
+                  'font-family': 'Montserrat, sans-serif',
                   ':hover': {
-                    'background-color': '#637fac',
+                    'background-color': '#314459',
                   },
-                  'background-color': '#6e8dbf',
+                  'background-color': '#364c63',
                   ':focus': {
-                    'background-color': '#637fac',
+                    'background-color': '#314459',
                   },
                 },
               },
@@ -182,22 +182,22 @@ function showProducts() {
                 total: 'Subtotal',
                 button: 'Checkout',
               },
-              googleFonts: ['Open Sans'],
+              googleFonts: ['Montserrat'],
             },
             toggle: {
               styles: {
                 toggle: {
-                  'font-family': 'Open Sans, sans-serif',
-                  'background-color': '#6e8dbf',
+                  'font-family': 'Montserrat, sans-serif',
+                  'background-color': '#364c63',
                   ':hover': {
-                    'background-color': '#637fac',
+                    'background-color': '#314459',
                   },
                   ':focus': {
-                    'background-color': '#637fac',
+                    'background-color': '#314459',
                   },
                 },
               },
-              googleFonts: ['Open Sans'],
+              googleFonts: ['Montserrat'],
             },
           },
         });

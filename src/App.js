@@ -3,7 +3,7 @@ import GlobalStyles from './styles/GlobalStyles';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './components/home/Home';
 import Login from './components/login/Login';
-import Nav from './components/home/Nav';
+import Nav from './components/nav/Nav';
 import Logout from './components/logout/Logout';
 import NotFound from './components/notfound/NotFound';
 import QrCode from './components/qrcode/QrCode';
@@ -15,11 +15,11 @@ import Settings from './components/settings/Settings';
 import Register from './components/register/Register';
 import PlanCheckout from './components/planCheckout/PlanCheckout';
 import InvalidLicense from './components/invalidLicense/InvalidLicense';
-import Discounts from './components/discounts/Discounts';
 import { useState } from 'react';
 
 function App() {
   const [theme, setTheme] = useState({ navWhiteColor: false });
+
   return (
     <Router>
       <div className='App'>
@@ -30,8 +30,12 @@ function App() {
             <Home setTheme={setTheme} theme={theme}></Home>
           </Route>
           <Route path='/home' component={HomeRedirect} />
-          <Route path='/login' component={Login} />
-          <Route path='/register' component={Register} />
+          <Route path='/login'>
+            <Login setTheme={setTheme} />
+          </Route>
+          <Route path='/register'>
+            <Register setTheme={setTheme} />
+          </Route>
           <Route path='/shop' component={Shop} />
           <Route path='/redirectShop' component={ShopRedirect} />
           <Route path='/logout' component={Logout} />
@@ -41,9 +45,10 @@ function App() {
           <Route path='/forgotpassword/:token' component={ForgotPassword} />
           <Route path='/qrcode' component={QrCode} />
           <Route path='/details/:id' component={Details} />
-          <Route path='/settings' component={Settings} />
+          <Route path='/settings'>
+            <Settings setTheme={setTheme} />
+          </Route>
           <Route path='/plancheckout' component={PlanCheckout} />
-          <Route path='/discounts' component={Discounts} />
         </Switch>
       </div>
     </Router>

@@ -1,175 +1,143 @@
-import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { FaChartLine, FaLock, FaUser } from 'react-icons/fa';
-import { BsFillChatFill } from 'react-icons/bs';
+import { FiPercent } from 'react-icons/fi';
+import { BsArrowRightShort, BsFillChatFill } from 'react-icons/bs';
 import { RiLogoutBoxFill } from 'react-icons/ri';
-import { VscChromeClose } from 'react-icons/vsc';
 import { IoIosWifi } from 'react-icons/io';
 import { Colors } from '../../styles/Colors';
+import NavItem from '../nav/NavItems';
 
 const SettingsNav = ({ setNavStatus, navStatus }) => {
-  const location = useLocation();
-
   return (
-    <SettingsNavWrapper>
-      <div className={navStatus ? ' sticky-nav active' : 'sticky-nav'}>
-        <VscChromeClose
-          className='close-icon'
-          onClick={() => setNavStatus(false)}
+    <SettingsNavWrapper navOpen={navStatus}>
+      <ul>
+        <NavItem
+          setNavStatus={setNavStatus}
+          navStatus={navStatus}
+          Icon={<FaUser />}
+          pathname='/settings'
+          link='/settings'
+          text=''
         />
-        <ul>
-          <li onClick={() => setNavStatus(!navStatus)}>
-            <Link
-              className={
-                'link ' + (location.pathname === '/settings' ? 'selected' : '')
-              }
-              to='/settings'
-            >
-              <FaUser className='icon' />
-              User Profile
-            </Link>
-          </li>
-          <li onClick={() => setNavStatus(!navStatus)}>
-            <Link
-              className={
-                'link ' +
-                (location.pathname === '/settings/statistics' ? 'selected' : '')
-              }
-              to='/settings/statistics'
-            >
-              <FaChartLine className='icon' />
-              Statistics
-            </Link>
-          </li>
-          <li onClick={() => setNavStatus(!navStatus)}>
-            <Link
-              className={
-                'link ' +
-                (location.pathname === '/settings/additem' ? 'selected' : '')
-              }
-              to='/settings/additem'
-            >
-              <IoIosWifi className='icon rotated' />
-              Add Item
-            </Link>
-          </li>
-          <li onClick={() => setNavStatus(!navStatus)}>
-            <Link
-              className={
-                'link ' +
-                (location.pathname === '/settings/changePassword'
-                  ? 'selected'
-                  : '')
-              }
-              to='/settings/changePassword'
-            >
-              <FaLock className='icon' />
-              Change Password
-            </Link>
-          </li>
-          <li onClick={() => setNavStatus(!navStatus)}>
-            <Link
-              className={
-                'link ' +
-                (location.pathname === '/settings/support' ? 'selected' : '')
-              }
-              to='/settings/support'
-            >
-              <BsFillChatFill className='icon' />
-              Support
-            </Link>
-          </li>
-          <li onClick={() => setNavStatus(!navStatus)}>
-            <Link
-              className={
-                'link ' +
-                (location.pathname === '/settings/logou' ? 'selected' : '')
-              }
-              to='/settings/logout'
-            >
-              <RiLogoutBoxFill className='icon' />
-              Logout
-            </Link>
-          </li>
-        </ul>
-      </div>
+
+        <NavItem
+          setNavStatus={setNavStatus}
+          navStatus={navStatus}
+          Icon={<FaChartLine />}
+          pathname='/settings/statistics'
+          link='/settings/statistics'
+          text=''
+        />
+        <NavItem
+          setNavStatus={setNavStatus}
+          navStatus={navStatus}
+          Icon={<FiPercent />}
+          pathname='/settings/discounts'
+          link='/settings/discounts'
+          text=''
+        />
+        <NavItem
+          setNavStatus={setNavStatus}
+          navStatus={navStatus}
+          Icon={<IoIosWifi className='rotated' />}
+          pathname='/settings/additem'
+          link='/settings/additem'
+          text=''
+        />
+        <NavItem
+          setNavStatus={setNavStatus}
+          navStatus={navStatus}
+          Icon={<FaLock />}
+          pathname='/settings/changePassword'
+          link='/settings/changePassword'
+          text=''
+        />
+        <NavItem
+          setNavStatus={setNavStatus}
+          navStatus={navStatus}
+          Icon={<BsFillChatFill />}
+          pathname='/settings/support'
+          link='/settings/support'
+          text=''
+        />
+        <NavItem
+          setNavStatus={setNavStatus}
+          navStatus={navStatus}
+          Icon={<RiLogoutBoxFill />}
+          pathname='/settings/logout'
+          link='/settings/logout'
+          text=''
+        />
+      </ul>
+      <OpenTag onClick={() => setNavStatus(!navStatus)}>
+        <BsArrowRightShort className={navStatus ? 'rotate' : ''} />
+      </OpenTag>
     </SettingsNavWrapper>
   );
 };
 
 const SettingsNavWrapper = styled.div`
-  .active {
-    left: 0% !important;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: ${Colors.primaryColor};
+  width: 4vw;
+  min-width: 4rem;
+  z-index: 10;
+  transition: all 0.5s ease-in-out;
+
+  .rotated {
+    transform: rotate(90deg);
   }
 
-  .close-icon {
-    position: absolute;
-    top: 3rem;
-    left: 80%;
-    font-size: 2rem;
-    color: lightgrey;
-    z-index: 2;
-    display: none;
-  }
-
-  .sticky-nav {
-    position: sticky;
-    top: 10%;
-    left: 0;
-    z-index: 1;
+  ul {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: start;
-    background: black;
-    min-width: 25rem;
-    width: 20vw;
-    min-height: 90vh;
-    margin-top: 10vh;
-    padding: 0 5vw;
-    padding-top: 20vh;
-    padding-bottom: 2rem;
-    transition: all 0.75s ease-out;
-    .link {
-      color: white;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      font-size: 1.2rem;
-      margin-bottom: 4rem;
-    }
-
-    li {
-      position: relative;
-    }
-
-    .icon {
-      margin-right: 0.75rem;
-    }
-
-    .rotated {
-      transform: rotate(90deg);
-    }
+    justify-content: space-evenly;
+    min-height: 60vh;
+    list-style: none;
   }
 
   .selected {
     color: ${Colors.primaryColor} !important;
   }
 
-  @media (max-width: 920px) {
-    .sticky-nav {
-      position: absolute;
-      left: -100%;
-      top: 0%;
-      min-width: 20rem;
-      .link {
-        font-size: 1rem;
-      }
-    }
-    .close-icon {
-      display: block;
-    }
+  @media (max-width: 600px) {
+    transform: ${(props) =>
+      props.navOpen ? 'translateX(0)' : 'translateX(-100%)'};
+  }
+`;
+
+const OpenTag = styled.div`
+  background: ${Colors.primaryColor};
+  width: 2rem;
+  height: 3.5rem;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+  position: absolute;
+  top: 15%;
+  right: -2rem;
+  display: none;
+
+  svg {
+    transition: 0.5s ease;
+  }
+
+  .rotate {
+    transform: rotate(180deg);
+  }
+
+  @media (max-width: 600px) {
+    display: flex;
   }
 `;
 

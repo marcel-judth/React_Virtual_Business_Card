@@ -16,11 +16,12 @@ const Skill = styled.div`
   display: flex;
   align-items: center;
   justify-content: start;
-  margin: 0.5rem 0rem;
+  margin: 0.5rem auto;
   padding: 0.5rem 0.5rem;
   width: 100%;
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  max-width: 30rem;
 
   .dot {
     min-width: 0.5rem;
