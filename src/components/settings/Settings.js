@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Logout from '../logout/Logout';
 import Discounts from './discounts/Discounts';
 import SettingsNav from './SettingsNav';
-import UserProfile from './userProfile/UserProfile';
+import UserEdit from './userEdit/UserEdit';
 import ChangePassword from './changePassword/ChangePassword';
 import Support from './support/Support';
 import Statistics from './statistics/Statistics';
@@ -15,7 +15,7 @@ const Settings = ({ setTheme }) => {
 
   useEffect(() => {
     setTheme({ navWhiteColor: false });
-  });
+  }, [setTheme]);
 
   return (
     <SettingsWrapper>
@@ -24,7 +24,7 @@ const Settings = ({ setTheme }) => {
       </div>
       <main onClick={() => setNavActive(false)}>
         <Switch>
-          <Route path='/settings' exact component={UserProfile} />
+          <Route path='/settings' exact component={UserEdit} />
           <Route path='/settings/changepassword' component={ChangePassword} />
           <Route path='/settings/support' component={Support} />
           <Route path='/settings/logout' component={Logout} />

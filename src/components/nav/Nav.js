@@ -84,7 +84,7 @@ const Nav = ({ theme }) => {
               setNavStatus={setNavStatus}
               navStatus={navStatus}
               Icon={<FaUserAlt />}
-              pathname={'/myage'}
+              pathname={'/mypage'}
               link={'/mypage'}
               text='My Page'
             />

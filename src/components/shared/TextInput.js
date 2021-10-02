@@ -8,12 +8,14 @@ function TextInput({
   required = false,
   onChange,
   isPassword = false,
+  pattern,
 }) {
   return (
     <InputWrapper>
       <input
         required={required ? 'true' : 'false'}
         type={isPassword ? 'password' : 'text'}
+        pattern={pattern}
         onChange={onChange}
         value={value}
       />

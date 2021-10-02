@@ -19,7 +19,7 @@ function Login({ setTheme }) {
 
   useEffect(() => {
     setTheme({ navWhiteColor: true });
-  });
+  }, [setTheme]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
