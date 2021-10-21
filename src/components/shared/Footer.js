@@ -103,6 +103,11 @@ const FooterWrapper = styled.footer`
       text-decoration: underline;
     }
   }
+
+  @media (max-width: 600px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 `;
 
 export default Footer;

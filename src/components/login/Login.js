@@ -86,14 +86,20 @@ const LoginWrapper = styled.form`
     margin-bottom: 1rem;
   }
 
+  a {
+    font-size: 0.8rem;
+    text-decoration: none;
+    margin-top: 0.5rem;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   .error-label {
     color: ${Colors.warningColor};
     font-size: 0.8rem;
     max-width: 100%;
     margin-bottom: 1rem;
-  }
-  .forgot-password {
-    margin-top: 1rem;
   }
 
   .content-wrapper {
@@ -105,10 +111,10 @@ const LoginWrapper = styled.form`
     padding: 3rem 4rem;
     border-radius: 5%;
     border: 1px solid lightgrey;
-    min-width: 25rem;
   }
 
   @media (max-width: 600px) {
+    background: white;
     .content-wrapper {
       border: none;
     }

@@ -81,6 +81,7 @@ const getScans = async (setLoading, setData) => {
     );
     setLoading(false);
     setData(res.data);
+    console.log(res.data);
   } catch (error) {
     console.log(error);
     if (error.response?.status === 401) return reloggin();
@@ -108,6 +109,13 @@ const login = async (email, password, setError, setLoading, history) => {
     })
     .catch((err) => {
       console.log(err);
+
+      if (err.response?.status === 403) {
+        if (!err.response?.data) return displayError('Invalid Error happened');
+        localStorage.setItem('user', JSON.stringify(err.response?.data));
+        return (window.location.href = '/plancheckout');
+      }
+
       displayError(err, setError, setLoading);
     });
 };
@@ -158,9 +166,7 @@ const register = async (
     })
     .catch((err) => {
       console.log(err);
-      setError(err);
-      setLoading(false);
-      setTimeout(() => setError(''), 3000);
+      displayError(err, setError, setLoading);
     });
 };
 

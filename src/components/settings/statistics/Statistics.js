@@ -1,54 +1,20 @@
 import styled from 'styled-components';
-import { Line } from 'react-chartjs-2';
 import { useEffect, useState } from 'react';
 import { getScans } from '../../../api';
 import Loading from '../../shared/Loading';
+import Chart from 'react-google-charts';
 
 const Statistics = (props) => {
   const [loading, setLoading] = useState(true);
   const [values, setValues] = useState([]);
-  const days = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ];
+  const days = ['Mo', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
-  var today = new Date();
   var daysSorted = [];
 
   for (var i = 7; i >= 0; i--) {
-    var newDate = new Date(today.setDate(today.getDate() - 1));
+    var newDate = new Date(new Date().setDate(new Date().getDate() - i));
     daysSorted.push(days[newDate.getDay()]);
   }
-
-  const data = {
-    labels: daysSorted,
-    datasets: [
-      {
-        label: '# of scans (last 7 days)',
-        data: values,
-        fill: false,
-        backgroundColor: 'rgb(108, 150, 204)',
-        borderColor: 'rgba(108, 150, 204, 0.2)',
-      },
-    ],
-  };
-
-  const options = {
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
-    },
-  };
 
   useEffect(() => {
     getScans(setLoading, setValues);
@@ -61,8 +27,33 @@ const Statistics = (props) => {
       ) : (
         <StatisticsWrapper>
           <h2>Statistics</h2>
-          <br />
-          <Line data={data} options={options} />
+          <Chart
+            width={'90vw'}
+            height={'50vh'}
+            chartType='AreaChart'
+            loader={<div>Loading Chart</div>}
+            data={[
+              ['x', 'scans'],
+              [daysSorted[0], values[0]],
+              [daysSorted[1], values[1]],
+              [daysSorted[2], values[2]],
+              [daysSorted[3], values[3]],
+              [daysSorted[4], values[4]],
+              [daysSorted[5], values[5]],
+              [daysSorted[6], values[6]],
+            ]}
+            options={{
+              hAxis: {
+                title: 'Days',
+              },
+              vAxis: {
+                title: 'Scans',
+                minValue: 0,
+                format: '0',
+              },
+            }}
+            rootProps={{ 'data-testid': '1' }}
+          />
         </StatisticsWrapper>
       )}
     </>
@@ -70,7 +61,12 @@ const Statistics = (props) => {
 };
 
 const StatisticsWrapper = styled.div`
-  padding: 15vh 10vw;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default Statistics;

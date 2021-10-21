@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Colors } from '../../styles/Colors';
 
-function TextInput({
+const TextInput = ({
   placeholder,
   value,
   Icon,
@@ -9,33 +9,55 @@ function TextInput({
   onChange,
   isPassword = false,
   pattern,
-}) {
+}) => {
   return (
-    <InputWrapper>
+    <TextInputWrapper>
       <input
-        required={required ? 'true' : 'false'}
         type={isPassword ? 'password' : 'text'}
-        pattern={pattern}
-        onChange={onChange}
+        class='form__input'
+        placeholder=' '
         value={value}
+        required={required}
+        onChange={onChange}
       />
-      <label htmlFor='name' className='label-name'>
-        <span className='content-name'>
-          <Icon /> {placeholder}
-        </span>
+      <label for='' class='form__label'>
+        <Icon />
+        {placeholder}
       </label>
-    </InputWrapper>
+    </TextInputWrapper>
   );
-}
+};
 
-const InputWrapper = styled.div`
+const TextInputWrapper = styled.div`
   position: relative;
-  overflow: hidden;
+  height: 48px;
+  min-width: 15rem;
+  width: 20vw;
   margin-bottom: 1.5rem;
-  width: 100%;
-  max-width: 25rem;
-  span {
-    font-size: 1rem;
+
+  .form__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: v1rem;
+    border: 1px solid ${Colors.primaryColor};
+    border-radius: 0.5rem;
+    outline: none;
+    padding: 1rem;
+    background: none;
+    z-index: 1;
+  }
+  .form__label {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    padding: 0 0.25rem;
+    background-color: #fff;
+    color: ${Colors.textColor};
+    font-size: 0.8rem;
+    transition: 0.3s;
     display: flex;
     align-items: center;
 
@@ -44,54 +66,26 @@ const InputWrapper = styled.div`
     }
   }
 
-  input {
-    width: 100%;
-    height: 100%;
-    border: none;
-    padding-top: 2rem;
-    outline: none;
-    overflow: visible;
-    font-size: 1rem;
-    color: ${Colors.textColor};
+  .form__input:focus + .form__label {
+    top: -0.5rem;
+    left: 0.8rem;
+    color: ${Colors.secondaryColor};
+    font-size: 0.75rem;
+    font-weight: 500;
+    z-index: 10;
   }
 
-  label {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    pointer-events: none;
-    color: gray;
-    border-bottom: 1px solid grey;
+  .form__input:not(:placeholder-shown).form__input:not(:focus) + .form__label {
+    top: -0.5rem;
+    left: 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    z-index: 10;
   }
 
-  label::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    height: 100%;
-    width: 100%;
-    border-bottom: 3px solid ${Colors.primaryColor};
-    transform: translateX(-100%);
-    transition: transform 1s ease-in-out;
-  }
-  .content-name {
-    position: absolute;
-    bottom: 5px;
-    left: 0;
-    transition: all 0.3s ease;
-    color: grey;
-  }
-  input:focus + .label-name .content-name,
-  input:valid + .label-name .content-name {
-    transform: translateY(-150%);
-    font-size: 0.8rem;
-  }
-  input:focus + .label-name::after,
-  .form input:valid + .label-name::after {
-    transform: translateX(0%);
+  /*Input focus*/
+  .form__input:focus {
+    border: 1.5px solid ${Colors.secondaryColor};
   }
 `;
 

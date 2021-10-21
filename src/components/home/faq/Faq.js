@@ -3,40 +3,34 @@ import styled from 'styled-components';
 import Toggle from './Toggle';
 import { AnimateSharedLayout, motion } from 'framer-motion';
 import { Colors } from '../../../styles/Colors';
+import { useTranslation } from 'react-i18next';
 
 const Faq = () => {
+  const { t } = useTranslation();
+
   return (
     <FaqWrapper>
       <h2>
-        Any Questions ? <span>FAQ</span>
+        {t('home.faq.heading')}
+        <span>{t('home.faq.heading2')}</span>
       </h2>
       <AnimateSharedLayout>
-        <Toggle title='How Do I Start?'>
+        <Toggle title={t('home.faq.f1.heading')}>
           <div className='answer'>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi
-              autem accusamus ex laboriosam porro, adipisci quam voluptatum
-              magnam placeat corporis.
-            </p>
+            <p>{t('home.faq.f1.text1')}</p>
+            <p>{t('home.faq.f1.text2')}</p>
           </div>
         </Toggle>
-        <Toggle title='How can I edit my data?'>
+        <Toggle title={t('home.faq.f1.heading')}>
           <div className='answer'>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error,
-              totam.
-            </p>
+            <p>{t('home.faq.f1.text1')}</p>
+            <p>{t('home.faq.f1.text2')}</p>
           </div>
         </Toggle>
-        <Toggle title='Do I need any app?'>
+        <Toggle title={t('home.faq.f1.heading')}>
           <div className='answer'>
-            <p>Lorem ipsum dolor sit amet.</p>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Necessitatibus, neque.
-            </p>
+            <p>{t('home.faq.f1.text1')}</p>
+            <p>{t('home.faq.f1.text2')}</p>
           </div>
         </Toggle>
       </AnimateSharedLayout>

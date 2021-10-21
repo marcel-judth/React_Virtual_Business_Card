@@ -56,7 +56,10 @@ function App() {
           <Route path='/settings'>
             <Settings setTheme={setTheme} />
           </Route>
-          <Route path='/plancheckout' component={PlanCheckout} />
+          <Route path='/plancheckout'>
+            <PlanCheckout setTheme={setTheme} />
+          </Route>
+          <Route component={NotFound} />
         </Switch>
       </div>
     </Router>

@@ -1,17 +1,18 @@
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 import { Colors } from '../../../styles/Colors';
-
 import video from '../../../video/mockup_video.mp4';
 import videoMobile from '../../../video/mockup_video_mobile.mp4';
+import { useTranslation } from 'react-i18next';
 
 const Intro = ({ theme, setTheme }) => {
+  const { t } = useTranslation();
   const [component, view] = useInView({ threshold: 0.95 });
   if (theme && theme.navWhiteColor && view) setTheme({ navWhiteColor: false });
 
   return (
     <IntroWrapper ref={component}>
-      <h2>As easy as it could get!</h2>
+      <h2>{t('home.intro.heading')}</h2>
       <div className='separator'></div>
       <video className='video' src={video} autoPlay muted loop />
       <video className='video-mobile' src={videoMobile} autoPlay muted loop />

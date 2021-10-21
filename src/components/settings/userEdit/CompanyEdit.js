@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   FaCity,
   FaEnvelope,
@@ -53,7 +53,7 @@ function CompanyEdit({
     setParentVisible(true);
     const tmp = user;
     tmp.companies.splice(index, 1);
-    setUser({ ...user, companies: tmp.companies });
+    setCurrentUser({ ...currentUser, companies: tmp.companies });
   }
 
   function handleSubmit() {
@@ -63,6 +63,9 @@ function CompanyEdit({
     setCurrentUser({ ...currentUser, companies: tmp.companies });
     closePopup();
   }
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   function closePopup() {
     setVisible(false);
@@ -252,10 +255,10 @@ function CompanyEdit({
           <CustomButton onClick={handleSubmit}>Save</CustomButton>
           <br />
           <CancelButton onClick={removeCompany}>Remove</CancelButton>
-          <ScrollTop />
           <CloseIcon onClick={closePopup} />
         </CompanyEditForm>
       )}
+      <ScrollTop />
     </CompanyEditWrapper>
   );
 }

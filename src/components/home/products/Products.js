@@ -1,13 +1,14 @@
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { Colors } from '../../../styles/Colors';
 
 function Products() {
+  const { t } = useTranslation();
+
   return (
     <ProductsWrapper>
-      <h2>Our Products</h2>
-      <p>
-        Choose one of our products and get started with <span>x-ACT.me.</span>
-      </p>
+      <h2>{t('home.products.heading')}</h2>
+      <p>{t('home.products.text')}</p>
       <div id='collection-component-1632069914946'></div>
     </ProductsWrapper>
   );

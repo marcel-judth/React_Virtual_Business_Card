@@ -7,9 +7,12 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
 }
+html { height: 100%; overflow:auto; }
+
 body{
     font-size: 62.5%;
     font-family: 'Nunito', sans-serif;
+ height: 100%; 
 }
 a{
     text-decoration: underline;

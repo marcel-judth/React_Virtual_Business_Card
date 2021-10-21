@@ -16,10 +16,19 @@ import { HiHome } from 'react-icons/hi';
 import { FaShoppingBag, FaUserAlt } from 'react-icons/fa';
 import NavItem from './NavItems';
 import { RiSettings3Fill } from 'react-icons/ri';
+import { useLocation } from 'react-router';
 
-const Nav = ({ theme }) => {
+const Nav = ({ theme, setTheme }) => {
   const [navStatus, setNavStatus] = useState(false);
   const user = JSON.parse(localStorage.getItem('user'));
+  const location = useLocation();
+  const locationsForWhiteIcon = ['/plancheckout'];
+
+  if (
+    theme.navWhiteColor === false &&
+    locationsForWhiteIcon.includes(location.pathname)
+  )
+    setTheme({ navWhiteColor: true });
 
   const listVariants = {
     hidden: {
@@ -171,7 +180,7 @@ const StyledNav = styled.nav`
     list-style: none;
     width: 80%;
     padding-top: 15vh;
-    padding-bottom: 10vh;
+    padding-bottom: 20vh;
     display: flex;
   }
 

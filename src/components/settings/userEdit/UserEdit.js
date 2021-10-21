@@ -118,7 +118,6 @@ function UserEdit() {
                     onChange={handleImgChange}
                     ref={(file) => (fileInput.current = file)}
                   />
-
                   <Logo
                     src={user.image ? user.image : defaultProfilePicture}
                     fileInput={fileInput}
@@ -379,6 +378,7 @@ const EditForm = styled.form`
     width: 100%;
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
   }
 
   .error-label {

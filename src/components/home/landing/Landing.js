@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import phone from '../../../img/iphone_landing.jpg';
 import { Colors } from '../../../styles/Colors';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 const Landing = ({ theme, setTheme }) => {
+  const { t } = useTranslation();
   const pageAnimation = {
     hidden: {
       x: '-100%',
@@ -41,12 +43,12 @@ const Landing = ({ theme, setTheme }) => {
       />
       <motion.div className='landing-text'>
         <Hide>
-          <motion.h2 variants={variants}>Digital Business Card</motion.h2>
+          <motion.h2 variants={variants}>{t('home.landing.heading')}</motion.h2>
         </Hide>
         <Separator variants={variants}></Separator>
         <Hide>
           <motion.p variants={variants}>
-            networking was never that easy
+            {t('home.landing.subHeading')}
           </motion.p>
         </Hide>
       </motion.div>

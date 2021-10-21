@@ -4,8 +4,11 @@ import { finalizePlanCheckout } from '../../api';
 import { API_BaseURL } from '../../utils/constants';
 import Loading from '../shared/Loading';
 import { FaCheck } from 'react-icons/fa';
+import { Colors } from '../../styles/Colors';
+import { HashLink } from 'react-router-hash-link';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 
-const ProductDisplay = (props) => {
+const ProductDisplay = () => {
   const currentUserEmail = JSON.parse(localStorage.getItem('user'))?.email;
 
   return (
@@ -126,14 +129,7 @@ const ComingSoon = (props) => {
   );
 };
 
-const Message = ({ message }) => (
-  <section>
-    <p>{message}</p>
-  </section>
-);
-
-export default function PlanCheckout() {
-  const [message, setMessage] = useState('');
+export default function PlanCheckout({ setTheme }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -147,7 +143,7 @@ export default function PlanCheckout() {
     }
 
     if (query.get('canceled')) {
-      setMessage('Order canceled -- please checkout again');
+      window.location.href = '/';
     }
   }, []);
 
@@ -157,17 +153,14 @@ export default function PlanCheckout() {
         <Loading />
       ) : (
         <>
-          {message ? (
-            <Message message={message} />
-          ) : (
-            <>
-              <h2 className='title'>Select your Plan</h2>
-              <div className='product-wrapper'>
-                <ProductDisplay />
-                <ComingSoon />
-              </div>
-            </>
-          )}
+          <h2 className='title'>Select your Plan</h2>
+          <div className='product-wrapper'>
+            <ProductDisplay />
+            <ComingSoon />
+          </div>
+          <HashLink to='/logout'>
+            <AiOutlineArrowLeft /> Cancel
+          </HashLink>
         </>
       )}
     </PlanCheckoutWrapper>
@@ -179,7 +172,7 @@ const PlanCheckoutWrapper = styled.section`
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  background: #242d60;
+  background: ${Colors.primaryColor};
   padding-top: 20vh;
   height: 100%;
   min-height: 100vh;
@@ -199,6 +192,21 @@ const PlanCheckoutWrapper = styled.section`
     padding-top: 1rem;
     margin: 0rem 1rem;
     margin-bottom: 2rem;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      margin-right: 0.2rem;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   .product-wrapper {

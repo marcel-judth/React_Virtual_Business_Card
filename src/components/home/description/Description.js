@@ -2,8 +2,10 @@ import styled from 'styled-components';
 import { Colors } from '../../../styles/Colors';
 import Card from './Card';
 import { useScroll } from '../../../hooks/useScroll';
+import { useTranslation } from 'react-i18next';
 
 const Description = () => {
+  const { t } = useTranslation();
   const [el, ctrl] = useScroll();
   const [el2, ctrl2] = useScroll();
   const [el3, ctrl3] = useScroll();
@@ -19,43 +21,23 @@ const Description = () => {
 
   return (
     <DescriptionWrapper>
-      <h2 className='mobile-header'>About us</h2>
+      <h2 className='mobile-header'>{t('home.description.heading')}</h2>
       <div className='card-wrapper'>
         <Card ref={el} variants={cardVariants} animate={ctrl}>
-          <h3>Who?</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque,
-            eaque. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Exercitationem ipsum accusamus neque. Officia fuga sint sapiente,
-            veniam vero animi nihil!
-          </p>
+          <h3>{t('home.description.card1.heading')}</h3>
+          <p>{t('home.description.card1.text')}</p>
         </Card>
         <Card ref={el2} variants={cardVariants} animate={ctrl2}>
-          <h3>What?</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque,
-            eaque. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Exercitationem ipsum accusamus neque. Officia fuga sint sapiente,
-            veniam vero animi nihil!
-          </p>
+          <h3>{t('home.description.card1.heading')}</h3>
+          <p>{t('home.description.card1.text')}</p>
         </Card>
         <Card ref={el3} variants={cardVariants} animate={ctrl3}>
-          <h3>Why?</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque,
-            eaque. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Exercitationem ipsum accusamus neque. Officia fuga sint sapiente,
-            veniam vero animi nihil!
-          </p>
+          <h3>{t('home.description.card1.heading')}</h3>
+          <p>{t('home.description.card1.text')}</p>
         </Card>
         <Card ref={el4} variants={cardVariants} animate={ctrl4}>
-          <h3>How?</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque,
-            eaque. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Exercitationem ipsum accusamus neque. Officia fuga sint sapiente,
-            veniam vero animi nihil!
-          </p>
+          <h3>{t('home.description.card1.heading')}</h3>
+          <p>{t('home.description.card1.text')}</p>
         </Card>
       </div>
     </DescriptionWrapper>

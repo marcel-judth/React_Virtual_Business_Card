@@ -37,7 +37,6 @@ function Register({ setTheme }) {
             <FaUserAlt />
           </IconImage>
           <br />
-
           <TextInput
             onChange={(event) => setUsername(event.target.value)}
             placeholder='Username'

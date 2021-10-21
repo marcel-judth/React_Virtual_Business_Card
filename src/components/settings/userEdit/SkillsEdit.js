@@ -42,18 +42,19 @@ function SkillsEdit({
     <SkillEditWrapper>
       <SkillForm>
         <h3>Edit Skill</h3>
-        <TextInput
-          placeholder='Skill'
-          Icon={RiToolsFill}
-          value={user.skills[index]}
-          onChange={(e) => {
-            const tmp = user;
-            tmp.skills[index] = e.target.value;
+        <div>
+          <TextInput
+            placeholder='Skill'
+            Icon={RiToolsFill}
+            value={user.skills[index]}
+            onChange={(e) => {
+              const tmp = user;
+              tmp.skills[index] = e.target.value;
 
-            setUser({ ...user, skills: tmp.skills });
-          }}
-        />
-
+              setUser({ ...user, skills: tmp.skills });
+            }}
+          />
+        </div>
         <CustomButton onClick={handleSubmit}>Save</CustomButton>
         <br />
         <CancelButton onClick={removeSkill}>Remove</CancelButton>
@@ -71,6 +72,11 @@ const SkillEditWrapper = styled.div`
   margin-right: auto;
   margin-top: 15vh;
   margin-bottom: 10vh;
+
+  h3 {
+    margin-bottom: 2rem;
+  }
+
   @media (max-width: 700px) {
     width: 100vw;
     border: none;
@@ -88,10 +94,6 @@ const SkillForm = styled.div`
   border-radius: 1rem;
   min-width: 25rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
-  input {
-    margin-top: 2rem;
-  }
 
   @media (max-width: 700px) {
     padding: 3rem 5vh;

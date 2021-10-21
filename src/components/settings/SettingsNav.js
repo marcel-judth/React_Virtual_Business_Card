@@ -79,6 +79,7 @@ const SettingsNavWrapper = styled.div`
   min-width: 4rem;
   z-index: 10;
   transition: all 0.5s ease-in-out;
+  z-index: 50;
 
   .rotated {
     transform: rotate(90deg);
