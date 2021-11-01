@@ -9,6 +9,7 @@ const TextInput = ({
   onChange,
   isPassword = false,
   pattern,
+  disabled = false,
 }) => {
   return (
     <TextInputWrapper>
@@ -19,8 +20,14 @@ const TextInput = ({
         value={value}
         required={required}
         onChange={onChange}
+        disabled={disabled ? 'disabled' : ''}
+        title={
+          disabled
+            ? 'Please upgrade to business license to edit this field'
+            : ''
+        }
       />
-      <label for='' class='form__label'>
+      <label for='' class={disabled ? ' form__label disabled' : 'form__label'}>
         <Icon />
         {placeholder}
       </label>
@@ -86,6 +93,15 @@ const TextInputWrapper = styled.div`
   /*Input focus*/
   .form__input:focus {
     border: 1.5px solid ${Colors.secondaryColor};
+  }
+
+  .form__input:disabled {
+    border: 1px solid lightgray;
+    color: lightgray;
+  }
+
+  .disabled {
+    color: lightgray;
   }
 `;
 

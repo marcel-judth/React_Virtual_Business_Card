@@ -18,9 +18,8 @@ import styled from 'styled-components';
 import CancelButton from '../../shared/CancelButton';
 import CustomButton from '../../shared/CustomButton';
 import TextInput from '../../shared/TextInput';
-import defaultProfilePicture from '../../../img/profile.png';
+import defaultProfilePicture from '../../../img/defaultcompany.png';
 import Logo from '../../shared/Logo';
-import ScrollTop from '../../shared/ScrollTop';
 import _ from 'lodash';
 import CloseIcon from '../../shared/CloseIcon';
 import Loading from '../../shared/Loading';
@@ -83,6 +82,7 @@ function CompanyEdit({
             type='file'
             accept='image/*'
             onChange={handleImgChange}
+            autofocus
             ref={(file) => (fileInput.current = file)}
           />
           <Logo
@@ -258,7 +258,6 @@ function CompanyEdit({
           <CloseIcon onClick={closePopup} />
         </CompanyEditForm>
       )}
-      <ScrollTop />
     </CompanyEditWrapper>
   );
 }

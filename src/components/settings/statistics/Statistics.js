@@ -31,7 +31,7 @@ const Statistics = (props) => {
             width={'90vw'}
             height={'50vh'}
             chartType='AreaChart'
-            loader={<div>Loading Chart</div>}
+            loader={<Loading />}
             data={[
               ['x', 'scans'],
               [daysSorted[0], values[0]],

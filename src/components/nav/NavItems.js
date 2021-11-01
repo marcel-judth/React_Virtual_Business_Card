@@ -4,33 +4,20 @@ import { HashLink as Link } from 'react-router-hash-link';
 import styled from 'styled-components';
 import { Colors } from '../../styles/Colors';
 
-const NavItem = ({ setNavStatus, navStatus, Icon, text, pathname, link }) => {
+const NavItem = ({
+  setNavStatus,
+  navStatus,
+  Icon,
+  text,
+  pathname,
+  link,
+  children,
+}) => {
   const location = useLocation();
-
-  const itemVariants = {
-    show: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        y: { stiffness: 1000, velocity: -100 },
-      },
-    },
-    hidden: {
-      opacity: 0,
-      transition: {
-        y: { stiffness: 1000 },
-      },
-    },
-  };
 
   return (
     <NavItemWrapper>
-      <motion.li
-        variants={itemVariants}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={() => setNavStatus(!navStatus)}
-      >
+      <motion.li onClick={() => setNavStatus(!navStatus)}>
         <Link
           className={
             'nav-link ' + (location.pathname === pathname ? 'active' : '')
@@ -40,12 +27,15 @@ const NavItem = ({ setNavStatus, navStatus, Icon, text, pathname, link }) => {
           {Icon}
           {text}
         </Link>
+        {children}
       </motion.li>
     </NavItemWrapper>
   );
 };
 
 const NavItemWrapper = styled.div`
+  position: relative;
+
   .nav-link {
     display: flex;
     align-items: center;

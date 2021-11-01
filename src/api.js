@@ -48,7 +48,8 @@ const getMyAccount = async (setUser, setLoading, setTheme) => {
     if (error.response?.status === 403)
       return (window.location.href = '/plancheckout');
 
-    window.location.href = '/';
+    // window.location.href = '/';
+    console.log(error);
   }
 };
 
@@ -150,6 +151,7 @@ const register = async (
   username,
   email,
   password,
+  isPublic,
   setLoading,
   setError,
   history
@@ -159,6 +161,7 @@ const register = async (
       username,
       email,
       password,
+      public: isPublic,
     })
     .then((res) => {
       localStorage.setItem('user', JSON.stringify(res.data));
@@ -172,14 +175,33 @@ const register = async (
 
 const finalizePlanCheckout = async (email, username) => {
   axios
-    .post(API_BaseURL + '/users/finalizePlanCheckout', {
+    .post(API_BaseURL + '/stripe/finalizePlanCheckout', {
       email,
     })
     .then((res) => {
-      if (res.status === 200) window.location.href = '/details/' + username;
-      else window.location.href = '/';
+      if (res.status === 200) {
+        localStorage.setItem('user', JSON.stringify(res.data));
+        window.location.href = '/mypage';
+      } else window.location.href = '/';
+    })
+    .catch(() => {
+      window.location.href = '/';
+    });
+};
+
+const deactivateSubscription = async (email) => {
+  axios
+    .post(API_BaseURL + '/stripe/deactivateSubscription', {
+      email,
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        localStorage.setItem('user', JSON.stringify(res.data));
+        window.location.href = '/mypage';
+      } else window.location.href = '/';
     })
     .catch((err) => {
+      console.log(err);
       window.location.href = '/';
     });
 };
@@ -234,6 +256,35 @@ const changePassword = async (
         newPassword,
         currentPassword,
         username,
+      },
+      {
+        headers: {
+          'x-auth-token': JSON.parse(localStorage.getItem('user'))?.token,
+        },
+      }
+    )
+    .then(() => {
+      setSuccess(true);
+      setIsLoading(false);
+    })
+    .catch((err) => {
+      displayError(err, setError, setIsLoading);
+    });
+};
+
+const changeEmail = async (
+  email,
+  newEmail,
+  setSuccess,
+  setIsLoading,
+  setError
+) => {
+  axios
+    .post(
+      API_BaseURL + '/users/changeEmail',
+      {
+        email,
+        newEmail,
       },
       {
         headers: {
@@ -310,10 +361,12 @@ export {
   update,
   forgotPassword,
   changePassword,
+  changeEmail,
   resetPassword,
   finalizePlanCheckout,
   getScans,
   uploadImage,
   addItem,
   activate,
+  deactivateSubscription,
 };

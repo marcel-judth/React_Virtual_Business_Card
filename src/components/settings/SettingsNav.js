@@ -1,13 +1,19 @@
 import styled from 'styled-components';
 
-import { FaChartLine, FaLock, FaUser } from 'react-icons/fa';
+import { FaChartLine, FaUser } from 'react-icons/fa';
 import { FiPercent } from 'react-icons/fi';
 import { BsArrowRightShort, BsFillChatFill } from 'react-icons/bs';
 import { RiLogoutBoxFill } from 'react-icons/ri';
 import { Colors } from '../../styles/Colors';
 import NavItem from '../nav/NavItems';
+import { AiFillSetting } from 'react-icons/ai';
+import DropdownItem from '../nav/DropdownItem';
+import { HashLink as Link } from 'react-router-hash-link';
+import { useState } from 'react';
 
 const SettingsNav = ({ setNavStatus, navStatus }) => {
+  const [dropdownActive, setDropdownActive] = useState(false);
+
   return (
     <SettingsNavWrapper navOpen={navStatus}>
       <ul>
@@ -38,19 +44,36 @@ const SettingsNav = ({ setNavStatus, navStatus }) => {
         <NavItem
           setNavStatus={setNavStatus}
           navStatus={navStatus}
-          Icon={<FaLock />}
-          pathname='/settings/changePassword'
-          link='/settings/changePassword'
-          text=''
-        />
-        <NavItem
-          setNavStatus={setNavStatus}
-          navStatus={navStatus}
           Icon={<BsFillChatFill />}
           pathname='/settings/support'
           link='/settings/support'
           text=''
         />
+        <DropdownItem
+          Icon={<AiFillSetting />}
+          onClick={() => setDropdownActive(!dropdownActive)}
+          pathnames={[
+            '/settings/changepassword',
+            '/settings/changeemail',
+            '/settings/changeplan',
+            '/settings/deleteaccount',
+          ]}
+        >
+          <SettingsDropdown
+            className={dropdownActive ? 'active' : ''}
+            onClick={() => {
+              setDropdownActive(!dropdownActive);
+              setNavStatus(false);
+            }}
+          >
+            <Link to='/settings/changepassword'>Change Password</Link>
+            <Link to='/settings/changeemail'>Change Email</Link>
+            <Link to='/settings/changeplan'>Change Plan</Link>
+            <Link className='danger' to='/settings/deleteaccount'>
+              Delete Account
+            </Link>
+          </SettingsDropdown>
+        </DropdownItem>
         <NavItem
           setNavStatus={setNavStatus}
           navStatus={navStatus}
@@ -66,6 +89,39 @@ const SettingsNav = ({ setNavStatus, navStatus }) => {
     </SettingsNavWrapper>
   );
 };
+
+const SettingsDropdown = styled.div`
+  position: absolute;
+  min-width: 12rem;
+  width: auto;
+  height: 5rem;
+  height: fit-content;
+  background: white;
+  left: 1.5rem;
+  top: 0.2rem;
+  border: 1px solid hsla(210, 18%, 87%, 1);
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+
+  a {
+    color: ${Colors.textColor};
+    display: block;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid hsla(210, 18%, 87%, 1);
+
+    &:hover {
+      background: hsla(210, 18%, 87%, 1);
+    }
+  }
+
+  .danger {
+    color: ${Colors.warningColor};
+  }
+`;
 
 const SettingsNavWrapper = styled.div`
   position: relative;
@@ -83,6 +139,11 @@ const SettingsNavWrapper = styled.div`
 
   .rotated {
     transform: rotate(90deg);
+  }
+
+  .active {
+    opacity: 1;
+    pointer-events: all;
   }
 
   ul {

@@ -7,11 +7,14 @@ import {
   FaEnvelope,
   FaPhone,
   FaMobileAlt,
+  FaXing,
+  FaTwitter,
+  FaTelegramPlane,
 } from 'react-icons/fa';
-import { FiShare } from 'react-icons/fi';
 
 import Icon from '../shared/Icon';
-import defaultProfilePicture from '../../img/profile.png';
+import defaultProfilePicture from '../../img/userdefault.png';
+import { SiTiktok } from 'react-icons/si';
 
 function DetailsHeader({ user, theme, setPopupDisplayed }) {
   return (
@@ -47,20 +50,22 @@ function DetailsHeader({ user, theme, setPopupDisplayed }) {
           {user.instagramURL && (
             <Icon theme={theme} Icon={FaInstagram} url={user.instagramURL} />
           )}
+          {user.twitterURL && (
+            <Icon theme={theme} Icon={FaTwitter} url={user.twitterURL} />
+          )}
+          {user.tiktokURL && (
+            <Icon theme={theme} Icon={SiTiktok} url={user.tiktokURL} />
+          )}
           {user.linkedInURL && (
             <Icon theme={theme} Icon={FaLinkedinIn} url={user.linkedInURL} />
           )}
+          {user.xingURL && (
+            <Icon theme={theme} Icon={FaXing} url={user.xingURL} />
+          )}
+          {user.telegramURL && (
+            <Icon theme={theme} Icon={FaTelegramPlane} url={user.telegramURL} />
+          )}
         </IconsWrapper>
-      </div>
-      <div className='logo-wrapper'>
-        <button
-          onClick={() => {
-            setPopupDisplayed(true);
-          }}
-        >
-          <FiShare className='btn-icon' />
-          Share
-        </button>
       </div>
     </Header>
   );
@@ -68,10 +73,12 @@ function DetailsHeader({ user, theme, setPopupDisplayed }) {
 
 const IconsWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   margin-top: 1rem;
 
   > * {
     margin-right: 0.3rem;
+    margin-top: 0.5rem;
   }
 
   @media (max-width: 800px) {
@@ -112,15 +119,6 @@ const Header = styled.div`
     margin-top: 1rem;
   }
 
-  .logo {
-    width: 10vw;
-    height: auto;
-  }
-
-  .logo-wrapper {
-    margin-left: auto;
-  }
-
   @media (max-width: 800px) {
     flex-direction: column;
     margin-top: 5rem;
@@ -129,9 +127,6 @@ const Header = styled.div`
       margin-bottom: 1rem;
       margin-left: 0;
       margin-right: 0;
-    }
-    .logo-wrapper {
-      display: none;
     }
 
     > * {

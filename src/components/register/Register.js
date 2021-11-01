@@ -10,21 +10,31 @@ import IconImage from '../shared/IconImage';
 import Loading from '../shared/Loading';
 import { useEffect } from 'react';
 
-function Register({ setTheme }) {
+function Register({ theme, setTheme }) {
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [isPublic, setIsPublic] = useState(false);
   const [error, setError] = useState();
   const history = useHistory();
 
   useEffect(() => {
-    setTheme({ navWhiteColor: true });
-  });
+    if (window.screen.width > 600) setTheme({ navWhiteColor: true });
+    else setTheme({ navWhiteColor: false });
+  }, [setTheme]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    register(username, email, password, setLoading, setError, history);
+    register(
+      username,
+      email,
+      password,
+      isPublic,
+      setLoading,
+      setError,
+      history
+    );
   };
 
   return (
@@ -55,6 +65,22 @@ function Register({ setTheme }) {
             isPassword
             Icon={FaLock}
           />
+          <div className='checkbox-wrapper'>
+            <input
+              type='checkbox'
+              id='cboxPhoneportal'
+              onChange={() => setIsPublic(!isPublic)}
+            />
+            <label htmlFor='subscribeNews'>
+              My profile should be visible in the networking portal
+            </label>
+          </div>
+          <div className='checkbox-wrapper'>
+            <input type='checkbox' id='cboxTerms' required />
+            <label htmlFor='subscribeNews'>
+              I agree to the <a href='/terms'>terms and conditions </a>
+            </label>
+          </div>
           <span className='error-label'>{error}</span>
           <CustomButton>Register</CustomButton>
         </div>
@@ -95,7 +121,27 @@ const RegisterWrapper = styled.form`
     border: 1px solid lightgrey;
     min-width: 25rem;
   }
+
+  .checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: start;
+    padding-left: 1rem;
+
+    input:checked {
+      background-color: ${Colors.primaryColor};
+      background-color: #41b883;
+    }
+
+    label {
+      margin-left: 0.5rem;
+      font-size: 0.8rem;
+    }
+  }
+
   @media (max-width: 600px) {
+    background: white;
     .content-wrapper {
       border: none;
     }

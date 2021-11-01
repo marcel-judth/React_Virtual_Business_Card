@@ -1,16 +1,20 @@
 import { FaEdit } from 'react-icons/fa';
 import styled from 'styled-components';
 
-function Logo({ fileInput, src, isRounded = false }) {
+function Logo({ fileInput, src, isRounded = false, disabled = false }) {
   return (
     <LogoContainer>
       <div className={isRounded ? 'container rounded' : 'container'}>
         <img className='logo' src={src} alt='company logo' />
-        <div
-          className='overlay'
-          onClick={() => fileInput.current.click()}
-        ></div>
-        <FaEdit />
+        {!disabled && (
+          <>
+            <div
+              className='overlay'
+              onClick={() => fileInput.current.click()}
+            ></div>
+            <FaEdit />
+          </>
+        )}
       </div>
     </LogoContainer>
   );

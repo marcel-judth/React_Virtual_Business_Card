@@ -47,6 +47,7 @@ const Skill = styled.div`
 
 const SkillsWrapper = styled.div`
   margin-left: 4rem;
+  min-width: 15rem;
 
   @media (max-width: 1100px) {
     width: 100%;

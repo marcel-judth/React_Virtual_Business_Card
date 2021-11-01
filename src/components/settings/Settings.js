@@ -9,6 +9,8 @@ import ChangePassword from './changePassword/ChangePassword';
 import Support from './support/Support';
 import Statistics from './statistics/Statistics';
 import { useEffect } from 'react';
+import ChangeEmail from './changeEmail/changeEmail';
+import ChangePlan from './changePlan/ChangePlan';
 
 const Settings = ({ setTheme }) => {
   const [navActive, setNavActive] = useState(false);
@@ -26,6 +28,8 @@ const Settings = ({ setTheme }) => {
         <Switch>
           <Route path='/settings' exact component={UserEdit} />
           <Route path='/settings/changepassword' component={ChangePassword} />
+          <Route path='/settings/changeemail' component={ChangeEmail} />
+          <Route path='/settings/changeplan' component={ChangePlan} />
           <Route path='/settings/support' component={Support} />
           <Route path='/settings/logout' component={Logout} />
           <Route path='/settings/statistics' component={Statistics} />

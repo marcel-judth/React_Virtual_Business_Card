@@ -18,7 +18,8 @@ function Login({ setTheme }) {
   const history = useHistory();
 
   useEffect(() => {
-    setTheme({ navWhiteColor: true });
+    if (window.screen.width > 600) setTheme({ navWhiteColor: true });
+    else setTheme({ navWhiteColor: false });
   }, [setTheme]);
 
   const handleSubmit = (e) => {

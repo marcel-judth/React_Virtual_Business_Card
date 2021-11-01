@@ -1,139 +1,17 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { finalizePlanCheckout } from '../../api';
-import { API_BaseURL } from '../../utils/constants';
 import Loading from '../shared/Loading';
-import { FaCheck } from 'react-icons/fa';
 import { Colors } from '../../styles/Colors';
 import { HashLink } from 'react-router-hash-link';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
+import StandardPlanCard from './StandardPlanCard';
+import BusinessPlanCard from './BusinessPlanCard';
 
-const ProductDisplay = () => {
-  const currentUserEmail = JSON.parse(localStorage.getItem('user'))?.email;
-
-  return (
-    <section>
-      <h2>Basic Plan</h2>
-      <div className='product'>
-        <div>
-          <h3>
-            <span>1.99€</span> / month
-          </h3>
-          <h5>+49.99€ activation fee</h5>
-        </div>
-        <div className='description'>
-          <div className='line'>
-            <p>
-              <FaCheck className='icon' />
-              No app required!
-            </p>
-          </div>
-          <div className='line'>
-            <p>
-              <FaCheck className='icon' />
-              Reduce Costs
-            </p>
-          </div>
-          <div className='line'>
-            <p>
-              <FaCheck className='icon' />
-              Reach more people
-            </p>
-          </div>
-          <div className='line'>
-            <p>
-              <FaCheck className='icon' />
-              unlimited scans
-            </p>
-          </div>
-        </div>
-      </div>
-      <form
-        action={
-          API_BaseURL +
-          '/stripe/create-plan-checkout-session/' +
-          currentUserEmail
-        }
-        method='POST'
-      >
-        <button className='checkout-button' type='submit'>
-          Select
-        </button>
-      </form>
-    </section>
-  );
-};
-
-const ComingSoon = (props) => {
-  return (
-    <section>
-      <h2>Business Plan</h2>
-      <div className='product'>
-        <div>
-          <h3>
-            <span>tba</span> / month
-          </h3>
-          <h5>+ activation fee</h5>
-        </div>
-        <div className='description'>
-          <div className='line'>
-            <p>
-              <FaCheck className='icon' />
-              No app required!
-            </p>
-          </div>
-          <div className='line'>
-            <p>
-              <FaCheck className='icon' />
-              Reduce Costs
-            </p>
-          </div>
-          <div className='line'>
-            <p>
-              <FaCheck className='icon' />
-              Reach more people
-            </p>
-          </div>
-          <div className='line'>
-            <p>
-              <FaCheck className='icon' />
-              unlimited scans
-            </p>
-          </div>
-          <div className='line'>
-            <p>
-              <FaCheck className='icon' />
-              see employees data
-            </p>
-          </div>
-          <div className='line'>
-            <p>
-              <FaCheck className='icon' />
-              get company benefits
-            </p>
-          </div>
-          <div className='line'>
-            <p>
-              <FaCheck className='icon' />
-              custom branding
-            </p>
-          </div>
-        </div>
-      </div>
-      <form method='POST'>
-        <button className='checkout-button coming-soon-btn' type='submit'>
-          Coming Soon
-        </button>
-      </form>
-    </section>
-  );
-};
-
-export default function PlanCheckout({ setTheme }) {
+export default function PlanCheckout() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
 
     if (query.get('success')) {
@@ -154,13 +32,18 @@ export default function PlanCheckout({ setTheme }) {
       ) : (
         <>
           <h2 className='title'>Select your Plan</h2>
+
+          <button className='compare-button'>Compare Plans</button>
+
           <div className='product-wrapper'>
-            <ProductDisplay />
-            <ComingSoon />
+            <StandardPlanCard />
+            <BusinessPlanCard />
           </div>
           <HashLink to='/logout'>
             <AiOutlineArrowLeft /> Cancel
           </HashLink>
+          <br></br>
+          <br></br>
         </>
       )}
     </PlanCheckoutWrapper>
@@ -262,7 +145,7 @@ const PlanCheckoutWrapper = styled.section`
     color: white;
     font-weight: 600;
     font-size: 2rem;
-    margin-bottom: 4rem;
+    margin-bottom: 1rem;
   }
 
   h2 {
@@ -283,6 +166,25 @@ const PlanCheckoutWrapper = styled.section`
   }
   h5 {
     opacity: 0.5;
+  }
+
+  .compare-button {
+    height: 36px;
+    background: ${Colors.secondaryColor};
+    color: ${Colors.primaryColor};
+    width: 10rem;
+    font-size: 14px;
+    border: 0;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.6;
+    border-radius: 6px 6px 6px 6px;
+    transition: all 0.2s ease;
+    box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+    margin-bottom: 1rem;
+  }
+  .compare-button:hover {
+    opacity: 0.8;
   }
 
   .checkout-button {

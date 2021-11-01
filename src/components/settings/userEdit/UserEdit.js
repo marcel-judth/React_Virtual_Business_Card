@@ -13,14 +13,18 @@ import {
   FaPen,
   FaPhoneAlt,
   FaUser,
+  FaTwitter,
+  FaXing,
+  FaTelegramPlane,
 } from 'react-icons/fa';
+import { SiTiktok } from 'react-icons/si';
 import CustomButton from '../../shared/CustomButton';
 import { Colors } from '../../../styles/Colors';
 import TextInput from '../../shared/TextInput';
 import CompanyHeader from './CompanyHeader';
 import { getMyAccount, update, uploadImage } from '../../../api';
 import CompanyEdit from './CompanyEdit';
-import defaultProfilePicture from '../../../img/profile.png';
+import defaultProfilePicture from '../../../img/userdefault.png';
 import Logo from '../../shared/Logo';
 import ScrollTop from '../../shared/ScrollTop';
 import _ from 'lodash';
@@ -29,8 +33,8 @@ import SkillHeader from './SkillHeader';
 import SkillsEdit from './SkillsEdit';
 import { SwatchesPicker } from 'react-color';
 import Loading from '../../shared/Loading';
-import { AiOutlineTwitter } from 'react-icons/ai';
 import { MdDateRange } from 'react-icons/md';
+import { userHasLicense } from '../../../utils/license';
 
 function UserEdit() {
   const [error, setError] = useState();
@@ -42,17 +46,19 @@ function UserEdit() {
   const [loading, setLoading] = useState(true);
   const [visible, setVisible] = useState(true);
   const [user, setUser] = useState();
-  const currentUserEmail = JSON.parse(localStorage.getItem('user'))?.email;
+  const [profLicense, setprofLicense] = useState(false);
 
   useEffect(() => {
     getMyAccount(
       (userObj) => {
         setUser(_.cloneDeep(userObj));
+        setprofLicense(userHasLicense('business'));
+        console.log(profLicense);
       },
       setLoading,
       () => {}
     );
-  }, [currentUserEmail]);
+  }, [profLicense]);
 
   async function handleImgChange(event) {
     setLoading(true);
@@ -122,6 +128,7 @@ function UserEdit() {
                     src={user.image ? user.image : defaultProfilePicture}
                     fileInput={fileInput}
                     isRounded
+                    disabled={!profLicense}
                   />
                   <div className='input-wrappers'>
                     <TextInput
@@ -144,25 +151,6 @@ function UserEdit() {
                       }
                     />
                     <TextInput
-                      placeholder='Date of Birth (dd.mm.yyyy)'
-                      Icon={MdDateRange}
-                      value={user.dateOfBirth}
-                      pattern='(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}'
-                      onChange={(e) =>
-                        setUser({ ...user, dateOfBirth: e.target.value })
-                      }
-                    />
-
-                    <TextInput
-                      placeholder='Job Title'
-                      Icon={FaIdCardAlt}
-                      value={user.jobtitle}
-                      onChange={(e) =>
-                        setUser({ ...user, jobtitle: e.target.value })
-                      }
-                    />
-
-                    <TextInput
                       placeholder='Description'
                       Icon={FaPen}
                       value={user.description}
@@ -170,6 +158,7 @@ function UserEdit() {
                         setUser({ ...user, description: e.target.value })
                       }
                     />
+
                     <TextInput
                       placeholder='Phone Nr.'
                       Icon={FaPhoneAlt}
@@ -185,14 +174,38 @@ function UserEdit() {
                       onChange={(e) =>
                         setUser({ ...user, mobileNr: e.target.value })
                       }
+                      disabled={!profLicense}
                     />
+
                     <TextInput
-                      placeholder='Street Number'
+                      placeholder='Job Title'
+                      Icon={FaIdCardAlt}
+                      value={user.jobtitle}
+                      onChange={(e) =>
+                        setUser({ ...user, jobtitle: e.target.value })
+                      }
+                      disabled={!profLicense}
+                    />
+
+                    <TextInput
+                      placeholder='Date of Birth (dd.mm.yyyy)'
+                      Icon={MdDateRange}
+                      value={user.dateOfBirth}
+                      pattern='(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}'
+                      onChange={(e) =>
+                        setUser({ ...user, dateOfBirth: e.target.value })
+                      }
+                      disabled={!profLicense}
+                    />
+
+                    <TextInput
+                      placeholder='Street & Number'
                       Icon={FaAddressBook}
                       value={user.street}
                       onChange={(e) =>
                         setUser({ ...user, street: e.target.value })
                       }
+                      disabled={!profLicense}
                     />
                     <TextInput
                       placeholder='Zip Code'
@@ -201,6 +214,7 @@ function UserEdit() {
                       onChange={(e) =>
                         setUser({ ...user, zipCode: e.target.value })
                       }
+                      disabled={!profLicense}
                     />
                     <TextInput
                       placeholder='City'
@@ -209,6 +223,7 @@ function UserEdit() {
                       onChange={(e) =>
                         setUser({ ...user, city: e.target.value })
                       }
+                      disabled={!profLicense}
                     />
                     <TextInput
                       placeholder='Country'
@@ -217,6 +232,7 @@ function UserEdit() {
                       onChange={(e) =>
                         setUser({ ...user, country: e.target.value })
                       }
+                      disabled={!profLicense}
                     />
                     <TextInput
                       placeholder='Facebook Url'
@@ -225,6 +241,7 @@ function UserEdit() {
                       onChange={(e) =>
                         setUser({ ...user, facebookURL: e.target.value })
                       }
+                      disabled={!profLicense}
                     />
                     <TextInput
                       placeholder='Instagram Url'
@@ -233,6 +250,25 @@ function UserEdit() {
                       onChange={(e) =>
                         setUser({ ...user, instagramURL: e.target.value })
                       }
+                      disabled={!profLicense}
+                    />
+                    <TextInput
+                      placeholder='TikTok Url'
+                      Icon={SiTiktok}
+                      value={user.tiktokURL}
+                      onChange={(e) =>
+                        setUser({ ...user, tiktokURL: e.target.value })
+                      }
+                      disabled={!profLicense}
+                    />
+                    <TextInput
+                      placeholder='Twitter Url'
+                      Icon={FaTwitter}
+                      value={user.twitterURL}
+                      onChange={(e) =>
+                        setUser({ ...user, twitterURL: e.target.value })
+                      }
+                      disabled={!profLicense}
                     />
                     <TextInput
                       placeholder='LinkedIn Url'
@@ -241,21 +277,33 @@ function UserEdit() {
                       onChange={(e) =>
                         setUser({ ...user, linkedInURL: e.target.value })
                       }
+                      disabled={!profLicense}
                     />
                     <TextInput
-                      placeholder='Twitter Url'
-                      Icon={AiOutlineTwitter}
-                      value={user.twitterURL}
+                      placeholder='XING Url'
+                      Icon={FaXing}
+                      value={user.xingURL}
                       onChange={(e) =>
-                        setUser({ ...user, twitterURL: e.target.value })
+                        setUser({ ...user, xingURL: e.target.value })
                       }
+                      disabled={!profLicense}
+                    />
+                    <TextInput
+                      placeholder='Telegram Url'
+                      Icon={FaTelegramPlane}
+                      value={user.telegramURL}
+                      onChange={(e) =>
+                        setUser({ ...user, telegramURL: e.target.value })
+                      }
+                      disabled={!profLicense}
                     />
                   </div>
+                  <span>*Upgrade to business license to edit all fields.</span>
                   <div className='d-flex'>
                     <div className='company-wrapper'>
                       <h4>Companies</h4>
                       <div className='company-list'>
-                        {user.companies.map((company, index) => {
+                        {user.companies?.map((company, index) => {
                           return (
                             <CompanyHeader
                               onclick={() => openCompanyEdit(index)}
@@ -264,19 +312,26 @@ function UserEdit() {
                             />
                           );
                         })}
-                        <button
-                          className='add-btn'
-                          type='button'
-                          onClick={addNewCompany}
-                        >
-                          <IoIosAddCircle />
-                        </button>
+                        {profLicense ? (
+                          <button
+                            className='add-btn'
+                            type='button'
+                            onClick={addNewCompany}
+                          >
+                            <IoIosAddCircle />
+                          </button>
+                        ) : (
+                          <p>
+                            To add companies please upgrade to professional
+                            license.
+                          </p>
+                        )}
                       </div>
                     </div>
                     <div className='skills-wrapper'>
                       <h4>Skills</h4>
                       <div className='skills-list'>
-                        {user.skills.map((skill, index) => {
+                        {user.skills?.map((skill, index) => {
                           return (
                             <SkillHeader
                               skill={skill}
@@ -285,13 +340,19 @@ function UserEdit() {
                             />
                           );
                         })}
-                        <button
-                          className='add-btn'
-                          type='button'
-                          onClick={addNewSkill}
-                        >
-                          <IoIosAddCircle />
-                        </button>
+                        {profLicense ? (
+                          <button
+                            className='add-btn'
+                            type='button'
+                            onClick={addNewSkill}
+                          >
+                            <IoIosAddCircle />
+                          </button>
+                        ) : (
+                          <p>
+                            To add skills please upgrade to business license.
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -299,6 +360,21 @@ function UserEdit() {
                     color={user.color ? user.color : undefined}
                     onChangeComplete={handleColorChange}
                   />
+                  <div>
+                    <div className='checkbox-wrapper'>
+                      <input
+                        type='checkbox'
+                        id='cboxPublic'
+                        checked={user.public}
+                        onChange={() =>
+                          setUser({ ...user, public: !user.public })
+                        }
+                      />
+                      <label htmlFor='cboxPublic'>
+                        My profile should be visible in the networking portal
+                      </label>
+                    </div>
+                  </div>
                   <span className='error-label'>{error}</span>
                   <CustomButton onClick={handleSubmit}>Save</CustomButton>
                   <ScrollTop />
@@ -403,6 +479,32 @@ const EditForm = styled.form`
   .company-list,
   .skills-list {
     width: 100%;
+  }
+
+  p {
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+  }
+
+  .checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: start;
+    padding-left: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+
+    input:checked {
+      background-color: ${Colors.primaryColor};
+      background-color: #41b883;
+    }
+
+    label {
+      margin-left: 0.5rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
   }
 
   @media (max-width: 700px) {
