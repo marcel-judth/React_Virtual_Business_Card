@@ -15,7 +15,7 @@ const TextInput = ({
     <TextInputWrapper>
       <input
         type={isPassword ? 'password' : 'text'}
-        class='form__input'
+        className='form__input'
         placeholder=' '
         value={value}
         required={required}
@@ -27,7 +27,10 @@ const TextInput = ({
             : ''
         }
       />
-      <label for='' class={disabled ? ' form__label disabled' : 'form__label'}>
+      <label
+        htmlFor=''
+        className={disabled ? ' form__label disabled' : 'form__label'}
+      >
         <Icon />
         {placeholder}
       </label>

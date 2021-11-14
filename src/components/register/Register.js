@@ -43,9 +43,11 @@ function Register({ theme, setTheme }) {
         <Loading />
       ) : (
         <div className='content-wrapper'>
-          <IconImage>
-            <FaUserAlt />
-          </IconImage>
+          <div className='logo'>
+            <IconImage>
+              <FaUserAlt />
+            </IconImage>
+          </div>
           <br />
           <TextInput
             onChange={(event) => setUsername(event.target.value)}
@@ -100,10 +102,11 @@ const RegisterWrapper = styled.form`
   h2 {
     margin: 2rem 0rem;
   }
+
   .logo {
-    width: 10rem;
     margin-bottom: 1rem;
   }
+
   .error-label {
     color: ${Colors.warningColor};
     font-size: 0.8rem;

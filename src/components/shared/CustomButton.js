@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { Colors } from '../../styles/Colors';
 
-function CustomButton({ Icon, children, onClick }) {
+function CustomButton({ Icon, children, onClick, isSubmit = true }) {
   return (
-    <Button onClick={onClick}>
+    <Button type={isSubmit ? 'submit' : 'button'} onClick={onClick}>
       {Icon && <Icon className='btn-icon' />}
       {children}
     </Button>
@@ -27,7 +27,7 @@ const Button = styled.button`
   width: 100%;
 
   &:hover {
-    transform: scale(1.02);
+    opacity: 0.6;
   }
 
   .btn-icon {

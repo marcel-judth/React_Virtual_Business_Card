@@ -9,10 +9,17 @@ import NavItem from '../nav/NavItems';
 import { AiFillSetting } from 'react-icons/ai';
 import DropdownItem from '../nav/DropdownItem';
 import { HashLink as Link } from 'react-router-hash-link';
-import { useState } from 'react';
 
-const SettingsNav = ({ setNavStatus, navStatus }) => {
-  const [dropdownActive, setDropdownActive] = useState(false);
+const SettingsNav = ({
+  setNavStatusFunction,
+  navStatus,
+  dropdownActive,
+  setDropdownActive,
+}) => {
+  const setNavStatus = (status) => {
+    if (!status) setDropdownActive(status);
+    setNavStatusFunction(status);
+  };
 
   return (
     <SettingsNavWrapper navOpen={navStatus}>
@@ -55,7 +62,6 @@ const SettingsNav = ({ setNavStatus, navStatus }) => {
           pathnames={[
             '/settings/changepassword',
             '/settings/changeemail',
-            '/settings/changeplan',
             '/settings/deleteaccount',
           ]}
         >
@@ -68,7 +74,7 @@ const SettingsNav = ({ setNavStatus, navStatus }) => {
           >
             <Link to='/settings/changepassword'>Change Password</Link>
             <Link to='/settings/changeemail'>Change Email</Link>
-            <Link to='/settings/changeplan'>Change Plan</Link>
+            <Link to='/plancheckout'>Change Plan</Link>
             <Link className='danger' to='/settings/deleteaccount'>
               Delete Account
             </Link>
@@ -154,6 +160,10 @@ const SettingsNavWrapper = styled.div`
     list-style: none;
   }
 
+  li svg {
+    cursor: pointer;
+  }
+
   .selected {
     color: ${Colors.primaryColor} !important;
   }
@@ -179,6 +189,7 @@ const OpenTag = styled.div`
   top: 15%;
   right: -2rem;
   display: none;
+  cursor: pointer;
 
   svg {
     transition: 0.5s ease;

@@ -1,18 +1,20 @@
 import { FaCheck } from 'react-icons/fa';
 import { API_BaseURL } from '../../utils/constants';
+import { userHasLicense } from '../../utils/license';
 
 const BusinessPlanCard = () => {
   const currentUserEmail = JSON.parse(localStorage.getItem('user'))?.email;
+  const activeLicense = userHasLicense('business');
 
   return (
     <section>
-      <h2>Business Plan</h2>
+      <h2>Business Account</h2>
       <div className='product'>
-        <div>
+        <div className='price'>
           <h3>
-            <span>48.99€</span>
+            <span>0.99€</span>
           </h3>
-          <h5>+0.99€ / month</h5>
+          <h5> billed monthly</h5>
         </div>
         <div className='description'>
           <div className='line'>
@@ -24,13 +26,13 @@ const BusinessPlanCard = () => {
           <div className='line'>
             <p>
               <FaCheck className='icon' />
-              Reduce Costs
+              Download Contact Card
             </p>
           </div>
           <div className='line'>
             <p>
               <FaCheck className='icon' />
-              Reach more people
+              Visible in Networking Portal
             </p>
           </div>
           <div className='line'>
@@ -39,19 +41,46 @@ const BusinessPlanCard = () => {
               unlimited scans
             </p>
           </div>
+          <div className='line'>
+            <p>
+              <FaCheck className='icon' />
+              Upload Images
+            </p>
+          </div>
+          <div className='line'>
+            <p>
+              <FaCheck className='icon' />
+              Edit all fields
+            </p>
+          </div>
+          <div className='line'>
+            <p>
+              <FaCheck className='icon' />
+              Upload companies
+            </p>
+          </div>
+          <div className='line'>
+            <p>
+              <FaCheck className='icon' />
+              Upload skills
+            </p>
+          </div>
         </div>
       </div>
       <form
         action={
           API_BaseURL +
           '/stripe/create-plan-checkout-session/' +
-          currentUserEmail +
-          '/1'
+          currentUserEmail
         }
         method='POST'
       >
-        <button className='checkout-button' type='submit'>
-          Select
+        <button
+          className='checkout-button'
+          type='submit'
+          disabled={activeLicense ? 'disabled' : ''}
+        >
+          {activeLicense ? 'current' : 'select'}
         </button>
       </form>
     </section>

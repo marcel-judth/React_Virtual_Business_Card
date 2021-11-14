@@ -24,6 +24,7 @@ import _ from 'lodash';
 import CloseIcon from '../../shared/CloseIcon';
 import Loading from '../../shared/Loading';
 import { uploadImage } from '../../../api';
+import ScrollTop from '../../shared/ScrollTop';
 
 function CompanyEdit({
   currentUser,
@@ -35,6 +36,10 @@ function CompanyEdit({
   const fileInput = useRef();
   const [user, setUser] = useState(_.cloneDeep(currentUser));
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   async function handleImgChange(event) {
     setLoading(true);
@@ -62,9 +67,6 @@ function CompanyEdit({
     setCurrentUser({ ...currentUser, companies: tmp.companies });
     closePopup();
   }
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   function closePopup() {
     setVisible(false);
@@ -82,7 +84,7 @@ function CompanyEdit({
             type='file'
             accept='image/*'
             onChange={handleImgChange}
-            autofocus
+            autoFocus
             ref={(file) => (fileInput.current = file)}
           />
           <Logo
@@ -251,7 +253,7 @@ function CompanyEdit({
               setUser({ ...user, companies: tmp.companies });
             }}
           />
-
+          <ScrollTop />
           <CustomButton onClick={handleSubmit}>Save</CustomButton>
           <br />
           <CancelButton onClick={removeCompany}>Remove</CancelButton>
@@ -264,6 +266,7 @@ function CompanyEdit({
 
 const CompanyEditWrapper = styled.div`
   width: 30vw;
+  position: relative;
   display: block;
   margin-left: auto;
   margin-right: auto;

@@ -4,6 +4,7 @@ import phone from '../../../img/iphone_landing.jpg';
 import { Colors } from '../../../styles/Colors';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 
 const Landing = ({ theme, setTheme }) => {
   const { t } = useTranslation();
@@ -26,8 +27,11 @@ const Landing = ({ theme, setTheme }) => {
     },
   };
   const [component, view] = useInView({ threshold: 0.4 });
-  if (theme && theme.navWhiteColor === false && view)
-    setTheme({ navWhiteColor: true });
+
+  useEffect(() => {
+    if (theme && theme.navWhiteColor === false && view)
+      setTheme({ navWhiteColor: true });
+  }, [setTheme, theme, view]);
 
   return (
     <LandingWrapper

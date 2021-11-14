@@ -184,16 +184,26 @@ const finalizePlanCheckout = async (email, username) => {
         window.location.href = '/mypage';
       } else window.location.href = '/';
     })
-    .catch(() => {
-      window.location.href = '/';
+    .catch((err) => {
+      console.log(err);
+      // window.location.href = '/';
     });
 };
 
 const deactivateSubscription = async (email) => {
+  const user = JSON.parse(localStorage.getItem('user'));
   axios
-    .post(API_BaseURL + '/stripe/deactivateSubscription', {
-      email,
-    })
+    .post(
+      API_BaseURL + '/stripe/deactivateSubscription',
+      {
+        username: user.username,
+      },
+      {
+        headers: {
+          'x-auth-token': user?.token,
+        },
+      }
+    )
     .then((res) => {
       if (res.status === 200) {
         localStorage.setItem('user', JSON.stringify(res.data));
@@ -202,7 +212,32 @@ const deactivateSubscription = async (email) => {
     })
     .catch((err) => {
       console.log(err);
-      window.location.href = '/';
+      // window.location.href = '/';
+    });
+};
+
+const activateAccount = async (username) => {
+  axios
+    .post(
+      API_BaseURL + '/users/activateaccount',
+      {
+        username,
+      },
+      {
+        headers: {
+          'x-auth-token': JSON.parse(localStorage.getItem('user'))?.token,
+        },
+      }
+    )
+    .then((res) => {
+      if (res.status === 200) {
+        localStorage.setItem('user', JSON.stringify(res.data));
+        window.location.href = '/mypage';
+      } else window.location.href = '/';
+    })
+    .catch((err) => {
+      console.log(err);
+      // window.location.href = '/';
     });
 };
 
@@ -272,19 +307,15 @@ const changePassword = async (
     });
 };
 
-const changeEmail = async (
-  email,
-  newEmail,
-  setSuccess,
-  setIsLoading,
-  setError
-) => {
+const changeEmail = async (email, setSuccess, setIsLoading, setError) => {
+  const user = JSON.parse(localStorage.getItem('user'));
+
   axios
     .post(
       API_BaseURL + '/users/changeEmail',
       {
+        username: user.username,
         email,
-        newEmail,
       },
       {
         headers: {
@@ -292,9 +323,12 @@ const changeEmail = async (
         },
       }
     )
-    .then(() => {
-      setSuccess(true);
-      setIsLoading(false);
+    .then((res) => {
+      if (res.status === 200) {
+        localStorage.setItem('user', JSON.stringify(res.data));
+        setSuccess(true);
+        setIsLoading(false);
+      } else window.location.href = '/';
     })
     .catch((err) => {
       displayError(err, setError, setIsLoading);
@@ -353,6 +387,25 @@ function displayError(httpError, setError, setIsLoading) {
   }, 4000);
 }
 
+const deleteAccount = async (setSuccess, setIsLoading, setError) => {
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  axios
+    .delete(API_BaseURL + '/users/' + user.username, {
+      headers: {
+        'x-auth-token': user?.token,
+      },
+    })
+    .then(() => {
+      localStorage.clear();
+      setSuccess(true);
+      setIsLoading(false);
+    })
+    .catch((err) => {
+      displayError(err, setError, setIsLoading);
+    });
+};
+
 export {
   getUserByID,
   getMyAccount,
@@ -369,4 +422,6 @@ export {
   addItem,
   activate,
   deactivateSubscription,
+  deleteAccount,
+  activateAccount,
 };

@@ -41,12 +41,17 @@ function ForgotPassword() {
           <div className='content-wrapper'>
             {success ? (
               <>
-                <IconImage>
-                  <FaUserAlt />
-                </IconImage>
+                <div className='logo'>
+                  <IconImage>
+                    <FaUserAlt />
+                  </IconImage>
+                </div>
                 <p className='info-message'>{successMessage}</p>
                 <span className='error-label'>{error}</span>
-                <CustomButton onClick={() => (window.location.href = '/')}>
+                <CustomButton
+                  isSubmit={false}
+                  onClick={() => (window.location.href = '/')}
+                >
                   Return
                 </CustomButton>
               </>
@@ -72,9 +77,11 @@ function ForgotPassword() {
                   </>
                 ) : (
                   <>
-                    <IconImage>
-                      <FaUserAlt />
-                    </IconImage>
+                    <div className='logo'>
+                      <IconImage>
+                        <FaUserAlt />
+                      </IconImage>
+                    </div>
                     <br />
                     <TextInput
                       onChange={(event) => setEmail(event.target.value)}
@@ -108,7 +115,6 @@ const ForgotWrapper = styled.form`
   }
 
   .logo {
-    width: 10rem;
     margin-bottom: 1rem;
   }
 

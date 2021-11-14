@@ -68,6 +68,24 @@ const ContactWrapper = styled.div`
     max-width: 25rem;
     margin-top: 5rem;
   }
+
+  @media (max-width: 800px) {
+    h2 {
+      text-align: center;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    form {
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
 `;
 
 export default Contact;

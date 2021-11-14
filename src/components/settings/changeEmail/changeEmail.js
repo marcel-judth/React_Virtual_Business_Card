@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { Colors } from '../../../styles/Colors';
 import Loading from '../../shared/Loading';
 import { changeEmail } from '../../../api';
+import { HashLink } from 'react-router-hash-link';
 
 function ChangeEmail() {
   const [isLoading, setIsLoading] = useState();
@@ -14,13 +15,12 @@ function ChangeEmail() {
   const [email, setEmail] = useState();
   const [success, setSuccess] = useState();
   const [successMessage, setSuccessMessage] = useState();
-  const currentEmail = JSON.parse(localStorage.getItem('user'))?.email;
 
   const handleEmailChange = (e) => {
     e.preventDefault();
     setIsLoading(true);
     setSuccessMessage('Successfully changed email!');
-    changeEmail(currentEmail, email, setSuccess, setIsLoading, setError);
+    changeEmail(email, setSuccess, setIsLoading, setError);
   };
 
   return (
@@ -28,25 +28,28 @@ function ChangeEmail() {
       {isLoading ? (
         <Loading />
       ) : (
-        <ForgotWrapper>
+        <ChangeEmailWrapper>
           <div className='content-wrapper'>
             {success ? (
               <>
-                <IconImage>
-                  <FaUserAlt />
-                </IconImage>
+                <div className='logo'>
+                  <IconImage>
+                    <FaUserAlt />
+                  </IconImage>
+                </div>
                 <p className='info-message'>{successMessage}</p>
                 <span className='error-label'>{error}</span>
-                <CustomButton
-                  onClick={() => {
-                    window.location.href = '/';
-                  }}
-                >
-                  Return
-                </CustomButton>
+                <HashLink to='/settings'>
+                  <CustomButton>Return</CustomButton>
+                </HashLink>
               </>
             ) : (
               <>
+                <div className='logo'>
+                  <IconImage>
+                    <FaUserAlt />
+                  </IconImage>
+                </div>
                 <h2>Change Email</h2>
                 <TextInput
                   onChange={(event) => {
@@ -64,24 +67,24 @@ function ChangeEmail() {
               </>
             )}
           </div>
-        </ForgotWrapper>
+        </ChangeEmailWrapper>
       )}
     </>
   );
 }
 
-const ForgotWrapper = styled.form`
+const ChangeEmailWrapper = styled.form`
   width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+
   h2 {
     margin: 2rem 0rem;
   }
 
   .logo {
-    width: 10rem;
     margin-bottom: 1rem;
   }
 
@@ -120,7 +123,8 @@ const ForgotWrapper = styled.form`
 
   @media (max-width: 600px) {
     .content-wrapper {
-      border: none;
+      min-width: 90%;
+      max-width: 90%;
     }
   }
 `;

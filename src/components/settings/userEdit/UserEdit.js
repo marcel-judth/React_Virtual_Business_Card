@@ -53,7 +53,6 @@ function UserEdit() {
       (userObj) => {
         setUser(_.cloneDeep(userObj));
         setprofLicense(userHasLicense('business'));
-        console.log(profLicense);
       },
       setLoading,
       () => {}
@@ -113,9 +112,6 @@ function UserEdit() {
           {visible && (
             <>
               <EditWrapper>
-                <form>
-                  <div></div>
-                </form>
                 <EditForm onSubmit={handleSubmit}>
                   <input
                     style={{ display: 'none' }}
@@ -130,6 +126,15 @@ function UserEdit() {
                     isRounded
                     disabled={!profLicense}
                   />
+
+                  {!profLicense && (
+                    <a href='settings/changeplan'>
+                      <button type='button' className='upgrade-button'>
+                        Upgrade Now
+                      </button>
+                    </a>
+                  )}
+
                   <div className='input-wrappers'>
                     <TextInput
                       placeholder='First Name'
@@ -298,7 +303,11 @@ function UserEdit() {
                       disabled={!profLicense}
                     />
                   </div>
-                  <span>*Upgrade to business license to edit all fields.</span>
+                  {!profLicense && (
+                    <span className='warning'>
+                      Upgrade to business license to edit all fields.
+                    </span>
+                  )}
                   <div className='d-flex'>
                     <div className='company-wrapper'>
                       <h4>Companies</h4>
@@ -322,8 +331,7 @@ function UserEdit() {
                           </button>
                         ) : (
                           <p>
-                            To add companies please upgrade to professional
-                            license.
+                            To add companies please upgrade to business license.
                           </p>
                         )}
                       </div>
@@ -400,7 +408,6 @@ function UserEdit() {
               setParentVisible={setVisible}
             />
           )}
-          {/* {error && <ErrorPopup error={error} setError={setError} />} */}
         </>
       )}
     </>
@@ -464,6 +471,10 @@ const EditForm = styled.form`
     margin-bottom: 1rem;
   }
 
+  .warning {
+    color: ${Colors.warningColor};
+  }
+
   .company-wrapper {
     min-width: 20rem;
     text-align: center;
@@ -481,9 +492,21 @@ const EditForm = styled.form`
     width: 100%;
   }
 
-  p {
-    margin-bottom: 2rem;
-    margin-top: 1rem;
+  .upgrade-button {
+    height: 36px;
+    min-height: 36px;
+    background: ${Colors.secondaryColor};
+    color: ${Colors.primaryColor};
+    width: 10rem;
+    font-size: 14px;
+    border: 0;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.6;
+    border-radius: 6px 6px 6px 6px;
+    transition: all 0.2s ease;
+    box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+    margin-bottom: 1.5rem;
   }
 
   .checkbox-wrapper {

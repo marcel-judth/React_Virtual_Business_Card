@@ -1,18 +1,29 @@
 import { FaCheck } from 'react-icons/fa';
-import { API_BaseURL } from '../../utils/constants';
+import { RiCloseFill } from 'react-icons/ri';
+import { activateAccount, deactivateSubscription } from '../../api';
+import { userHasLicense } from '../../utils/license';
 
-const StandardPlanCard = () => {
-  const currentUserEmail = JSON.parse(localStorage.getItem('user'))?.email;
+const StandardPlanCard = ({ setLoading }) => {
+  const currentUser = JSON.parse(localStorage.getItem('user'));
+  const activeLicense =
+    !userHasLicense('business') && userHasLicense('standard');
+
+  const handleSubmit = () => {
+    setLoading(true);
+
+    if (userHasLicense('business')) deactivateSubscription(currentUser?.email);
+    else activateAccount(currentUser?.username);
+  };
 
   return (
     <section>
-      <h2>Standard Plan</h2>
+      <h2>Standard Account</h2>
       <div className='product'>
-        <div>
+        <div className='price'>
           <h3>
-            <span>48,99€</span>
+            <span>0,00€</span>
           </h3>
-          <h5>+0.99€ products</h5>
+          <h5>billed monthly</h5>
         </div>
         <div className='description'>
           <div className='line'>
@@ -24,13 +35,13 @@ const StandardPlanCard = () => {
           <div className='line'>
             <p>
               <FaCheck className='icon' />
-              Reduce Costs
+              Download Contact Card
             </p>
           </div>
           <div className='line'>
             <p>
               <FaCheck className='icon' />
-              Reach more people
+              Visible in Networking Portal
             </p>
           </div>
           <div className='line'>
@@ -39,19 +50,39 @@ const StandardPlanCard = () => {
               unlimited scans
             </p>
           </div>
+          <div className='line'>
+            <p>
+              <RiCloseFill className='icon-error' />
+              Upload Images
+            </p>
+          </div>
+          <div className='line'>
+            <p>
+              <RiCloseFill className='icon-error' />
+              Edit all fields
+            </p>
+          </div>
+          <div className='line'>
+            <p>
+              <RiCloseFill className='icon-error' />
+              Upload companies
+            </p>
+          </div>
+          <div className='line'>
+            <p>
+              <RiCloseFill className='icon-error' />
+              Upload skills
+            </p>
+          </div>
         </div>
       </div>
-      <form
-        action={
-          API_BaseURL +
-          '/stripe/create-plan-checkout-session/' +
-          currentUserEmail +
-          '/0'
-        }
-        method='POST'
-      >
-        <button className='checkout-button' type='submit'>
-          Select
+      <form onSubmit={handleSubmit} method='POST'>
+        <button
+          className='checkout-button'
+          type='submit'
+          disabled={activeLicense ? 'disabled' : ''}
+        >
+          {activeLicense ? 'current' : 'select'}
         </button>
       </form>
     </section>

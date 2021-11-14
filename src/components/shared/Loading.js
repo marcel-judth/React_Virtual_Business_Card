@@ -35,7 +35,7 @@ const LodingElemant = styled(motion.div)`
 `;
 
 const LoadingWrapper = styled.div`
-  height: 90vh;
+  height: 50vh;
   width: 100%;
   max-width: 100vw;
 `;

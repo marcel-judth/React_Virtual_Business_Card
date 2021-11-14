@@ -14,8 +14,15 @@ const Intro = ({ theme, setTheme }) => {
     <IntroWrapper ref={component}>
       <h2>{t('home.intro.heading')}</h2>
       <div className='separator'></div>
-      <video className='video' src={video} autoPlay muted loop />
-      <video className='video-mobile' src={videoMobile} autoPlay muted loop />
+      <video className='video' src={video} autoPlay muted loop playsInline />
+      <video
+        className='video-mobile'
+        src={videoMobile}
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
     </IntroWrapper>
   );
 };

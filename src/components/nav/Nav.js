@@ -8,7 +8,6 @@ import { HashLink as Link } from 'react-router-hash-link';
 
 //animation
 import { motion } from 'framer-motion';
-import { useState } from 'react';
 import { Colors } from '../../styles/Colors';
 import Burger from '@animated-burgers/burger-arrow';
 import '@animated-burgers/burger-arrow/dist/styles.css';
@@ -18,26 +17,29 @@ import NavItem from './NavItems';
 import { RiSettings3Fill } from 'react-icons/ri';
 import { useLocation } from 'react-router';
 
-const Nav = ({ theme, setTheme }) => {
-  const [navStatus, setNavStatus] = useState(false);
+const Nav = ({ theme, setTheme, navStatus, setNavStatus }) => {
   const user = JSON.parse(localStorage.getItem('user'));
   const location = useLocation();
-  const locationsForWhiteIcon = ['/plancheckout'];
+  const locationsForWhiteIcon = ['/plancheckout', '/compareplans'];
 
   if (
     theme.navWhiteColor === false &&
-    locationsForWhiteIcon.includes(location.pathname)
+    locationsForWhiteIcon.includes(location.pathname?.toLowerCase())
   )
     setTheme({ navWhiteColor: true });
 
   const listVariants = {
     hidden: {
       x: '100%',
-      transition: { staggerChildren: 0.1, staggerDirection: -1 },
+      transition: {
+        type: 'linear',
+      },
     },
     show: {
       x: 0,
-      transition: { staggerChildren: 0.25, delayChildren: 0.5 },
+      transition: {
+        type: 'linear',
+      },
     },
   };
 
@@ -192,7 +194,7 @@ const StyledNav = styled.nav`
   .burger .burger-lines,
   .burger .burger-lines:after,
   .burger .burger-lines:before {
-    z-index: 50;
+    z-index: 60;
     background-color: ${(props) =>
       props.theme?.navWhiteColor ? 'white' : Colors.primaryColor};
   }

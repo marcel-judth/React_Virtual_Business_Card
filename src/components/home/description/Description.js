@@ -23,19 +23,19 @@ const Description = () => {
     <DescriptionWrapper>
       <h2 className='mobile-header'>{t('home.description.heading')}</h2>
       <div className='card-wrapper'>
-        <Card ref={el} variants={cardVariants} animate={ctrl}>
+        <Card innerRef={el} variants={cardVariants} animate={ctrl}>
           <h3>{t('home.description.card1.heading')}</h3>
           <p>{t('home.description.card1.text')}</p>
         </Card>
-        <Card ref={el2} variants={cardVariants} animate={ctrl2}>
+        <Card innerRef={el2} variants={cardVariants} animate={ctrl2}>
           <h3>{t('home.description.card1.heading')}</h3>
           <p>{t('home.description.card1.text')}</p>
         </Card>
-        <Card ref={el3} variants={cardVariants} animate={ctrl3}>
+        <Card innerRef={el3} variants={cardVariants} animate={ctrl3}>
           <h3>{t('home.description.card1.heading')}</h3>
           <p>{t('home.description.card1.text')}</p>
         </Card>
-        <Card ref={el4} variants={cardVariants} animate={ctrl4}>
+        <Card innerRef={el4} variants={cardVariants} animate={ctrl4}>
           <h3>{t('home.description.card1.heading')}</h3>
           <p>{t('home.description.card1.text')}</p>
         </Card>

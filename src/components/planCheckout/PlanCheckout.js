@@ -21,7 +21,7 @@ export default function PlanCheckout() {
     }
 
     if (query.get('canceled')) {
-      window.location.href = '/';
+      window.location.href = '/logout';
     }
   }, []);
 
@@ -31,12 +31,14 @@ export default function PlanCheckout() {
         <Loading />
       ) : (
         <>
-          <h2 className='title'>Select your Plan</h2>
+          <h2 className='title'>Select your Account</h2>
 
-          <button className='compare-button'>Compare Plans</button>
+          <HashLink to='/ComparePlans'>
+            <button className='compare-button'>Compare Plans</button>
+          </HashLink>
 
           <div className='product-wrapper'>
-            <StandardPlanCard />
+            <StandardPlanCard setLoading={setLoading} />
             <BusinessPlanCard />
           </div>
           <HashLink to='/logout'>
@@ -83,6 +85,7 @@ const PlanCheckoutWrapper = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2rem;
     svg {
       margin-right: 0.2rem;
     }
@@ -105,8 +108,8 @@ const PlanCheckoutWrapper = styled.section`
 
     h3 {
       margin-top: 2rem;
-      margin-bottom: 0.5rem;
       text-align: center;
+      margin-bottom: 0.2rem;
       span {
         font-size: 2rem;
       }
@@ -121,7 +124,12 @@ const PlanCheckoutWrapper = styled.section`
       align-items: flex-start;
       .icon {
         margin-right: 0.5rem;
+        margin-left: 0.3rem;
         color: #0c9807;
+      }
+      .icon-error {
+        color: ${Colors.errorColor};
+        font-size: 1.5rem;
       }
     }
   }
@@ -166,10 +174,13 @@ const PlanCheckoutWrapper = styled.section`
   }
   h5 {
     opacity: 0.5;
+    font-size: 1rem;
+    text-align: center;
   }
 
   .compare-button {
     height: 36px;
+    min-height: 36px;
     background: ${Colors.secondaryColor};
     color: ${Colors.primaryColor};
     width: 10rem;
@@ -201,9 +212,15 @@ const PlanCheckoutWrapper = styled.section`
     transition: all 0.2s ease;
     box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
   }
+
+  .checkout-button:disabled {
+    background: grey;
+  }
+
   .checkout-button:hover {
     opacity: 0.8;
   }
+
   .coming-soon-btn {
     background: grey;
   }

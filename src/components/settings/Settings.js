@@ -10,10 +10,11 @@ import Support from './support/Support';
 import Statistics from './statistics/Statistics';
 import { useEffect } from 'react';
 import ChangeEmail from './changeEmail/changeEmail';
-import ChangePlan from './changePlan/ChangePlan';
+import DeleteAccount from './deleteAccount/DeleteAccount';
 
 const Settings = ({ setTheme }) => {
   const [navActive, setNavActive] = useState(false);
+  const [dropdownActive, setDropdownActive] = useState(false);
 
   useEffect(() => {
     setTheme({ navWhiteColor: false });
@@ -22,18 +23,28 @@ const Settings = ({ setTheme }) => {
   return (
     <SettingsWrapper>
       <div className='nav'>
-        <SettingsNav setNavStatus={setNavActive} navStatus={navActive} />
+        <SettingsNav
+          setNavStatusFunction={setNavActive}
+          navStatus={navActive}
+          dropdownActive={dropdownActive}
+          setDropdownActive={setDropdownActive}
+        />
       </div>
-      <main onClick={() => setNavActive(false)}>
+      <main
+        onClick={() => {
+          setNavActive(false);
+          setDropdownActive(false);
+        }}
+      >
         <Switch>
           <Route path='/settings' exact component={UserEdit} />
           <Route path='/settings/changepassword' component={ChangePassword} />
           <Route path='/settings/changeemail' component={ChangeEmail} />
-          <Route path='/settings/changeplan' component={ChangePlan} />
           <Route path='/settings/support' component={Support} />
           <Route path='/settings/logout' component={Logout} />
           <Route path='/settings/statistics' component={Statistics} />
           <Route path='/settings/discounts' component={Discounts} />
+          <Route path='/settings/deleteaccount' component={DeleteAccount} />
         </Switch>
       </main>
     </SettingsWrapper>

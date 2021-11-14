@@ -37,10 +37,11 @@ function Login({ setTheme }) {
         <>
           <LoginWrapper onSubmit={handleSubmit}>
             <div className='content-wrapper'>
-              <IconImage>
-                <FaUserAlt />
-              </IconImage>
-              <br />
+              <div className='logo'>
+                <IconImage>
+                  <FaUserAlt />
+                </IconImage>
+              </div>
               <TextInput
                 onChange={(event) => setEmail(event.target.value)}
                 placeholder='Email or Username'
@@ -58,7 +59,10 @@ function Login({ setTheme }) {
               />
               <span className='error-label'>{error}</span>
               <CustomButton>Login</CustomButton>
-              <a href='/forgotpassword' className='forgot-password'>
+              <a href='/register' className='link'>
+                No account yet? Click here for registration.
+              </a>
+              <a href='/forgotpassword' className='link'>
                 Forgot Password?
               </a>
             </div>
@@ -83,7 +87,7 @@ const LoginWrapper = styled.form`
   }
 
   .logo {
-    width: 10rem;
+    margin: 0 auto;
     margin-bottom: 1rem;
   }
 
@@ -91,8 +95,15 @@ const LoginWrapper = styled.form`
     font-size: 0.8rem;
     text-decoration: none;
     margin-top: 0.5rem;
+
     &:hover {
-      text-decoration: underline;
+      text-decoration: underline !important;
+    }
+  }
+
+  .link {
+    &:hover {
+      text-decoration: underline !important;
     }
   }
 
