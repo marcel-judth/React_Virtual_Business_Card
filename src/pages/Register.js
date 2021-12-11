@@ -1,13 +1,13 @@
 import { FaLock, FaUser, FaEnvelope, FaUserAlt } from 'react-icons/fa';
 import styled from 'styled-components';
-import CustomButton from '../shared/CustomButton';
-import TextInput from '../shared/TextInput';
-import { register } from '../../api';
+import CustomButton from '../components/shared/CustomButton';
+import TextInput from '../components/shared/TextInput';
+import { register } from '../api';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Colors } from '../../styles/Colors';
-import IconImage from '../shared/IconImage';
-import Loading from '../shared/Loading';
+import { Colors } from '../styles/Colors';
+import IconImage from '../components/shared/IconImage';
+import Loading from '../components/shared/Loading';
 import { useEffect } from 'react';
 
 function Register({ theme, setTheme }) {

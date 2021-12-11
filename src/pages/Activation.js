@@ -1,13 +1,13 @@
 import { FaLock, FaEnvelope, FaUserAlt } from 'react-icons/fa';
 import styled from 'styled-components';
-import CustomButton from '../shared/CustomButton';
-import IconImage from '../shared/IconImage';
-import TextInput from '../shared/TextInput';
+import CustomButton from '../components/shared/CustomButton';
+import IconImage from '../components/shared/IconImage';
+import TextInput from '../components/shared/TextInput';
 import { useState } from 'react';
-import { Colors } from '../../styles/Colors';
-import Loading from '../shared/Loading';
+import { Colors } from '../styles/Colors';
+import Loading from '../components/shared/Loading';
 import { useEffect } from 'react';
-import { activate } from '../../api';
+import { activate } from '../api';
 import { useParams } from 'react-router';
 import { HashLink as Link } from 'react-router-hash-link';
 

@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
-import Logout from '../logout/Logout';
-import Discounts from './discounts/Discounts';
-import SettingsNav from './SettingsNav';
-import UserEdit from './userEdit/UserEdit';
-import ChangePassword from './changePassword/ChangePassword';
-import Support from './support/Support';
-import Statistics from './statistics/Statistics';
+import Discounts from '../components/settings/discounts/Discounts';
+import SettingsNav from '../components/settings/SettingsNav';
+import UserEdit from '../components/settings/userEdit/UserEdit';
+import ChangePassword from '../components/settings/changePassword/ChangePassword';
+import Support from '../components/settings/support/Support';
+import Statistics from '../components/settings/statistics/Statistics';
 import { useEffect } from 'react';
-import ChangeEmail from './changeEmail/changeEmail';
-import DeleteAccount from './deleteAccount/DeleteAccount';
+import ChangeEmail from '../components/settings/changeEmail/changeEmail';
+import DeleteAccount from '../components/settings/deleteAccount/DeleteAccount';
+import Logout from './Logout';
 
 const Settings = ({ setTheme }) => {
   const [navActive, setNavActive] = useState(false);

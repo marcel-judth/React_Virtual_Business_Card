@@ -1,13 +1,13 @@
 import { FaEnvelope, FaLock, FaUserAlt } from 'react-icons/fa';
 import styled from 'styled-components';
-import CustomButton from '../shared/CustomButton';
-import IconImage from '../shared/IconImage';
-import TextInput from '../shared/TextInput';
-import { forgotPassword, resetPassword } from '../../api';
+import CustomButton from '../components/shared/CustomButton';
+import IconImage from '../components/shared/IconImage';
+import TextInput from '../components/shared/TextInput';
+import { forgotPassword, resetPassword } from '../api';
 import { useState } from 'react';
-import { Colors } from '../../styles/Colors';
+import { Colors } from '../styles/Colors';
 import { useParams } from 'react-router-dom';
-import Loading from '../shared/Loading';
+import Loading from '../components/shared/Loading';
 
 function ForgotPassword() {
   let { token } = useParams();

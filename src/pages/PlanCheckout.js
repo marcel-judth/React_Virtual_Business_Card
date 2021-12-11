@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { finalizePlanCheckout } from '../../api';
-import Loading from '../shared/Loading';
-import { Colors } from '../../styles/Colors';
+import { finalizePlanCheckout } from '../api';
+import Loading from '../components/shared/Loading';
+import { Colors } from '../styles/Colors';
 import { HashLink } from 'react-router-hash-link';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-import StandardPlanCard from './StandardPlanCard';
-import BusinessPlanCard from './BusinessPlanCard';
+import StandardPlanCard from '../components/planCheckout/StandardPlanCard';
+import BusinessPlanCard from '../components/planCheckout/BusinessPlanCard';
 
 export default function PlanCheckout() {
   const [loading, setLoading] = useState(false);

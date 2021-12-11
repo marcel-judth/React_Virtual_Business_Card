@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import DetailsHeader from './DetailsHeader';
-import DetailsBody from './DetailsBody';
+import DetailsHeader from '../components/details/DetailsHeader';
+import DetailsBody from '../components/details/DetailsBody';
 import { useParams } from 'react-router-dom';
 import { FiDownload } from 'react-icons/fi';
-import SharePopup from './SharePopup';
-import Loading from '../shared/Loading';
-import { API_BaseURL } from '../../utils/constants';
-import { getMyAccount, getUserByID } from '../../api';
-import { Colors } from '../../styles/Colors';
+import SharePopup from '../components/details/SharePopup';
+import Loading from '../components/shared/Loading';
+import { API_BaseURL } from '../utils/constants';
+import { getMyAccount, getUserByID } from '../api';
+import { Colors } from '../styles/Colors';
 import { HashLink as Link } from 'react-router-hash-link';
 import { FaUserEdit } from 'react-icons/fa';
 
