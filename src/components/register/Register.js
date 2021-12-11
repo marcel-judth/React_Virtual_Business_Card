@@ -148,6 +148,8 @@ const RegisterWrapper = styled.form`
     .content-wrapper {
       border: none;
     }
+
+    margin-top: 2rem;
   }
 `;
 

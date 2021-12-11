@@ -82,6 +82,7 @@ const LoginWrapper = styled.form`
   justify-content: center;
   align-items: center;
   background: ${Colors.primaryColor};
+
   h2 {
     margin: 2rem 0rem;
   }
@@ -120,7 +121,7 @@ const LoginWrapper = styled.form`
     justify-content: center;
     align-items: center;
     background: white;
-    padding: 3rem 4rem;
+    padding: 2rem 3rem;
     border-radius: 5%;
     border: 1px solid lightgrey;
   }

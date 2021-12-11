@@ -41,8 +41,8 @@ const TextInput = ({
 const TextInputWrapper = styled.div`
   position: relative;
   height: 48px;
-  min-width: 15rem;
-  width: 20vw;
+  width: 90vw;
+  max-width: 25rem;
   margin-bottom: 1.5rem;
 
   .form__input {

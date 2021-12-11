@@ -194,7 +194,7 @@ const StyledNav = styled.nav`
   .burger .burger-lines,
   .burger .burger-lines:after,
   .burger .burger-lines:before {
-    z-index: 60;
+    z-index: 99;
     background-color: ${(props) =>
       props.theme?.navWhiteColor ? 'white' : Colors.primaryColor};
   }
