@@ -50,13 +50,14 @@ function Details({ setTheme, mypage = false }) {
                 onClick={() => {
                   window.open(API_BaseURL + '/users/download/' + user.username);
                 }}
+                className='text-decoration-none'
               >
                 <FiDownload className='btn-icon' />
                 download
               </button>
 
               {mypage && (
-                <Link to='/settings'>
+                <Link to='/settings' className='text-decoration-none'>
                   <button>
                     <FaUserEdit className='btn-icon' />
                     edit

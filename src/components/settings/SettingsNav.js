@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { FaChartLine, FaUser } from 'react-icons/fa';
 import { FiPercent } from 'react-icons/fi';
-import { BsArrowRightShort, BsFillChatFill } from 'react-icons/bs';
+import { BsArrowRightShort } from 'react-icons/bs';
 import { RiLogoutBoxFill } from 'react-icons/ri';
 import { Colors } from '../../styles/Colors';
 import NavItem from '../nav/NavItems';
@@ -23,7 +23,7 @@ const SettingsNav = ({
 
   return (
     <SettingsNavWrapper navOpen={navStatus}>
-      <ul>
+      <ul className='p-0'>
         <NavItem
           setNavStatus={setNavStatus}
           navStatus={navStatus}
@@ -46,14 +46,6 @@ const SettingsNav = ({
           Icon={<FiPercent />}
           pathname='/settings/discounts'
           link='/settings/discounts'
-          text=''
-        />
-        <NavItem
-          setNavStatus={setNavStatus}
-          navStatus={navStatus}
-          Icon={<BsFillChatFill />}
-          pathname='/settings/support'
-          link='/settings/support'
           text=''
         />
         <DropdownItem

@@ -1,18 +1,36 @@
 import { FaEdit } from 'react-icons/fa';
 import styled from 'styled-components';
 
-function Logo({ fileInput, src, isRounded = false, disabled = false }) {
+function Logo({
+  fileInput,
+  src,
+  isRounded = false,
+  disabled = false,
+  isLoading = false,
+}) {
   return (
     <LogoContainer>
-      <div className={isRounded ? 'container rounded' : 'container'}>
-        <img className='logo' src={src} alt='company logo' />
-        {!disabled && (
+      <div
+        className={isRounded ? 'img-container img-rounded' : 'img-container'}
+      >
+        {isLoading ? (
+          <div class='d-flex justify-content-center'>
+            <div class='spinner-border' role='status'>
+              <span class='sr-only'></span>
+            </div>
+          </div>
+        ) : (
           <>
-            <div
-              className='overlay'
-              onClick={() => fileInput.current.click()}
-            ></div>
-            <FaEdit />
+            <img className='logo' src={src} alt='company logo' />
+            {!disabled && (
+              <>
+                <div
+                  className='overlay'
+                  onClick={() => fileInput.current.click()}
+                ></div>
+                <FaEdit />
+              </>
+            )}
           </>
         )}
       </div>
@@ -23,15 +41,18 @@ function Logo({ fileInput, src, isRounded = false, disabled = false }) {
 const LogoContainer = styled.div`
   margin-bottom: 2rem;
 
-  .container {
+  .img-container {
     position: relative;
     overflow: hidden;
     width: 10vw;
     cursor: pointer;
     min-width: 10rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
   }
 
-  .rounded {
+  .img-rounded {
     border-radius: 50%;
     width: 10rem;
     height: 10rem;

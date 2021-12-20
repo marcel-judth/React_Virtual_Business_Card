@@ -23,18 +23,20 @@ import { Colors } from '../../../styles/Colors';
 import TextInput from '../../shared/TextInput';
 import CompanyHeader from './CompanyHeader';
 import { getMyAccount, update, uploadImage } from '../../../api';
-import CompanyEdit from './CompanyEdit';
 import defaultProfilePicture from '../../../img/userdefault.png';
 import Logo from '../../shared/Logo';
 import ScrollTop from '../../shared/ScrollTop';
 import _ from 'lodash';
 import { IoIosAddCircle } from 'react-icons/io';
 import SkillHeader from './SkillHeader';
-import SkillsEdit from './SkillsEdit';
 import { SwatchesPicker } from 'react-color';
 import Loading from '../../shared/Loading';
 import { MdDateRange } from 'react-icons/md';
 import { userHasLicense } from '../../../utils/license';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import CompanyEditModal from './CompanyEditModal';
+import SkillsEditModal from './SkillsEditModal';
 
 function UserEdit() {
   const [error, setError] = useState();
@@ -83,7 +85,6 @@ function UserEdit() {
   function openCompanyEdit(index) {
     setSelectedCompany(index);
     setEditCompanyOpen(true);
-    setVisible(false);
   }
 
   function addNewSkill() {
@@ -95,7 +96,6 @@ function UserEdit() {
   function openSkillsEdit(index) {
     setSelectedSkill(index);
     setEditSkillOpen(true);
-    setVisible(false);
   }
 
   async function handleSubmit() {
@@ -391,25 +391,46 @@ function UserEdit() {
             </>
           )}
           {editCompanyOpen && (
-            <CompanyEdit
+            <CompanyEditModal
+              show={editCompanyOpen}
+              onHide={() => setEditCompanyOpen(false)}
               currentUser={user}
               setCurrentUser={setUser}
               index={selectedCompany}
-              setVisible={setEditCompanyOpen}
-              setParentVisible={setVisible}
+              setLoading={setLoading}
             />
           )}
           {editSkillOpen && (
-            <SkillsEdit
+            <SkillsEditModal
               currentUser={user}
               setCurrentUser={setUser}
               index={selectedSkill}
               setVisible={setEditSkillOpen}
               setParentVisible={setVisible}
+              show={editSkillOpen}
+              onHide={() => setEditSkillOpen(false)}
             />
           )}
         </>
       )}
+      <Modal
+        show={error}
+        onHide={() => {
+          setError('');
+        }}
+        backdrop='static'
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Error</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{error}</Modal.Body>
+        <Modal.Footer>
+          <Button variant='primary' onClick={() => setError('')}>
+            Okay
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

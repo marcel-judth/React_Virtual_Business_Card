@@ -119,7 +119,7 @@ function CompanyBody({ company, toggle, theme }) {
 
 const CoBody = styled.div`
   table {
-    margin-left: 6.5rem;
+    margin-left: 7rem;
     margin-bottom: 1rem;
     font-size: 0.9rem;
 

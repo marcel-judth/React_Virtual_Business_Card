@@ -15,6 +15,7 @@ import Settings from './pages/Settings';
 import PlanCheckout from './pages/PlanCheckout';
 import ComparePlans from './pages/ComparePlans';
 import Nav from './components/nav/Nav';
+import './styles/app.scss';
 
 function App() {
   const [theme, setTheme] = useState({ navWhiteColor: false });
@@ -32,7 +33,7 @@ function App() {
         />
         <div onClick={() => setNavStatus(false)}>
           <Switch>
-            <Route path='/'>
+            <Route path='/' exact>
               <Details mypage theme={theme} setTheme={setTheme} />
             </Route>
             <Route path='/login'>

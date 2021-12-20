@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 import { Colors } from './Colors';
 
 const GlobalStyles = createGlobalStyle`
-*{
+/* *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -92,6 +92,32 @@ button{
     h5{
         font-size: 0.9rem;
     }
+} */
+
+html,body{
+    height :100%;
+}
+
+.form-signin{
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    margin-top: 15vh;
+}
+
+.login-wrapper{
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+    height: 100vh;
+}
+
+.fill { 
+    min-height: 100%;
+    height: 100%;
 }
 `;
 

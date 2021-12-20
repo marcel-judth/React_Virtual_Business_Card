@@ -5,7 +5,6 @@ import Discounts from '../components/settings/discounts/Discounts';
 import SettingsNav from '../components/settings/SettingsNav';
 import UserEdit from '../components/settings/userEdit/UserEdit';
 import ChangePassword from '../components/settings/changePassword/ChangePassword';
-import Support from '../components/settings/support/Support';
 import Statistics from '../components/settings/statistics/Statistics';
 import { useEffect } from 'react';
 import ChangeEmail from '../components/settings/changeEmail/changeEmail';
@@ -40,7 +39,6 @@ const Settings = ({ setTheme }) => {
           <Route path='/settings' exact component={UserEdit} />
           <Route path='/settings/changepassword' component={ChangePassword} />
           <Route path='/settings/changeemail' component={ChangeEmail} />
-          <Route path='/settings/support' component={Support} />
           <Route path='/settings/logout' component={Logout} />
           <Route path='/settings/statistics' component={Statistics} />
           <Route path='/settings/discounts' component={Discounts} />

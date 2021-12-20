@@ -37,6 +37,7 @@ const Company = styled.div`
     font-size: 0.8rem;
     text-align: left;
     max-width: 10rem;
+    margin: 0 !important;
   }
   .icon {
     margin-left: auto;

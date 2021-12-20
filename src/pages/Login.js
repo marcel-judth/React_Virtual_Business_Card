@@ -1,14 +1,10 @@
-import { FaLock, FaEnvelope, FaUserAlt } from 'react-icons/fa';
-import styled from 'styled-components';
-import CustomButton from '../components/shared/CustomButton';
+import { FaUserAlt } from 'react-icons/fa';
 import IconImage from '../components/shared/IconImage';
-import TextInput from '../components/shared/TextInput';
 import { login } from '../api';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Colors } from '../styles/Colors';
 import Loading from '../components/shared/Loading';
-import { useEffect } from 'react';
+import Form from 'react-bootstrap/Form';
 
 function Login({ setTheme }) {
   const [email, setEmail] = useState();
@@ -16,11 +12,6 @@ function Login({ setTheme }) {
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-
-  useEffect(() => {
-    if (window.screen.width > 600) setTheme({ navWhiteColor: true });
-    else setTheme({ navWhiteColor: false });
-  }, [setTheme]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,103 +26,79 @@ function Login({ setTheme }) {
         <Loading />
       ) : (
         <>
-          <LoginWrapper onSubmit={handleSubmit}>
-            <div className='content-wrapper'>
-              <div className='logo'>
-                <IconImage>
-                  <FaUserAlt />
-                </IconImage>
-              </div>
-              <TextInput
-                onChange={(event) => setEmail(event.target.value)}
-                placeholder='Email or Username'
-                required
-                Icon={FaEnvelope}
-              />
-              <TextInput
-                onChange={(event) => {
-                  setPassword(event.target.value);
-                }}
-                required
-                placeholder='Password'
-                isPassword
-                Icon={FaLock}
-              />
-              <span className='error-label'>{error}</span>
-              <CustomButton>Login</CustomButton>
-              <a href='/register' className='link'>
-                No account yet? Click here for registration.
-              </a>
-              <a href='/forgotpassword' className='link'>
-                Forgot Password?
-              </a>
+          <div className='text-center login-wrapper'>
+            <div className='form-signin'>
+              <form onSubmit={handleSubmit}>
+                <div className='text-center mb-4 ml-auto mr-auto'>
+                  <IconImage>
+                    <FaUserAlt />
+                  </IconImage>
+                </div>
+                <h1 class='h3 mb-3 fw-normal'>Please sign in</h1>
+
+                <div class='form-floating'>
+                  <input
+                    type='text'
+                    class='form-control'
+                    id='floatingInput'
+                    placeholder='name@example.com'
+                    onChange={(event) => {
+                      setEmail(event.target.value);
+                    }}
+                  />
+                  <label for='floatingInput'>Email or Username</label>
+                </div>
+                <div class='form-floating mb-3'>
+                  <input
+                    type='password'
+                    class='form-control'
+                    id='floatingPassword'
+                    placeholder='Password'
+                    onChange={(event) => {
+                      setPassword(event.target.value);
+                    }}
+                  />
+                  <label for='floatingPassword'>Password</label>
+                </div>
+                <div class='checkbox mb-3'>
+                  <label>
+                    <Form.Check
+                      type='switch'
+                      id='custom-switch'
+                      label='Remember me'
+                    />
+                  </label>
+                </div>
+                <span className='mb-3 d-block text-danger'>{error}</span>
+                <button class='w-100 btn btn-lg btn-primary' type='submit'>
+                  Sign in
+                </button>
+                <div className='mt-2'>
+                  <a
+                    href='/register'
+                    className='text-muted small mb-2 d-block text-decoration-none'
+                  >
+                    No account yet? Register here
+                  </a>
+
+                  <a
+                    href='/forgotpassword'
+                    className='text-muted small text-decoration-none'
+                  >
+                    Forgot Password?
+                  </a>
+                </div>
+
+                <p class='mt-5 mb-3 text-muted small'>
+                  © x-ACT.me {new Date().getFullYear()}
+                </p>
+              </form>
             </div>
-          </LoginWrapper>
+          </div>
         </>
       )}
     </>
   );
 }
-
-const LoginWrapper = styled.form`
-  max-width: 100vw;
-  width: 100%;
-  height: auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: ${Colors.primaryColor};
-
-  h2 {
-    margin: 2rem 0rem;
-  }
-
-  .logo {
-    margin: 0 auto;
-    margin-bottom: 1rem;
-  }
-
-  a {
-    font-size: 0.8rem;
-    text-decoration: none;
-    margin-top: 0.5rem;
-
-    &:hover {
-      text-decoration: underline !important;
-    }
-  }
-
-  .link {
-    &:hover {
-      text-decoration: underline !important;
-    }
-  }
-
-  .error-label {
-    color: ${Colors.warningColor};
-    font-size: 0.8rem;
-    max-width: 100%;
-    margin-bottom: 1rem;
-  }
-
-  .content-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: white;
-    padding: 2rem 3rem;
-    border-radius: 5%;
-    border: 1px solid lightgrey;
-  }
-
-  @media (max-width: 600px) {
-    background: white;
-    .content-wrapper {
-      border: none;
-    }
-  }
-`;
 
 export default Login;

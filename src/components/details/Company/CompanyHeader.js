@@ -66,7 +66,7 @@ const CoHeader = styled.div`
   img {
     width: 5rem;
     height: auto;
-
+    margin-right: 0.5rem;
     max-height: 3.5rem;
     object-fit: contain;
   }

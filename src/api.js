@@ -62,9 +62,14 @@ const update = async (user, setError, setLoading) => {
     })
     .then(() => (window.location.href = '/mypage'))
     .catch((error) => {
-      if (error.response.status === 401) reloggin();
+      if (error.response?.status === 401) reloggin();
       else {
-        displayError(error, setError, setLoading);
+        // displayError(error, setError, setLoading);
+        // setError(error.response.data);
+        // setIsLoading(false);
+        if (error.response?.data) setError(error.response.data);
+        else setError('An unexpected error happened!');
+        setLoading(false);
       }
     });
 };

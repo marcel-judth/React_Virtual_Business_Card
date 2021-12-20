@@ -15,7 +15,7 @@ const Skill = styled.div`
   display: flex;
   align-items: center;
   justify-content: start;
-  margin: 0.5rem auto;
+  margin: 0.5rem auto !important;
   padding: 0.5rem 0.5rem;
   width: 100%;
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
@@ -23,7 +23,8 @@ const Skill = styled.div`
   max-width: 30rem;
 
   p {
-    margin-left: 0.4rem;
+    margin: 0 !important;
+    margin-left: 0.4rem !important;
     font-size: 0.8rem;
     text-align: left;
     max-width: 15rem;
